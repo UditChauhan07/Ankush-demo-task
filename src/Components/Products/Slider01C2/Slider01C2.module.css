@@ -1,0 +1,311 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+.stocDiv {
+    margin-top: -20px;
+}
+
+.stock {
+    margin-left: 15px;
+    color: #49a344;
+    font-weight: 620;
+    font-size: 18px;
+}
+.grayBackgorund {
+    background-color: #f4f3f4;
+  }
+.selectDiv {
+    margin-left: -30px;
+    font-size: 12px;
+    padding: 2px 8px;
+    margin-left: 15px;
+    border-radius: 20px;
+    background-color: #bbbbbb6c;
+    border: 0.5px solid gray;
+    outline: none;
+}
+.cartBtnDiv {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.cartBtn {
+    margin-top: 20px;
+    padding: 6px 40px;
+    width: 100%;
+    font-size: 20px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: black;
+    color: white;
+    font-weight: 400;
+}
+
+.RadioButton {
+    margin-left: 20px;
+    width: 16px;
+    height: 16px;
+}
+.RadioButton2{
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 16px;
+    height: 16px;
+}
+.accordianHeader{
+padding-top: 15px;
+}
+.liText{
+    margin-top: -15px;
+}
+.priceDiv {
+    margin-left: -5px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.price {
+    /* margin-top: 5px; */
+    margin-bottom: -5px;
+    margin-left: -5px;
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+}
+
+.dollar{
+    margin-top: 2px;
+    position: absolute;
+    font-size: 16px;
+}
+.cents {
+    margin-top: 2px;
+    position: absolute;
+    font-size: 16px; 
+}
+
+.mainPrice {
+    position: relative;
+    top: 0px;
+    margin-left: 10px; 
+}
+
+/* ......end number... */
+.price2 {
+    margin-top: -15px;
+    margin-bottom: 15px;
+    /* margin-left: 35px; */
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+}
+
+.dollar2{
+    margin-top: 2px;
+    position: absolute;
+    font-size: 16px;
+}
+.cents2 {
+    margin-top: 2px;
+    position: absolute;
+    font-size: 16px; 
+}
+
+.mainPrice2 {
+    position: relative;
+    top: 0px;
+    margin-left: 10px; 
+}
+.doloor2{
+    position: absolute;
+    font-size: 13px;
+    margin-top: 2px;
+    margin-left: -10px;
+}
+
+.ooferBtn {
+    margin-left: -20px;
+    margin-top: -35px;
+    /* margin-bottom: 15px; */
+}
+
+.offer {
+    font-weight: 700;
+    position: absolute;
+    margin-top: 7px;
+    margin-left: 30px;
+    font-size: 16px;
+    color: gray;
+    text-decoration: line-through;
+}
+
+.offer2 {
+    font-size: 16px;
+    margin-top: 25px;
+    border: none;
+    margin-left: 20px;
+    background-color: #80db69;
+    width: 110px;
+    height: 25px;
+    font-weight: bold;
+}
+
+.sub {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.accordianBody {
+    margin-left: 15px;
+    margin-top: -15px;
+}
+
+.learn {
+    margin-top: -10px;
+    color: rgb(0, 167, 225);
+}
+
+.content {
+    font-size: 9px;
+    margin-top: -5px;
+}
+.subsContent {
+    margin-top: -5px;
+    font-size: 16px;
+}
+
+.infoBtn {
+    margin-top: -5px;
+    width: 15px;
+}
+.liContent {
+    margin-left: -30px;
+    font-size: 11px;
+    margin-top: -5px;
+}
+
+.stock2 {
+    margin-top: -10px;
+    color: #49a344;
+    font-weight: 620;
+    font-size: 18px;
+}
+.customSelect2 {
+    margin-left: -15px;
+}
+.customSelect3 {
+    margin-top: 10px;
+    margin-left: -15px;
+}
+
+.subBtnDiv {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.subBtn {
+    margin-top: 20px;
+    padding: 6px 40px;
+    width: 100%;
+    font-size: 20px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: black;
+    color: white;
+    font-weight: 400;
+}
+
+/* ............ */
+
+.accordionButton::after {
+   
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: auto;
+   
+    transition: transform .2s ease-in-out;
+}
+.accordionButton::before {
+   
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: auto;
+   
+    transition: transform .2s ease-in-out;
+}
+@media (max-width: 768px) {
+    .AccordianDiv{
+        margin-top: 40px;
+        margin-left: -12px;
+        width: 106.7%;
+   }
+   .subBtn{
+    margin-left: -25px;
+    width: 95%;
+   }
+  }
+  @media (max-width: 425px) {
+    .subBtn{
+        margin-left: -15px;
+        /* width: 95%; */
+       }
+  }
+@media (max-width: 375px) {
+    .AccordianDiv{
+        width: 108%;
+    margin-left: -12px;
+    margin-top: 40px;
+   }
+   .infoBtn{
+    margin-left: 240px;
+    margin-top: -50px;
+   }
+   .liContent{
+    margin-top: -30px;
+   }
+   .content{
+    margin-top: 20px;
+   }
+   .subBtn{
+    margin-left: -20px;
+    width: 95%;
+}
+  }
+
+  @media (max-width:320px){
+    .content{
+        margin-top: -5px;
+    }
+    .stocDiv2{
+        margin-top: 15px;
+    }
+    .subsContent{
+        margin-bottom: -30px;
+    }
+    .liContent{
+        margin-top: 15px;
+        margin-bottom: 25px;
+    }
+    .subBtn{
+        margin-left: -15px;
+    width: 95%;
+    }
+ }
+ @media (max-width:300px){
+    .AccordianDiv{
+        width: 108.6%;
+        margin-top: 40px;
+       }
+    .sub{
+        font-size: 13px;
+    }
+    .subBtn{
+        margin-left: -15px;
+    width: 95%;
+    }
+ }

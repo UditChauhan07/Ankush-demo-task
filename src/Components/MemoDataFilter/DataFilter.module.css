@@ -1,0 +1,29 @@
+.heading {
+  text-align: center;
+}
+.main{
+  margin-top: 35px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.searchBar {
+  margin-top: 20px;
+  margin-left: 20%;
+  margin-bottom: 20px;
+}
+.sTitle {
+  margin-right: 10px;
+  outline: none;
+}
+.noData {
+  color: red;
+  text-align: center;
+}
+.exportBtn {
+  margin-left: 50%;
+}
+.titleBar{
+    text-decoration: none;
+    color: black;
+}

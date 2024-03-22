@@ -1,0 +1,475 @@
+.accordionHeader {
+  font-weight: bold;
+  margin-left: 38px;
+  margin-top: 9px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+/* ......................animations start accordian........... */
+
+
+@keyframes expandHeight {
+  from {
+    height: 100px;
+  }
+  to {
+    height: 200px;
+  }
+}
+.accordionItem1{
+  height: auto;
+}
+
+.expanded {
+  position: relative;
+  animation: expandHeight 1s  ease-in-out;
+}
+@keyframes expandHeight2 {
+  from {
+    height: 100px;
+  }
+  to {
+    height: 400px;
+  }
+}
+.accordionItem2{
+  position: relative;
+  height: auto;
+}
+.expanded2 {
+  animation: expandHeight2 2s  ease-in-out;
+}
+
+
+/* .........animations End.......... */
+
+.grayBackgorund {
+  background-color: #f4f3f4;
+}
+
+
+
+.icon1 {
+  margin-left: 20px;
+  position: absolute;
+  margin-top: 17px !important;
+}
+
+.money {
+  font-size: 23px;
+}
+
+.stocDiv {
+  margin-top: -30px;
+}
+
+.stock {
+  margin-left: 20px;
+  color: #49a344;
+  font-weight: 620;
+  font-size: 18px;
+}
+
+.selectDiv {
+  margin-left: -30px;
+  font-size: 12px;
+  padding: 2px 8px;
+  margin-left: 10px;
+  border-radius: 20px;
+  background-color: #bbbbbb6c;
+  border: 0.5px solid gray;
+  outline: none;
+}
+
+.cartBtnDiv {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.cartBtn {
+  margin-top: 20px;
+  padding: 6px 40px;
+  width: 90%;
+  font-size: 20px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: black;
+  color: white;
+  font-weight: 400;
+}
+
+.ooferBtn {
+  margin-left: -20px;
+  margin-top: -20px;
+  margin-bottom: 5px;
+}
+
+.offer {
+  font-size: 14px;
+  color: gray;
+  text-decoration: line-through;
+}
+
+.offer2 {
+  margin-top: 10px;
+  border: none;
+  margin-left: 20px;
+  background-color: #80db69;
+  width: 110px;
+  height: 25px;
+  font-weight: bold;
+}
+
+.sub {
+  color: rgb(8, 8, 8);
+  font-weight: normal;
+}
+
+.Ptext {
+  margin-top: -10px;
+  margin-left: 18px;
+  font-size: 15px;
+}
+
+.liText {
+  font-size: 15px;
+  margin-top: -15px;
+  margin-left: 10px;
+}
+
+.accordion2 {
+  margin-left: 18px;
+  margin-top: -10px;
+}
+
+.header {
+  color: rgb(0, 167, 225);
+}
+
+.content {
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+.subsContent {
+  margin-left: -100px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.infoBtn {
+  margin-top: -75px;
+  margin-left: 245px;
+}
+
+.liContent {
+  margin-bottom: 25px;
+  margin-left: -30px;
+  font-size: 9px;
+  margin-top: -20px;
+}
+
+.stocDiv2 {
+  margin-left: 10px;
+}
+
+.stock2 {
+  margin-top: 0px;
+  margin-left: 10px;
+  color: #49a344;
+  font-weight: 620;
+  font-size: 18px;
+}
+
+.customSelect {
+  margin-left: 10px;
+}
+
+.customSelect2 {
+  margin-left: 0px;
+}
+
+.delivery {
+  margin-left: 20px;
+}
+
+.customSelect3 {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.subBtnDiv {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.subBtn {
+  margin-top: 20px;
+  padding: 6px 40px;
+  width: 90%;
+  font-size: 20px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: black;
+  color: white;
+  font-weight: 400;
+}
+
+
+.accordionButton::after {
+  /* flex-shrink: 0; */
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: auto;
+ 
+  transition: transform .2s ease-in-out;
+}
+
+
+@media (max-width: 1440px) {
+  .infoBtn {
+    margin-left: 270px;
+  }
+
+  @media only screen and (max-width:2800px) and (min-width:1441px) {
+    .infoBtn {
+      margin-left: 300px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .subsContent {
+    margin-left: -10px;
+  }
+
+  .infoBtn {
+    margin-left: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .accordion {
+    width: 90%;
+    margin-left: 35px;
+    margin-top: 40px;
+  }
+
+  .icon1 {
+    margin-left: 30px;
+  }
+
+  .accordionHeader {
+    margin-left: 50px;
+  }
+
+  .stocDiv {
+    margin-left: 12px;
+  }
+
+  .Ptext {
+    margin-left: 30px;
+  }
+
+  .liText {
+    margin-left: 30px;
+  }
+
+  .accordion2 {
+    margin-left: 30px;
+  }
+
+  .stocDiv2 {
+    margin-left: 25px;
+  }
+
+  .delivery {
+    margin-left: 30px;
+  }
+
+  .customSelect3 {
+    margin-left: 20px;
+  }
+
+  .subBtnDiv {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .subBtn {
+    width: 90%;
+  }
+
+  .cartBtn {
+    width: 90%;
+  }
+
+  .subsContent {
+    margin-left: -350px;
+  }
+
+  .infoBtn {
+    margin-top: -75px;
+    margin-left: 250px;
+  }
+}
+
+@media (max-width: 425px) {
+  .accordion {
+    margin-left: -12px;
+    width: 106%;
+  }
+
+  .accordionHeader {
+    margin-left: 35px;
+  }
+
+  .icon1 {
+    margin-left: 17px;
+  }
+
+  .stocDiv {
+    margin-left: -5px;
+  }
+
+  .cartBtn {
+    width: 90%;
+    font-family: var(--bmd-font-Secondary);
+  }
+
+  .Ptext {
+    margin-left: 15px;
+  }
+
+  .liText {
+    margin-left: 15px;
+  }
+
+  .accordion2 {
+    margin-left: 15px;
+  }
+
+  .stocDiv2 {
+    margin-left: 5px;
+  }
+
+  .delivery {
+    margin-left: 15px;
+  }
+
+  .customSelect3 {
+    margin-left: 5px;
+  }
+
+  .subsContent {
+    margin-left: -50px;
+    font-size: 15px;
+  }
+
+  .infoBtn {
+    margin-top: -73px;
+    width: 16px;
+    margin-left: 250px;
+  }
+
+  .subBtn {
+    width: 90%;
+    font-family: var(--bmd-font-Secondary);
+  }
+}
+
+@media (max-width: 375px) {
+  .accordion {
+    margin-top: 40px;
+    width: 106.7%;
+    margin-left: -12px;
+  }
+
+  .accordion2 {
+    margin-left: 15px;
+  }
+
+  .subsContent {
+    margin-left: -110px;
+    font-size: 14px;
+  }
+
+  .infoBtn {
+    margin-top: -70px;
+    width: 16px;
+    margin-left: 250px;
+  }
+
+  .cartBtn {
+    width: 90%;
+  }
+
+  .subBtn {
+    width: 90%;
+  }
+}
+
+@media (max-width: 320px) {
+  .accordion {
+    margin-top: 25px;
+    width: 108%;
+    margin-left: -12px;
+  }
+
+  .cartBtn {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  .sub {
+    font-size: 13px;
+  }
+
+  .subBtn {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  .subsContent {
+    margin-left: -70px;
+    font-size: 13px;
+  }
+
+  .infoBtn {
+    margin-top: -70px;
+    width: 15px;
+    margin-left: 200px;
+  }
+
+  .liContent {
+    margin-left: -33px;
+  }
+
+  .accordion2 {
+    margin-left: 15px;
+  }
+}
+
+@media (max-width:300px) {
+  .accordion {
+    border-radius: 0%;
+    margin-top: 25px;
+    width: 108.8%;
+    margin-left: -12px;
+  }
+
+  .infoBtn {
+    margin-left: 200px;
+  }
+
+  .subsContent {
+    margin-left: -50px;
+    font-size: 13px;
+  }
+}

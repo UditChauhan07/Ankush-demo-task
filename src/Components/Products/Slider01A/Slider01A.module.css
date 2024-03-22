@@ -1,0 +1,91 @@
+
+.stardiv {
+  display: none;
+  margin-top: -20px;
+  font-weight: 400;
+  font-size: 37px;
+  font-family: "Times New Roman", Times, serif;
+}
+/* .carousel{
+  animation: carousel 1.2s ease;
+}
+@keyframes carousel {
+  from {
+    transform: scale(0);
+   
+    opacity: 0;
+  }
+  to {
+   
+    transform: scale(1);
+    opacity: 1;
+  }
+} */
+
+
+@media only screen and (max-width:2800px) and (min-width:1441px){
+  .productCart{
+    max-width: 1450px;
+    width: fixed;
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .stardiv {
+    color: var(--bmd-black);
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    font-weight: 400;
+    font-size: 38px;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    line-height: 42px;
+  }
+    .carousel{
+      max-width: 500px;
+      width: 100%;
+      margin: auto;
+    }
+}
+
+@media (max-width: 425px) {
+  .stardiv {
+    width: 425px;
+    font-size: 35px;
+    line-height: 35px;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+}
+@media (max-width: 375px) {
+  .stardiv {
+    letter-spacing: -3px;
+    width: 95%;
+    font-weight: 500;
+    line-height: 35px;
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .stardiv {
+    margin-left: -5px !important;
+    font-size: 31px;
+    line-height: 35px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 300px) {
+  .stardiv {
+    line-height: 0.9;
+    margin-bottom: 15px;
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+}
