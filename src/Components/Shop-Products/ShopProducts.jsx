@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Style from "../Shop-Products/ShopProducts.module.css";
-import Shorting from "../Shop-Products/ShortingShop"
+// import Shorting from "../Shop-Products/ShortingShop"
 import { useNavigate } from 'react-router-dom';
 import { VscStarFull } from "react-icons/vsc";
 import { RiStarLine } from "react-icons/ri";
+import { FaSortAlphaDown } from "react-icons/fa";
+import { FaSortAlphaDownAlt } from "react-icons/fa";
 import swal from 'sweetalert'; // Import swal function
 import data from './ShopPoducts.json';
 import Skeleton from 'react-loading-skeleton'
@@ -16,6 +18,10 @@ const ShopProducts = () => {
     const [checkedItems, setCheckedItems] = useState({});
     const [selectedRating, setSelectedRating] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [productsPerPage, setProductsPerPage] = useState(10); // State for products per page
+    const [currentPage, setCurrentPage] = useState(1);
+    const [sortType, setSortType] = useState(''); // State for sorting // State for current page
+
 
     // Function to handle checkbox change
     const handleCheckboxChange = (label) => {
@@ -39,15 +45,15 @@ const ShopProducts = () => {
         setShowCheckboxes(prevState => !prevState);
     };
 
-    // Function to toggle display of rating options //
-    // const toggleRatingBody = () => {
-    //     setShowRatingBody(prevState => !prevState);
-    // };
+
 
     // Function to clear all filters
     const handleClearFilters = () => {
         setCheckedItems({});
         setSelectedRating([]);
+        setSortType('Sort');
+        setProductsPerPage(10);
+
     };
 
     // Function to filter products based on checked categories and selected rating..//
@@ -74,18 +80,32 @@ const ShopProducts = () => {
             setSelectedRating([]);
         });
     };
-
-
-
     useEffect(() => {
         if (filterProducts().length === 0) {
             showAlert();
         }
-        // Simulate loading delay
         setTimeout(() => {
             setLoading(false);
-        }, 1000); // Adjust the time as needed
+        }, 1000);
     }, [checkedItems, selectedRating]);
+
+
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filterProducts().slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const handleProductsPerPageChange = (e) => {
+        const selectedValue = parseInt(e.target.value);
+        setProductsPerPage(selectedValue);
+        setCurrentPage(1);
+    };
+
+    // Dynamic calculation of products per page options with a gap of 10
+    const totalProducts = filterProducts().length;
+    // const maxProductsPerPage = Math.ceil(totalProducts / productsPerPage);
+    const maxOptions = Math.ceil(totalProducts / 10) * 10;
+    const productsPerPageOptions = Array.from({ length: maxOptions / 10 }, (_, i) => (i + 1) * 10);
 
 
     const checkboxes = [
@@ -97,14 +117,67 @@ const ShopProducts = () => {
         { label: 'Vision' }
     ];
 
-    // Filtered products
-    const filteredProducts = filterProducts();
 
+const handleSortChange = (e) => {
+    const selectedSortType = e.target.value;
+    setSortType(selectedSortType);
+};
+
+const sortedProducts = () => {
+    let sorted = [...currentProducts];
+    if (sortType === 'asc') {
+        sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortType === 'desc') {
+        sorted.sort((a, b) => b.title.localeCompare(a.title));
+    } else if (sortType === 'highestRating') {
+        sorted.sort((a, b) => b.rating - a.rating);
+    } else if (sortType === 'lowestRating') {
+        sorted.sort((a, b) => a.rating - b.rating);
+    }
+    return sorted;
+};
     return (
         <>
             <section>
                 <div className={`container-fluid  ${Style.productmain}`}>
-                    <Shorting />
+                    <div className={Style.shorting}>
+                        <div className={`row fixed-top ${Style.shortingDiv}`}>
+                            <div className="col-lg-3 border">
+                                <p className={Style.showingProducts}>
+                                    Showing Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
+                                </p>
+                            </div>
+                            <div className="col-lg-3 border">
+                                <p className={Style.showingProducts}>For Grid and List icon</p>
+                            </div>
+                            <div className="col-lg-3 border">
+                                <select
+                                    className={`${Style.customSelect} form-select`}
+                                    aria-label="Products per page"
+                                    value={productsPerPage}
+                                    onChange={handleProductsPerPageChange}
+                                >
+                                    {productsPerPageOptions.map(option => (
+                                        <option key={option}
+                                            value={option}> {option} Products Per Page</option>
+                                    ))}
+                                </select>
+
+                            </div>
+                            <div className="col-lg-3 border">
+                                <select className={`form-select ${Style.customSelect}`} aria-label="Default select example"
+                                    onChange={handleSortChange}>
+                                    <option selected>Sort</option>
+                                    <option value="asc">A-Z <span ><FaSortAlphaDown /></span></option>
+                                    <option value="desc">Z-A <FaSortAlphaDownAlt /></option>
+                                    <option value="highestRating">Highest-Rating  </option>
+                                    <option value="lowestRating">Lowest-Rating  </option>
+                                    <option value="">Highest-Reviews  </option>
+                                    <option value="">Lowest-Reviews  </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div className="row w-100 mt-5">
                         <div className="col-lg-3 col-md-3  mt-1">
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
@@ -190,7 +263,7 @@ const ShopProducts = () => {
                                             <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
                                         ))
                                     ) : (
-                                        filteredProducts.map((product, index) => (
+                                        sortedProducts().map((product, index) => (
                                             <div key={index} className={`${Style.colactionCart}`}>
                                                 <div className={Style.imgWrapper}>
                                                     <img className={Style.img} src={product.image} alt="" />
@@ -221,9 +294,12 @@ const ShopProducts = () => {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </section>
+
         </>
     );
 };

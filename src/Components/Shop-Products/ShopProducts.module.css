@@ -1,3 +1,19 @@
+.customSelect {
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.showingProducts{
+    margin-top: 10px;
+}
+
+.shortingDiv {
+    background-color: rgb(255, 255, 255);
+
+}
+
+
+
 .filterCard {
     margin-top: 10px;
     border: 1px;
@@ -193,7 +209,7 @@
     background-color: rgba(255, 255, 255, 0.911);
     /* color: rgb(22, 22, 22); */
     min-width: 104px;
-    margin-top: 0.2rem;
+    margin-top: 0.19rem;
     padding-top: 7px;
     padding-bottom: 9.5px;
     outline: none;
@@ -268,6 +284,7 @@
     .filterCard {
         margin-left: 20px;
     }
+
     .cardImgLoading {
         margin: -1em;
     }
@@ -299,10 +316,12 @@
         margin-left: 50px;
         width: auto;
     }
+
     .cardImgLoading {
         margin: -8em;
         /* padding: 10px; */
     }
+
     .clear {
         margin-left: -10px;
     }
@@ -397,8 +416,9 @@
         margin-left: -18px;
 
     }
+
     .cardImgLoading {
-        margin: -5  em;
+        margin: -5 em;
     }
 
     .colactionCart {
@@ -501,9 +521,11 @@
         width: auto;
 
     }
+
     .cardImgLoading {
         margin: -5em;
     }
+
     .colactionCart {
         padding: 1rem 1rem 2rem;
     }

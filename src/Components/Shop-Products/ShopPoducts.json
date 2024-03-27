@@ -4,7 +4,7 @@
         "id": 1,
         "image": "Images/Royal-Collagen-Peptides.webp",
         "title": "Royal Collagen Peptides Servings",
-        "rating": 5,
+        "rating": 4,
         "categories":["Skin","Bones"],
         "reviews": "78 Review",
         "button": "buy now"
@@ -63,7 +63,8 @@
         "reviews": "42 Review",
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER"
-    },   {
+    }, 
+      {
         "id": 8,
         "image": "Images/Royal-Collagen-Peptides.webp",
         "title": "Royal Collagen Peptides Servings",
@@ -74,6 +75,33 @@
     },
     {
         "id": 9,
+        "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
+        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "rating": 1,
+        "categories":["Joints","Heart","Immunity"],
+        "reviews": "24 Review",
+        "button": "BUY NOW"
+    },
+    {
+        "id": 10,
+        "image": "Images/bruno7.webp",
+        "title": "Riboflam 90 V-Caps 30 servings",
+        "rating": 4,
+        "categories":["Skin","Vision"],
+        "reviews": "7 Review",
+        "button": "BUY NOW"
+    },
+    {
+        "id": 11,
+        "image": "Images/Royal-Collagen-Peptides.webp",
+        "title": "Royal Collagen Peptides Servings",
+        "rating": 4,
+        "categories":["Skin","Bones"],
+        "reviews": "78 Review",
+        "button": "buy now"
+    },
+    {
+        "id": 12,
         "image": "Images/BRUNOPHARMA1.webp",
         "title": "Riboflam 90 V-Caps 30 servings",
         "rating": 4,
@@ -82,7 +110,7 @@
         "button": "BUY NOW"
     },
     {
-        "id": 10,
+        "id": 13,
         "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
         "title": "Bluerex Vision 60 SoftGels 30 Servings",
         "rating": 1,
@@ -91,7 +119,7 @@
         "button": "BUY NOW"
     },
     {
-        "id": 11,
+        "id": 14,
         "image": "Images/BRONU6409.webp",
         "title": "Cholestq10 60 V Caps 30 Servings",
         "rating": 4,
@@ -101,7 +129,7 @@
 
     },
     {
-        "id": 12,
+        "id": 15,
         "image": "Images/RCP-SP-StrawberryAcai-01452NR-framed.webp",
         "title": "Royal Collagen Peptides Stick Packs Straw Acai 20 Units",
         "rating": 3,
@@ -110,39 +138,12 @@
         "button": "PRE-ORDER"
     },
     {
-        "id": 13,
+        "id": 16,
         "image": "Images/RCP-SP-BloodOrange-01452NR-framed.webp",
         "title": "Royal Collagen Peptides Stick Packs Blood Orange 20 Units",
         "rating": 4,
         "categories":["Bones","Immunity","Heart"],
         "reviews": "42 Review",
-        "button": "PRE-ORDER"
-    },
-    {
-        "id": 14,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
-    },
-    {
-        "id": 15,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
-    },
-    {
-        "id": 16,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER"
     },
     {
@@ -153,79 +154,124 @@
         "reviews": "42 Review",
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER"
-    },
-    {
+    }, 
+      {
         "id": 18,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "image": "Images/Royal-Collagen-Peptides.webp",
+        "title": "Royal Collagen Peptides Servings",
+        "rating": 5,
+        "categories":["Skin","Bones"],
+        "reviews": "78 Review",
+        "button": "buy now"
     },
     {
         "id": 19,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
+        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "rating": 1,
+        "categories":["Joints","Heart","Immunity"],
+        "reviews": "24 Review",
+        "button": "BUY NOW"
     },
     {
         "id": 20,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "image": "Images/bruno7.webp",
+        "title": "Riboflam 90 V-Caps 30 servings",
+        "rating": 4,
+        "categories":["Skin","Vision"],
+        "reviews": "7 Review",
+        "button": "BUY NOW"
     },
     {
         "id": 21,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "image": "Images/Royal-Collagen-Peptides.webp",
+        "title": "Royal Collagen Peptides Servings",
+        "rating": 5,
+        "categories":["Skin","Bones"],
+        "reviews": "78 Review",
+        "button": "buy now"
     },
     {
-        "id": 22,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "id":22,
+        "image": "Images/BRUNOPHARMA1.webp",
+        "title": "Riboflam 90 V-Caps 30 servings",
+        "rating": 4,
+        "categories":["Joints","Heart","Immunity"],
+        "reviews": "24 Review",
+        "button": "BUY NOW"
     },
     {
         "id": 23,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
+        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "rating": 3,
+        "categories":["Skin","Vision"],
+        "reviews": "7 Review",
+        "button": "BUY NOW"
     },
     {
         "id": 24,
-        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
+        "image": "Images/BRONU6409.webp",
+        "title": "Cholestq10 60 V Caps 30 Servings",
         "rating": 2,
-        "reviews": "42 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
+        "categories":["Skin","Heart","Vision"],
+        "reviews": "6 Review",
+        "button": "BUY NOW"
+
     },
     {
         "id": 25,
+        "image": "Images/RCP-SP-StrawberryAcai-01452NR-framed.webp",
+        "title": "Royal Collagen Peptides Stick Packs Straw Acai 20 Units",
+        "rating": 1,
+        "categories":["Bones","Immunity","Vision"],
+        "reviews": "42 review",
+        "button": "PRE-ORDER"
+    },
+    {
+        "id": 26,
+        "image": "Images/RCP-SP-BloodOrange-01452NR-framed.webp",
+        "title": "Royal Collagen Peptides Stick Packs Blood Orange 20 Units",
+        "rating": 5,
+        "categories":["Bones","Immunity","Heart"],
+        "reviews": "42 Review",
+        "button": "PRE-ORDER"
+    },
+    {
+        "id": 27,
         "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
         "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
-        "rating": 2,
+        "rating": 4,
         "reviews": "42 Review",
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER"
+    }, 
+      {
+        "id": 28,
+        "image": "Images/Royal-Collagen-Peptides.webp",
+        "title": "Royal Collagen Peptides Servings",
+        "rating": 3,
+        "categories":["Skin","Bones"],
+        "reviews": "78 Review",
+        "button": "buy now"
+    },
+    {
+        "id": 29,
+        "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
+        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "rating": 2,
+        "categories":["Joints","Heart","Immunity"],
+        "reviews": "24 Review",
+        "button": "BUY NOW"
+    },
+    {
+        "id": 30,
+        "image": "Images/bruno7.webp",
+        "title": "Riboflam 90 V-Caps 30 servings",
+        "rating": 1,
+        "categories":["Skin","Vision"],
+        "reviews": "7 Review",
+        "button": "BUY NOW"
     }
-    
     
 ]
