@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Style from "../Shop-Products/ShopProducts.module.css";
-// import Shorting from "../Shop-Products/ShortingShop"
 import { useNavigate } from 'react-router-dom';
 import { VscStarFull } from "react-icons/vsc";
 import { RiStarLine } from "react-icons/ri";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";
-import swal from 'sweetalert'; // Import swal function
+import swal from 'sweetalert';
 import data from './ShopPoducts.json';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { FaSortNumericDown } from "react-icons/fa";
+import { FaSortNumericUpAlt } from "react-icons/fa";
+import { FaSortAmountDownAlt } from "react-icons/fa";
+import { FaSortAmountDown } from "react-icons/fa";
+
 
 
 const ShopProducts = () => {
@@ -18,10 +22,9 @@ const ShopProducts = () => {
     const [checkedItems, setCheckedItems] = useState({});
     const [selectedRating, setSelectedRating] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [productsPerPage, setProductsPerPage] = useState(10); // State for products per page
+    const [productsPerPage, setProductsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortType, setSortType] = useState(''); // State for sorting // State for current page
-
+    const [sortType, setSortType] = useState('');
 
     // Function to handle checkbox change
     const handleCheckboxChange = (label) => {
@@ -51,8 +54,10 @@ const ShopProducts = () => {
     const handleClearFilters = () => {
         setCheckedItems({});
         setSelectedRating([]);
-        setSortType('Sort');
+        setSortType("");
         setProductsPerPage(10);
+        setCurrentPage(1);
+
 
     };
 
@@ -90,7 +95,7 @@ const ShopProducts = () => {
     }, [checkedItems, selectedRating]);
 
 
-
+    // ............Pagination  Start  .......// 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filterProducts().slice(indexOfFirstProduct, indexOfLastProduct);
@@ -101,11 +106,11 @@ const ShopProducts = () => {
         setCurrentPage(1);
     };
 
-    // Dynamic calculation of products per page options with a gap of 10
     const totalProducts = filterProducts().length;
-    // const maxProductsPerPage = Math.ceil(totalProducts / productsPerPage);
     const maxOptions = Math.ceil(totalProducts / 10) * 10;
     const productsPerPageOptions = Array.from({ length: maxOptions / 10 }, (_, i) => (i + 1) * 10);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
     const checkboxes = [
@@ -118,24 +123,61 @@ const ShopProducts = () => {
     ];
 
 
-const handleSortChange = (e) => {
-    const selectedSortType = e.target.value;
-    setSortType(selectedSortType);
-};
 
-const sortedProducts = () => {
-    let sorted = [...currentProducts];
-    if (sortType === 'asc') {
-        sorted.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortType === 'desc') {
-        sorted.sort((a, b) => b.title.localeCompare(a.title));
-    } else if (sortType === 'highestRating') {
-        sorted.sort((a, b) => b.rating - a.rating);
-    } else if (sortType === 'lowestRating') {
-        sorted.sort((a, b) => a.rating - b.rating);
-    }
-    return sorted;
-};
+
+    const sortedProducts = () => {
+        let sorted = [...currentProducts];
+        if (sortType === 'asc') {
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (sortType === 'desc') {
+            sorted.sort((a, b) => b.title.localeCompare(a.title));
+        } else if (sortType === 'highestRating') {
+            sorted.sort((a, b) => b.rating - a.rating);
+        } else if (sortType === 'lowestRating') {
+            sorted.sort((a, b) => a.rating - b.rating);
+        } else if (sortType === 'lowestReview') {
+            sorted.sort((a, b) => {
+                return a.reviews.split(" ")?.[0] - b.reviews.split(" ")?.[0]
+            });
+
+
+        }
+        else if (sortType === 'highestReview') {
+            sorted.sort((a, b) => {
+                return b.reviews.split(" ")?.[0] - a.reviews.split(" ")?.[0]
+            });
+
+
+        }
+        return sorted;
+    };
+
+    const getSortInfo = () => {
+        switch (sortType) {
+            case 'asc':
+                return { name: '', icon: <FaSortAlphaDown /> };
+            case 'desc':
+                return { name: '', icon: <FaSortAlphaDownAlt /> };
+            case 'highestRating':
+                return { name: '', icon: <FaSortNumericUpAlt /> };
+            case 'lowestRating':
+                return { name: '', icon: <FaSortNumericDown /> };
+            case 'highestReview':
+                return { name: '', icon: <FaSortAmountDown /> };
+            case 'lowestReview':
+                return { name: '', icon: <FaSortAmountDownAlt /> };
+            default:
+                return { name: 'Sort Products', icon: null };
+        }
+    };
+
+    const handleSortClick = (sortType) => {
+        setSortType(sortType);
+    };
+
+    const sortInfo = getSortInfo();
+
+
     return (
         <>
             <section>
@@ -152,8 +194,8 @@ const sortedProducts = () => {
                             </div>
                             <div className="col-lg-3 border">
                                 <select
-                                    className={`${Style.customSelect} form-select`}
-                                    aria-label="Products per page"
+                                    className={`${Style.customSelect} `} style={{ width: "100%" }}
+                                    // aria-label="Products per page"
                                     value={productsPerPage}
                                     onChange={handleProductsPerPageChange}
                                 >
@@ -165,16 +207,20 @@ const sortedProducts = () => {
 
                             </div>
                             <div className="col-lg-3 border">
-                                <select className={`form-select ${Style.customSelect}`} aria-label="Default select example"
-                                    onChange={handleSortChange}>
-                                    <option selected>Sort</option>
-                                    <option value="asc">A-Z <span ><FaSortAlphaDown /></span></option>
-                                    <option value="desc">Z-A <FaSortAlphaDownAlt /></option>
-                                    <option value="highestRating">Highest-Rating  </option>
-                                    <option value="lowestRating">Lowest-Rating  </option>
-                                    <option value="">Highest-Reviews  </option>
-                                    <option value="">Lowest-Reviews  </option>
-                                </select>
+
+                                <div className="dropdown">
+                                    <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        {sortInfo.icon} {sortInfo.name}
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('asc')}><FaSortAlphaDown /> A-Z</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('desc')}><FaSortAlphaDownAlt /> Z-A</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('highestRating')}><FaSortNumericUpAlt /> Highest-Rating</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('lowestRating')}><FaSortNumericDown /> Lowest-Rating</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('highestReview')}><FaSortAmountDown /> Highest-Review</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('lowestReview')}><FaSortAmountDownAlt /> Lowest-Reviews</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -296,6 +342,29 @@ const sortedProducts = () => {
                         </div>
 
                     </div>
+
+
+                    {totalProducts > productsPerPage && (
+                        <div className={`pagination justify-content-center ${Style.PaginatenDiv}`}>
+                            <button className={Style.preBtn} onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+                                Prev
+                            </button>
+                            {Array.from({ length: Math.ceil(totalProducts / productsPerPage) }, (_, i) => (
+                                <button
+                                    style={{ width: "30px" }}
+                                    key={i}
+                                    onClick={() => paginate(i + 1)}
+                                    className={`${Style.pageBtn} ${currentPage === i + 1 ? Style.active : ''}`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                            <button className={Style.nextBtn} onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
+                                Next
+                            </button>
+                        </div>
+                    )}
+
                 </div>
 
             </section>
