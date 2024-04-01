@@ -13,6 +13,9 @@ import { FaSortNumericDown } from "react-icons/fa";
 import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
+import ReactPaginate from "react-paginate";
+
+
 
 
 
@@ -22,9 +25,11 @@ const ShopProducts = () => {
     const [checkedItems, setCheckedItems] = useState({});
     const [selectedRating, setSelectedRating] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [productsPerPage, setProductsPerPage] = useState(10);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage, setProductsPerPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(10);
     const [sortType, setSortType] = useState('');
+    const [pageRangeStart, setPageRangeStart] = useState(10);
+    const [pageRangeEnd, setPageRangeEnd] = useState(9);
 
     // Function to handle checkbox change
     const handleCheckboxChange = (label) => {
@@ -55,8 +60,9 @@ const ShopProducts = () => {
         setCheckedItems({});
         setSelectedRating([]);
         setSortType("");
-        setProductsPerPage(10);
+        setProductsPerPage(1);
         setCurrentPage(1);
+
 
 
     };
@@ -107,10 +113,20 @@ const ShopProducts = () => {
     };
 
     const totalProducts = filterProducts().length;
-    const maxOptions = Math.ceil(totalProducts / 10) * 10;
-    const productsPerPageOptions = Array.from({ length: maxOptions / 10 }, (_, i) => (i + 1) * 10);
+    const maxOptions = Math.ceil(totalProducts / 1) * 1;
+    const productsPerPageOptions = Array.from({ length: maxOptions / 1 }, (_, i) => (i + 1) * 1);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+
+ // Update page range when current page changes
+ useEffect(() => {
+     const newPageRangeStart = Math.floor((currentPage - 1) / 10) * 10;
+     const newPageRangeEnd = Math.min(newPageRangeStart + 9, Math.ceil(totalProducts / productsPerPage) - 1);
+     setPageRangeStart(newPageRangeStart);
+     setPageRangeEnd(newPageRangeEnd);
+ }, [currentPage, totalProducts, productsPerPage]);
 
 
     const checkboxes = [
@@ -152,6 +168,9 @@ const ShopProducts = () => {
         return sorted;
     };
 
+
+
+
     const getSortInfo = () => {
         switch (sortType) {
             case 'asc':
@@ -176,6 +195,8 @@ const ShopProducts = () => {
     };
 
     const sortInfo = getSortInfo();
+
+
 
 
     return (
@@ -345,27 +366,50 @@ const ShopProducts = () => {
 
 
                     {totalProducts > productsPerPage && (
-                        <div className={`pagination justify-content-center ${Style.PaginatenDiv}`}>
-                            <button className={Style.preBtn} onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-                                Prev
+                    <div className={`pagination justify-content-center ${Style.PaginatenDiv}`}>
+                        <button className={Style.preBtn} onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+                            Prev
+                        </button>
+                        {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
+                            <button
+                                style={{ width: "30px" }}
+                                key={pageRangeStart + i + 1}
+                                onClick={() => paginate(pageRangeStart + i + 1)}
+                                className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
+                            >
+                                {pageRangeStart + i + 1}
                             </button>
-                            {Array.from({ length: Math.ceil(totalProducts / productsPerPage) }, (_, i) => (
-                                <button
-                                    style={{ width: "30px" }}
-                                    key={i}
-                                    onClick={() => paginate(i + 1)}
-                                    className={`${Style.pageBtn} ${currentPage === i + 1 ? Style.active : ''}`}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-                            <button className={Style.nextBtn} onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
-                                Next
-                            </button>
+                        ))}
+                        <button className={Style.nextBtn} onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
+                            Next
+                        </button>
+                    </div>
+                )}
+
+                    {totalProducts > productsPerPage && (
+                        <div className={`${Style.paginateAgain}`} style={{ width: '100%', maxWidth: '300px', marginTop: "50px", margin: "0 auto" }}>
+                            <ReactPaginate
+                                previousLabel="Prev"
+                                nextLabel="Next"
+                                pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                onPageChange={({ selected }) => setCurrentPage(selected + 1)}
+                                pageClassName="page-item"
+                                pageLinkClassName={`page-link ${Style.pageLink}`}
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                // breakLabel="..."
+                                // breakClassName="page-item"
+                                // breakLinkClassName="page-link"
+                                containerClassName="pagination"
+                                activeClassName="active"
+                                marginPagesDisplayed={1}
+                                pageRangeDisplayed={2}
+                            />
                         </div>
                     )}
-
                 </div>
+
 
             </section>
 
