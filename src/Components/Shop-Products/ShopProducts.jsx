@@ -14,7 +14,7 @@ import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-
+const ProductShow = 10;
 
 
 
@@ -25,12 +25,14 @@ const ShopProducts = () => {
     const [checkedItems, setCheckedItems] = useState({});
     const [selectedRating, setSelectedRating] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [productsPerPage, setProductsPerPage] = useState(1);
-    const [currentPage, setCurrentPage] = useState(10);
     const [sortType, setSortType] = useState('');
+    const [productsPerPage, setProductsPerPage] = useState(ProductShow);
+    const [currentPage, setCurrentPage] = useState(1);
     const [pageRangeStart, setPageRangeStart] = useState(10);
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
 
+
+    
     // Function to handle checkbox change
     const handleCheckboxChange = (label) => {
         setCheckedItems(prevState => ({
@@ -60,7 +62,8 @@ const ShopProducts = () => {
         setCheckedItems({});
         setSelectedRating([]);
         setSortType("");
-        setProductsPerPage(1);
+        // setProductsPerPage(10);
+        setProductsPerPage(ProductShow);
         setCurrentPage(1);
 
 
@@ -113,20 +116,18 @@ const ShopProducts = () => {
     };
 
     const totalProducts = filterProducts().length;
-    const maxOptions = Math.ceil(totalProducts / 1) * 1;
-    const productsPerPageOptions = Array.from({ length: maxOptions / 1 }, (_, i) => (i + 1) * 1);
+    const maxOptions = Math.ceil(totalProducts / ProductShow) * ProductShow;
+    const productsPerPageOptions = Array.from({ length: maxOptions / ProductShow }, (_, i) => (i + 1) * ProductShow);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-
-
- // Update page range when current page changes
- useEffect(() => {
-     const newPageRangeStart = Math.floor((currentPage - 1) / 10) * 10;
-     const newPageRangeEnd = Math.min(newPageRangeStart + 9, Math.ceil(totalProducts / productsPerPage) - 1);
-     setPageRangeStart(newPageRangeStart);
-     setPageRangeEnd(newPageRangeEnd);
- }, [currentPage, totalProducts, productsPerPage]);
+    // Update page range when current page changes
+    useEffect(() => {
+        const newPageRangeStart = Math.floor((currentPage - 1) / 10) * 10;
+        const newPageRangeEnd = Math.min(newPageRangeStart + 9, Math.ceil(totalProducts / productsPerPage) - 1);
+        setPageRangeStart(newPageRangeStart);
+        setPageRangeEnd(newPageRangeEnd);
+    }, [currentPage, totalProducts, productsPerPage]);
 
 
     const checkboxes = [
@@ -215,7 +216,7 @@ const ShopProducts = () => {
                             </div>
                             <div className="col-lg-3 border">
                                 <select
-                                    className={`${Style.customSelect} `} style={{ width: "100%" }}
+                                    className={`${Style.customSelect} `} 
                                     // aria-label="Products per page"
                                     value={productsPerPage}
                                     onChange={handleProductsPerPageChange}
@@ -229,7 +230,7 @@ const ShopProducts = () => {
                             </div>
                             <div className="col-lg-3 border">
 
-                                <div className="dropdown">
+                                <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                         {sortInfo.icon} {sortInfo.name}
                                     </button>
@@ -360,54 +361,77 @@ const ShopProducts = () => {
 
                                 </div>
                             </div>
+
+                            <div>
+                                {totalProducts > productsPerPage && (
+                                    <div className={`pagination justify-content-center ${Style.PaginatenDiv}`}>
+                                        <button className={Style.preBtn}
+                                            onClick={() => {
+                                                if (currentPage > 1) {
+                                                    paginate(currentPage - 1);
+                                                    setCurrentPage(currentPage - 1);
+                                                }
+                                            }}
+                                            disabled={currentPage === 1}>
+                                            Prev
+                                        </button>
+                                        {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
+                                            <button
+                                                style={{ width: "30px" }}
+                                                key={pageRangeStart + i + 1}
+                                                onClick={() => {
+                                                    paginate(pageRangeStart + i + 1);
+                                                    setCurrentPage(pageRangeStart + i + 1);
+                                                }}
+                                                className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
+                                            >
+                                                {pageRangeStart + i + 1}
+                                            </button>
+                                        ))}
+                                        <button className={Style.nextBtn}
+                                            onClick={() => {
+                                                if (currentPage < Math.ceil(totalProducts / productsPerPage)) {
+                                                    paginate(currentPage + 1);
+                                                    setCurrentPage(currentPage + 1);
+                                                }
+                                            }}
+                                            disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
+                                            Next
+                                        </button>
+                                    </div>
+                                )}
+                                {totalProducts > productsPerPage && (
+                                    <div className={`${Style.paginateAgain}`} style={{ width: '100%', maxWidth: '300px', marginTop: "50px", margin: "0 auto" }}>
+                                        <ReactPaginate
+                                            previousLabel="Prev"
+                                            nextLabel="Next"
+                                            pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                            onPageChange={({ selected }) => {
+                                                paginate(selected + 1);
+                                                setCurrentPage(selected + 1);
+                                            }}
+                                            pageClassName="page-item"
+                                            pageLinkClassName={`page-link ${Style.pageLink}`}
+                                            previousLinkClassName="page-link"
+                                            nextClassName="page-item"
+                                            nextLinkClassName="page-link"
+                                            containerClassName="pagination"
+                                            activeClassName="active"
+                                            marginPagesDisplayed={1}
+                                            pageRangeDisplayed={2}
+                                            forcePage={currentPage - 1} // Ensure ReactPaginate shows the correct page
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                     </div>
 
 
-                    {totalProducts > productsPerPage && (
-                    <div className={`pagination justify-content-center ${Style.PaginatenDiv}`}>
-                        <button className={Style.preBtn} onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-                            Prev
-                        </button>
-                        {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
-                            <button
-                                style={{ width: "30px" }}
-                                key={pageRangeStart + i + 1}
-                                onClick={() => paginate(pageRangeStart + i + 1)}
-                                className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
-                            >
-                                {pageRangeStart + i + 1}
-                            </button>
-                        ))}
-                        <button className={Style.nextBtn} onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
-                            Next
-                        </button>
-                    </div>
-                )}
 
-                    {totalProducts > productsPerPage && (
-                        <div className={`${Style.paginateAgain}`} style={{ width: '100%', maxWidth: '300px', marginTop: "50px", margin: "0 auto" }}>
-                            <ReactPaginate
-                                previousLabel="Prev"
-                                nextLabel="Next"
-                                pageCount={Math.ceil(totalProducts / productsPerPage)}
-                                onPageChange={({ selected }) => setCurrentPage(selected + 1)}
-                                pageClassName="page-item"
-                                pageLinkClassName={`page-link ${Style.pageLink}`}
-                                previousLinkClassName="page-link"
-                                nextClassName="page-item"
-                                nextLinkClassName="page-link"
-                                // breakLabel="..."
-                                // breakClassName="page-item"
-                                // breakLinkClassName="page-link"
-                                containerClassName="pagination"
-                                activeClassName="active"
-                                marginPagesDisplayed={1}
-                                pageRangeDisplayed={2}
-                            />
-                        </div>
-                    )}
+
+
                 </div>
 
 

@@ -28,7 +28,7 @@
         "button": "BUY NOW"
     },
     {
-        "id": 3,
+        "id": 4,
         "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
         
         "title": "Cholestq10 60 V Caps 30 Servings",
@@ -274,116 +274,5 @@
         "reviews": "59 Review",
         "button": "BUY NOW"
     }
-    ,{
-        "id": 31,
-        "image": "Images/fake14.jpg",
-        "title": "bsssorted Beauty Products in a Bag",
-        "rating": 1,
-        "categories":["Skin","Vision"],
-        "reviews": "59 Review",
-        "button": "BUY NOW"
-    }
-  
-    ,
-    {
-        "id": 21,
-        "image": "Images/fake11.webp",
-        "title": "pexels-photo-2633986",
-        "rating": 5,
-        "categories":["Skin","Bones"],
-        "reviews": "66 Review",
-        "button": "buy now"
-    },
-    {
-        "id":22,
-        "image": "Images/fake12.jpeg",
-        "title": "Zexels-photo-3259584 584 pexels",
-        "rating": 4,
-        "categories":["Joints","Heart","Immunity"],
-        "reviews": "29 Review",
-        "button": "BUY NOW"
-    },
-    {
-        "id": 23,
-        "image": "Images/fake13.jpg",
-        "title": "Bluerex Vision 60 SoftGels 30 Servings",
-        "rating": 3,
-        "categories":["Skin","Vision"],
-        "reviews": "71 Review",
-        "button": "BUY NOW"
-    },
-    {
-        "id": 24,
-        "image": "Images/fake14.jpg",
-        "title": "jam-beans-428094_1280_720_720",
-        "rating": 2,
-        "categories":["Skin","Heart","Vision"],
-        "reviews": "100 Review",
-        "button": "BUY NOW"
-
-    },
-    {
-        "id": 25,
-        "image": "Images/fake15.jpg",
-        "title": "coffee-beans-2258839_960_720",
-        "rating": 1,
-        "categories":["Bones","Immunity","Vision"],
-        "reviews": "30 review",
-        "button": "PRE-ORDER"
-    },
-    {
-        "id": 26,
-        "image": "Images/fake16.jpg",
-        "title": "istockphoto-1463681745-1024x1024",
-        "rating": 5,
-        "categories":["Bones","Immunity","Heart"],
-        "reviews": "10 Review",
-        "button": "PRE-ORDER"
-    },
-    {
-        "id": 27,
-        "image": "Images/fake27.webp",
-        "title": "ar Medicinals-1463681745-1024x1024",
-        "rating": 4,
-        "reviews": "40 Review",
-        "categories":["Skin","Immunity","Heart"],
-        "button": "PRE-ORDER"
-    }, 
-      {
-        "id": 28,
-        "image": "Images/fake28.webp",
-        "title": "A Bottle of Hemp Extract with Dropper",
-        "rating": 3,
-        "categories":["Skin","Bones"],
-        "reviews": "50 Review",
-        "button": "buy now"
-    },
-    {
-        "id": 29,
-        "image": "Images/fake29.webp",
-        "title": "Close-up of a Bottle of Hemp Oil",
-        "rating": 2,
-        "categories":["Joints","Heart","Immunity"],
-        "reviews": "4 Review",
-        "button": "BUY NOW"
-    },
-    {
-        "id": 30,
-        "image": "Images/fake30.jpeg",
-        "title": "Assorted Beauty Products in a Bag",
-        "rating": 1,
-        "categories":["Skin","Vision"],
-        "reviews": "59 Review",
-        "button": "BUY NOW"
-    }
-    ,{
-        "id": 31,
-        "image": "Images/fake14.jpg",
-        "title": "bsssorted Beauty Products in a Bag",
-        "rating": 1,
-        "categories":["Skin","Vision"],
-        "reviews": "59 Review",
-        "button": "BUY NOW"
-    }
-  
+      
 ]
