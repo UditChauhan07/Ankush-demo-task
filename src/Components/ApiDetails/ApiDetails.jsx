@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import Style from "../ApiDetails/ApiDetails.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 const ApiDetails = () => {

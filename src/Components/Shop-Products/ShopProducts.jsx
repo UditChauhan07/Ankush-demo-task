@@ -5,6 +5,8 @@ import { VscStarFull } from "react-icons/vsc";
 import { RiStarLine } from "react-icons/ri";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";
+import { BsGrid3X3GapFill } from "react-icons/bs";
+import { FaListUl } from "react-icons/fa6";
 import swal from 'sweetalert';
 import data from './ShopPoducts.json';
 import Skeleton from 'react-loading-skeleton'
@@ -14,13 +16,11 @@ import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-const ProductShow = 10;
-
-
-
 
 const ShopProducts = () => {
+    const ProductShow = 3;
     const navigate = useNavigate();
+    const [showReactPaginate, setShowReactPaginate] = useState(true); // State to track switch button status
     const [showCheckboxes, setShowCheckboxes] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
     const [selectedRating, setSelectedRating] = useState([]);
@@ -31,14 +31,18 @@ const ShopProducts = () => {
     const [pageRangeStart, setPageRangeStart] = useState(10);
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
 
+    // Function to toggle display of category checkboxes //
+    const toggleCheckboxes = () => {
+        setShowCheckboxes(prevState => !prevState);
+    };
 
-    
     // Function to handle checkbox change
     const handleCheckboxChange = (label) => {
         setCheckedItems(prevState => ({
             ...prevState,
             [label]: !prevState[label]
         }));
+        setCurrentPage(1);
     };
 
     // Function to handle click on product //
@@ -50,28 +54,16 @@ const ShopProducts = () => {
         }
     };
 
-    // Function to toggle display of category checkboxes //
-    const toggleCheckboxes = () => {
-        setShowCheckboxes(prevState => !prevState);
-    };
-
-
-
     // Function to clear all filters
     const handleClearFilters = () => {
         setCheckedItems({});
         setSelectedRating([]);
         setSortType("");
-        // setProductsPerPage(10);
         setProductsPerPage(ProductShow);
         setCurrentPage(1);
-
-
-
     };
 
     // Function to filter products based on checked categories and selected rating..//
-
     const filterProducts = () => {
         let filtered = data;
         if (Object.values(checkedItems).some(value => value)) {
@@ -86,14 +78,13 @@ const ShopProducts = () => {
     };
 
     // Function to show alert and reset filters....//
-
     const showAlert = () => {
         swal("No products found", "", "warning").then(() => {
-
             setCheckedItems({});
             setSelectedRating([]);
         });
     };
+
     useEffect(() => {
         if (filterProducts().length === 0) {
             showAlert();
@@ -103,6 +94,10 @@ const ShopProducts = () => {
         }, 1000);
     }, [checkedItems, selectedRating]);
 
+    // Function to handle switch button change
+    const handleSwitchChange = () => {
+        setShowReactPaginate(prevState => !prevState);
+    };
 
     // ............Pagination  Start  .......// 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -119,16 +114,21 @@ const ShopProducts = () => {
     const maxOptions = Math.ceil(totalProducts / ProductShow) * ProductShow;
     const productsPerPageOptions = Array.from({ length: maxOptions / ProductShow }, (_, i) => (i + 1) * ProductShow);
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber);
+    };
 
-    // Update page range when current page changes
+    useEffect(() => {
+        setCurrentPage(1);
+        paginate(1);
+    }, [selectedRating]);
+
     useEffect(() => {
         const newPageRangeStart = Math.floor((currentPage - 1) / 10) * 10;
         const newPageRangeEnd = Math.min(newPageRangeStart + 9, Math.ceil(totalProducts / productsPerPage) - 1);
         setPageRangeStart(newPageRangeStart);
         setPageRangeEnd(newPageRangeEnd);
     }, [currentPage, totalProducts, productsPerPage]);
-
 
     const checkboxes = [
         { label: 'Skin' },
@@ -138,9 +138,6 @@ const ShopProducts = () => {
         { label: 'Bones' },
         { label: 'Vision' }
     ];
-
-
-
 
     const sortedProducts = () => {
         let sorted = [...currentProducts];
@@ -153,24 +150,12 @@ const ShopProducts = () => {
         } else if (sortType === 'lowestRating') {
             sorted.sort((a, b) => a.rating - b.rating);
         } else if (sortType === 'lowestReview') {
-            sorted.sort((a, b) => {
-                return a.reviews.split(" ")?.[0] - b.reviews.split(" ")?.[0]
-            });
-
-
-        }
-        else if (sortType === 'highestReview') {
-            sorted.sort((a, b) => {
-                return b.reviews.split(" ")?.[0] - a.reviews.split(" ")?.[0]
-            });
-
-
+            sorted.sort((a, b) => a.reviews.split(" ")?.[0] - b.reviews.split(" ")?.[0]);
+        } else if (sortType === 'highestReview') {
+            sorted.sort((a, b) => b.reviews.split(" ")?.[0] - a.reviews.split(" ")?.[0]);
         }
         return sorted;
     };
-
-
-
 
     const getSortInfo = () => {
         switch (sortType) {
@@ -197,39 +182,34 @@ const ShopProducts = () => {
 
     const sortInfo = getSortInfo();
 
-
-
-
     return (
         <>
             <section>
                 <div className={`container-fluid  ${Style.productmain}`}>
                     <div className={Style.shorting}>
                         <div className={`row fixed-top ${Style.shortingDiv}`}>
-                            <div className="col-lg-3 border">
+                            <div className="col-lg-3 col-3 border">
                                 <p className={Style.showingProducts}>
-                                    Showing Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
+                                    Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
                                 </p>
                             </div>
-                            <div className="col-lg-3 border">
-                                <p className={Style.showingProducts}>For Grid and List icon</p>
+                            <div className="col-lg-3 col-3 border">
+                                <div className={Style.bothIcon}>
+                                    <span className={Style.showIcon}><BsGrid3X3GapFill /> <span className={Style.showIcon}>< FaListUl /></span></span>
+                                </div>
                             </div>
-                            <div className="col-lg-3 border">
+                            <div className="col-lg-3 col-3 border">
                                 <select
-                                    className={`${Style.customSelect} `} 
-                                    // aria-label="Products per page"
+                                    className={`${Style.customSelect} `}
                                     value={productsPerPage}
                                     onChange={handleProductsPerPageChange}
                                 >
                                     {productsPerPageOptions.map(option => (
-                                        <option key={option}
-                                            value={option}> {option} Products Per Page</option>
+                                        <option key={option} value={option}> {option}  Per Page</option>
                                     ))}
                                 </select>
-
                             </div>
-                            <div className="col-lg-3 border">
-
+                            <div className="col-lg-3 col-3 border">
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                         {sortInfo.icon} {sortInfo.name}
@@ -259,7 +239,6 @@ const ShopProducts = () => {
                                             <p className={Style.clear} style={{ cursor: "pointer" }} onClick={handleClearFilters}>Clear</p>
                                         </div>
                                     </div>
-
                                     <div className={Style.line1}><hr /></div>
                                     <div className={Style.categories}>
                                         <strong className={Style.catfilter} style={{ cursor: "pointer" }}>Categories</strong>
@@ -301,13 +280,11 @@ const ShopProducts = () => {
                                                             }
                                                         }}
                                                     />
-
                                                     {[...Array(5 - index).keys()].map((i) => (
                                                         <span id='starIcon' className={Style.starimg} key={i}>
                                                             <VscStarFull style={{ color: "rgb(244 172 12)" }} />
                                                         </span>
                                                     ))}
-
                                                     {[...Array(index).keys()].map((i) => (
                                                         <span id='starIcon' keys={5 - index + 1}>
                                                             <RiStarLine style={{ color: "#e6bf69" }} />
@@ -317,11 +294,9 @@ const ShopProducts = () => {
                                             </div>
                                         ))}
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
                         <div className="col-lg-9 col-md-9">
                             <h1 className={Style.heading}>SHOP PRODUCTS</h1>
                             <div className={Style.collection_Container}>
@@ -354,89 +329,80 @@ const ShopProducts = () => {
                                                 <div className={Style.btnDiv}>
                                                     <button className={Style.buybtn} onClick={() => handleClick(product.id)}>{product.button}</button>
                                                 </div>
-
                                             </div>
                                         ))
                                     )}
-
                                 </div>
                             </div>
-
-                            <div>
-                                {totalProducts > productsPerPage && (
-                                    <div className={`pagination justify-content-center ${Style.PaginatenDiv}`}>
-                                        <button className={Style.preBtn}
-                                            onClick={() => {
-                                                if (currentPage > 1) {
-                                                    paginate(currentPage - 1);
-                                                    setCurrentPage(currentPage - 1);
-                                                }
-                                            }}
-                                            disabled={currentPage === 1}>
-                                            Prev
-                                        </button>
-                                        {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
-                                            <button
-                                                style={{ width: "30px" }}
-                                                key={pageRangeStart + i + 1}
-                                                onClick={() => {
-                                                    paginate(pageRangeStart + i + 1);
-                                                    setCurrentPage(pageRangeStart + i + 1);
-                                                }}
-                                                className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
-                                            >
-                                                {pageRangeStart + i + 1}
-                                            </button>
-                                        ))}
-                                        <button className={Style.nextBtn}
-                                            onClick={() => {
-                                                if (currentPage < Math.ceil(totalProducts / productsPerPage)) {
-                                                    paginate(currentPage + 1);
-                                                    setCurrentPage(currentPage + 1);
-                                                }
-                                            }}
-                                            disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
-                                            Next
-                                        </button>
-                                    </div>
-                                )}
-                                {totalProducts > productsPerPage && (
-                                    <div className={`${Style.paginateAgain}`} style={{ width: '100%', maxWidth: '300px', marginTop: "50px", margin: "0 auto" }}>
-                                        <ReactPaginate
-                                            previousLabel="Prev"
-                                            nextLabel="Next"
-                                            pageCount={Math.ceil(totalProducts / productsPerPage)}
-                                            onPageChange={({ selected }) => {
-                                                paginate(selected + 1);
-                                                setCurrentPage(selected + 1);
-                                            }}
-                                            pageClassName="page-item"
-                                            pageLinkClassName={`page-link ${Style.pageLink}`}
-                                            previousLinkClassName="page-link"
-                                            nextClassName="page-item"
-                                            nextLinkClassName="page-link"
-                                            containerClassName="pagination"
-                                            activeClassName="active"
-                                            marginPagesDisplayed={1}
-                                            pageRangeDisplayed={2}
-                                            forcePage={currentPage - 1} // Ensure ReactPaginate shows the correct page
-                                        />
-                                    </div>
-                                )}
+                            <div className={`form-check form-switch  ${Style.toogelDiv}`}>
+                                <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={showReactPaginate} onChange={handleSwitchChange} />
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+                                    {showReactPaginate ? 'On' : 'Off'}
+                                </label>
                             </div>
+                            {showReactPaginate ? (
+                                <div className={`pagination justify-content-end ${Style.PaginatenDiv}`}>
+                                    <button className={Style.preBtn}
+                                        onClick={() => {
+                                            if (currentPage > 1) {
+                                                paginate(currentPage - 1);
+                                                setCurrentPage(currentPage - 1);
+                                            }
+                                        }}
+                                        disabled={currentPage === 1}>
+                                        Prev
+                                    </button>
+                                    {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
+                                        <button
+                                            style={{ width: "30px" }}
+                                            key={pageRangeStart + i + 1}
+                                            onClick={() => {
+                                                paginate(pageRangeStart + i + 1);
+                                                setCurrentPage(pageRangeStart + i + 1);
+                                            }}
+                                            className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
+                                        >
+                                            {pageRangeStart + i + 1}
+                                        </button>
+                                    ))}
+                                    <button className={Style.nextBtn}
+                                        onClick={() => {
+                                            if (currentPage < Math.ceil(totalProducts / productsPerPage)) {
+                                                paginate(currentPage + 1);
+                                                setCurrentPage(currentPage + 1);
+                                            }
+                                        }}
+                                        disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
+                                        Next
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className={`${Style.paginateAgain}`} style={{ width: '100%', maxWidth: '300px', marginTop: "50px", margin: "0 auto" }}>
+                                    <ReactPaginate
+                                        previousLabel="Prev"
+                                        nextLabel="Next"
+                                        pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                        onPageChange={({ selected }) => {
+                                            paginate(selected + 1);
+                                            setCurrentPage(selected + 1);
+                                        }}
+                                        pageClassName="page-item"
+                                        pageLinkClassName={`page-link ${Style.pageLink}`}
+                                        previousLinkClassName="page-link"
+                                        nextClassName="page-item"
+                                        nextLinkClassName="page-link"
+                                        containerClassName="pagination"
+                                        activeClassName="active"
+                                        marginPagesDisplayed={1}
+                                        pageRangeDisplayed={2}
+                                        forcePage={currentPage - 1}
+                                    />
+                                </div>
+                            )}
                         </div>
-
                     </div>
-
-
-
-
-
                 </div>
-
-
             </section>
-
         </>
     );
 };
