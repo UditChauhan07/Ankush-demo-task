@@ -18,7 +18,8 @@ import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 
 const ShopProducts = () => {
-    const ProductShow = 3;
+    const ProductShow = 1;
+    const PageLimit = 5
     const navigate = useNavigate();
     const [showReactPaginate, setShowReactPaginate] = useState(true); // State to track switch button status
     const [showCheckboxes, setShowCheckboxes] = useState(false);
@@ -28,8 +29,9 @@ const ShopProducts = () => {
     const [sortType, setSortType] = useState('');
     const [productsPerPage, setProductsPerPage] = useState(ProductShow);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageRangeStart, setPageRangeStart] = useState(10);
+    const [pageRangeStart, setPageRangeStart] = useState(PageLimit);
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
+    // console.log(pageRangeEnd)
 
     // Function to toggle display of category checkboxes //
     const toggleCheckboxes = () => {
@@ -124,8 +126,8 @@ const ShopProducts = () => {
     }, [selectedRating]);
 
     useEffect(() => {
-        const newPageRangeStart = Math.floor((currentPage - 1) / 10) * 10;
-        const newPageRangeEnd = Math.min(newPageRangeStart + 9, Math.ceil(totalProducts / productsPerPage) - 1);
+        const newPageRangeStart = Math.floor((currentPage - 1) / PageLimit) * PageLimit;
+        const newPageRangeEnd = Math.min(newPageRangeStart + 4, Math.ceil(totalProducts / productsPerPage) - 1);
         setPageRangeStart(newPageRangeStart);
         setPageRangeEnd(newPageRangeEnd);
     }, [currentPage, totalProducts, productsPerPage]);
@@ -188,28 +190,28 @@ const ShopProducts = () => {
                 <div className={`container-fluid  ${Style.productmain}`}>
                     <div className={Style.shorting}>
                         <div className={`row fixed-top ${Style.shortingDiv}`}>
-                            <div className="col-lg-3 col-3 border">
+                            <div className="col-lg-3 col-sm-3 border">
                                 <p className={Style.showingProducts}>
-                                    Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
+                                    Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
                                 </p>
                             </div>
-                            <div className="col-lg-3 col-3 border">
+                            <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <div className={Style.bothIcon}>
                                     <span className={Style.showIcon}><BsGrid3X3GapFill /> <span className={Style.showIcon}>< FaListUl /></span></span>
                                 </div>
                             </div>
-                            <div className="col-lg-3 col-3 border">
+                            <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <select
                                     className={`${Style.customSelect} `}
                                     value={productsPerPage}
                                     onChange={handleProductsPerPageChange}
                                 >
                                     {productsPerPageOptions.map(option => (
-                                        <option key={option} value={option}> {option}  Per Page</option>
+                                        <option key={option} value={option}> {option}Per Page</option>
                                     ))}
                                 </select>
                             </div>
-                            <div className="col-lg-3 col-3 border">
+                            <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                         {sortInfo.icon} {sortInfo.name}
@@ -334,14 +336,32 @@ const ShopProducts = () => {
                                     )}
                                 </div>
                             </div>
-                            <div className={`form-check form-switch  ${Style.toogelDiv}`}>
-                                <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={showReactPaginate} onChange={handleSwitchChange} />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-                                    {showReactPaginate ? 'On' : 'Off'}
-                                </label>
-                            </div>
+
                             {showReactPaginate ? (
-                                <div className={`pagination justify-content-end ${Style.PaginatenDiv}`}>
+                                <div className={`${Style.paginateAgain}`} >
+                                    <ReactPaginate
+                                        previousLabel="Prev"
+                                        nextLabel="Next"
+                                        pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                        onPageChange={({ selected }) => {
+                                            paginate(selected + 1);
+                                            setCurrentPage(selected + 1);
+                                        }}
+                                        pageClassName={`page-item ${Style.pageItem}`}
+                                        pageLinkClassName={` ${Style.pageLink}`}
+                                        previousLinkClassName={` ${Style.prevPageLink}`}
+                                        nextClassName="page-item"
+                                        nextLinkClassName={` ${Style.prevPageLink}`}
+                                        containerClassName="pagination"
+                                        activeClassName={`active ${Style.Active}`}
+                                        marginPagesDisplayed={1}
+                                        pageRangeDisplayed={2}
+                                        forcePage={currentPage - 1}
+                                    />
+                                </div>
+
+                            ) : (
+                                <div className={`pagination  ${Style.PaginatenDiv}`}>
                                     <button className={Style.preBtn}
                                         onClick={() => {
                                             if (currentPage > 1) {
@@ -376,30 +396,15 @@ const ShopProducts = () => {
                                         Next
                                     </button>
                                 </div>
-                            ) : (
-                                <div className={`${Style.paginateAgain}`} style={{ width: '100%', maxWidth: '300px', marginTop: "50px", margin: "0 auto" }}>
-                                    <ReactPaginate
-                                        previousLabel="Prev"
-                                        nextLabel="Next"
-                                        pageCount={Math.ceil(totalProducts / productsPerPage)}
-                                        onPageChange={({ selected }) => {
-                                            paginate(selected + 1);
-                                            setCurrentPage(selected + 1);
-                                        }}
-                                        pageClassName="page-item"
-                                        pageLinkClassName={`page-link ${Style.pageLink}`}
-                                        previousLinkClassName="page-link"
-                                        nextClassName="page-item"
-                                        nextLinkClassName="page-link"
-                                        containerClassName="pagination"
-                                        activeClassName="active"
-                                        marginPagesDisplayed={1}
-                                        pageRangeDisplayed={2}
-                                        forcePage={currentPage - 1}
-                                    />
-                                </div>
                             )}
                         </div>
+
+                    </div>
+                    <div className={`form-check form-switch  ${Style.toogelDiv}`}>
+                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={showReactPaginate} onChange={handleSwitchChange} />
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+                            All Page
+                        </label>
                     </div>
                 </div>
             </section>

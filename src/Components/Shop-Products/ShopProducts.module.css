@@ -6,6 +6,10 @@
     width: 100%;
 }
 
+.bothIcon {
+    margin-top: 10px;
+}
+
 .showingProducts {
     margin-top: 10px;
     margin-left: 10px;
@@ -13,7 +17,6 @@
 
 .shortingDiv {
     background-color: rgb(255, 255, 255);
-
     margin-left: 10px;
     margin-right: 10px;
 
@@ -31,7 +34,7 @@
 }
 
 .filterCard {
-    margin-top: 10px;
+    margin-top: 55px;
     border: 1px;
     width: 300px;
     position: fixed;
@@ -41,11 +44,12 @@
     overflow-y: auto;
     cursor: pointer;
     border-bottom: none;
+    max-height: calc(88vh - 38px);
 }
 
-@media screen and (max-height: 500px) {
+@media screen and (max-height: 600px) {
     .filterCard {
-        max-height: calc(88vh - 38px);
+        max-height: calc(80vh - 50px);
     }
 }
 
@@ -55,28 +59,23 @@
     }
 }
 
-
-
 .mainDiv {
     background-color: rgb(255, 255, 255);
     position: fixed;
     border-radius: 10px;
-    margin-top: -1px;
+    margin-top: 0px;
     max-width: 200px;
-    width: auto;
-    margin-left: 11px;
+    width: 100%;
+    margin-left: 13px;
 }
 
-
 .filtername {
-    /* position: fixed; */
     margin-top: 20px;
     width: 100%;
 }
 
 .clearname {
     color: gray;
-    /* position: fixed; */
     margin-top: -23px;
     margin-left: 210px !important;
 }
@@ -86,7 +85,6 @@
 }
 
 .line1 {
-    /* position: relati; */
     margin-top: 40px;
     color: #b3b1b193;
 }
@@ -126,11 +124,9 @@
     font-size: 42px;
     font-weight: 400;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
     cursor: pointer;
 }
-
-
 
 .colactionCart {
     margin-bottom: 30px;
@@ -195,30 +191,11 @@
     margin-left: 4px;
 }
 
-/* .buybtn {
-    background-color: black;
-    color: white;
-    min-width: 100px;
-    margin-top: 0.5rem;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border: 1px solid #000;
-    font-size: 12px;
-    font-weight: bold;
-    transition: all 0.25s;
-    
-} */
-
-/* .buybtn:hover {
-    background-color: rgb(55, 36, 107);
-} */
 
 .btnDiv {
     border: 1px;
     width: 109px;
     height: 50px;
-    /* width: 110px;
-    height: 50px; */
     border-radius: 35px;
     animation: rotation 2s linear 0s infinite;
 }
@@ -245,12 +222,6 @@
     border-radius: 35px;
 }
 
-/* .buybtn:hover
-{
-     color: white;
-     
-    background: linear-gradient(var(--gradient-angle), rgb(252, 251, 251), rgba(255, 255, 255, 0));
-} */
 
 @keyframes rotation {
     0% {
@@ -270,8 +241,16 @@
 
 /* ......pagination CSS Start */
 
+.paginateAgain {
+    width: 100%;
+    max-width: 350px;
+    float: right;
+}
 
 .PaginatenDiv {
+    margin-right: 15px;
+    /* justify-content: end; */
+    float: right;
     margin-bottom: 20px;
 }
 
@@ -279,54 +258,86 @@
     padding: 2px 10px;
     margin-right: 2px;
     border: none;
-    /* border: 3px solid#62a39b78; */
     font-weight: bold;
-    /* background-color: rgba(228, 240, 241, 0.002); */
+    background-color: transparent;
 
+}
+
+
+.pageLink {
+    border-radius: 10px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    /* background-color: red; */
+    border: none;
+}
+
+
+.pageLink:hover {
+    background-color: transparent;
+    color: black;
+}
+
+.prevPageLink {
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    color: black;
+    padding: 4px 10px;
+    text-decoration: none;
+    /* margin-top:10px; */
+
+}
+
+/* .prevPageLink :focus{
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+} */
+
+.prevPageLink:hover {
+    background-color: transparent;
+    color: black;
+}
+
+.Active {
+    border-radius: 10px;
+    background-color: rgb(0, 149, 255);
+    /* color: rgb(3, 3, 3); */
 }
 
 .pageBtn {
     margin-right: 2px;
-    /* padding: auto; */
-    /* padding: 2px 20px 0px 10px; */
-    /* width: 40px; */
-    /* border: 3px solid#62a39b78; */
     border: none;
     font-weight: bold;
-    /* background-color: rgba(0, 229, 255, 0.083); */
+    background-color: transparent;
+
 }
 
 .nextBtn {
     padding: 2px 10px;
     margin-right: 2px;
-    /* border: 3px solid#62a39b78; */
     border: none;
     font-weight: bold;
-    /* background-color: rgba(0, 229, 255, 0.083); */
+    background-color: transparent;
+
 
 }
 
-/* .pageBtn:hover{
-    background-color: rgb(0, 149, 255);
-    color: white;
-} */
-/* .preBtn:hover{
-    background-color: rgb(0, 149, 255);
-    color: white;
-} */
-/* .nextBtn:hover{
-    background-color: rgb(0, 149, 255);
-    color: white;
-} */
 .active {
     border-radius: 10px;
     background-color: rgb(0, 149, 255);
-    color: white;
+    /* color: rgb(10, 10, 10); */
 }
-.toogelDiv{
-    margin-left: 70%;
+
+.toogelDiv {
+    float: right;
+    margin-right: 45px;
     margin-bottom: 20px;
 }
+
 /* Responsive Start */
 
 
@@ -395,24 +406,35 @@
         margin-left: 0px;
     }
 
+    .paginateAgain {
+        margin-right: 15px;
+    }
 }
 
 
 
 
 @media (max-width: 1024px) {
-    .shortingDiv {
-        /* margin-left: 36rem; */
-        /* width: 50%; */
+
+
+
+    .showingProducts {
+        font-size: 15px;
+        margin-top: 10px;
     }
 
-    .colactionCart {
-        /* width: 100%;
-        min-width: 229px; */
+    .customSelect {
+        font-size: 15px;
     }
-.bothIcon{
-    margin-top: 10px;
-}
+
+    .dropDown {
+        font-size: 15px;
+    }
+
+    .bothIcon {
+        margin-top: 10px;
+    }
+
     .cardContainer {
         grid-template-columns: repeat(3, auto);
         margin-left: 25px;
@@ -437,11 +459,20 @@
     .filterCard {
         /* margin-left: px; */
         width: 26%;
-        margin-top: 40px;
+        margin-top: 20px;
+        max-height: calc(80vh - 38px);
     }
 
     .heading {
-        margin-top: 40px;
+        margin-top: 20px;
+    }
+
+    .PaginatenDiv {
+        margin-right: 15px;
+    }
+
+    .paginateAgain {
+        margin-right: 10px;
     }
 }
 
@@ -452,29 +483,31 @@
     }
 
     .showingProducts {
+        margin-top: 15px;
+        margin-left: -5px;
         font-size: 12px;
     }
 
     .bothIcon {
-        margin-top: 5px;
+        margin-top: 10px;
     }
 
     .customSelect {
         padding: 12px 5px;
-        margin-top: 0px;
+        margin-top: 3px;
         font-size: 12px;
     }
 
     .dropDown {
         font-size: 12px;
-        /* margin-top: -9px;
-        padding: 10px 2px; */
+        margin-top: 4px;
+
     }
 
     .heading {
         font-size: 36px;
         margin-left: 100px;
-        margin-top: 10px;
+        margin-top: 35px;
     }
 
     .cardContainer {
@@ -486,7 +519,7 @@
         margin-left: 10px;
         width: 100%;
         max-width: 230px;
-        margin-top: 10px;
+        margin-top: 35px;
     }
 
     .filtername {
@@ -518,8 +551,16 @@
         margin-left: 10px !important;
     }
 
+    .paginateAgain {
+        margin-right: -5px;
+    }
+
     .PaginatenDiv {
-        margin-left: 80px;
+        margin-right: 5px;
+    }
+
+    .toogelDiv {
+        margin-right: 35px;
     }
 }
 
@@ -565,24 +606,45 @@
         width: 100%;
     }
 
+
     .showingProducts {
-        margin-left: 0px;
-        font-size: 10px;
+        margin-top: 15px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-size: 16px;
     }
-    .bothIcon{
-       margin-top: 6px;
+
+    .GridDiv {
+        width: 33.33%;
     }
+
+    .bothIcon {
+        margin-top: -2px;
+    }
+
+    .showIcon {
+        font-size: 13px;
+
+    }
+
     .customSelect {
-        margin-left: -6px;
-        font-size: 10px;
+        margin-left: -10px;
+        font-size: 14px;
         margin-top: 0px;
         width: 120%;
+
     }
 
     .dropDown {
-        margin-top: 0px;
-        font-size: 10px;
-        margin-left: -13px;
+        margin-top: -6px;
+        font-size: 14px;
+        margin-left: -16px;
+
+    }
+
+    .dropDiv {
+        margin-top: 7px;
     }
 
     .cardContainer {
@@ -623,6 +685,7 @@
     .filterCard {
         width: 100%;
         margin-left: 10px;
+        margin-top: 0px;
         position: relative;
         overflow: none !important;
         max-height: calc(500vh - 30px);
@@ -643,7 +706,11 @@
     }
 
     .PaginatenDiv {
-        margin-left: 20px;
+        margin-right: 50px;
+    }
+
+    .paginateAgain {
+        max-width: 370px;
     }
 }
 
@@ -652,24 +719,46 @@
         margin-left: 0px;
         width: 100%;
     }
+
+
     .showingProducts {
-        margin-left: 0px;
-        font-size: 9px;
+        margin-top: 15px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-size: 16px;
     }
-    .bothIcon{
-       margin-top: 6px;
+
+    .GridDiv {
+        width: 33.33%;
     }
+
+    .bothIcon {
+        margin-top: -2px;
+    }
+
+    .showIcon {
+        font-size: 13px;
+
+    }
+
     .customSelect {
-        margin-left: -6px;
-        font-size: 9px;
+        margin-left: -10px;
+        font-size: 14px;
         margin-top: 0px;
         width: 120%;
+
     }
 
     .dropDown {
-        margin-top: 0px;
-        font-size: 9px;
-        margin-left: -13px;
+        margin-top: -6px;
+        font-size: 14px;
+        margin-left: -16px;
+
+    }
+
+    .dropDiv {
+        margin-top: 7px;
     }
 
     .cardContainer {
@@ -690,6 +779,7 @@
     .filterCard {
         margin-left: 13px;
         width: 100%;
+        margin-top: 15px;
         position: relative;
         max-width: 330px;
         max-height: calc(500vh - 30px);
@@ -702,7 +792,7 @@
         justify-content: center;
         display: flex;
         margin-left: 30px;
-        margin-top: 30px;
+        margin-top: 40px;
         margin-bottom: 20px;
     }
 
@@ -720,7 +810,11 @@
     }
 
     .PaginatenDiv {
-        margin-left: 20px;
+        width: 88%;
+    }
+
+    .paginateAgain {
+        max-width: 305px;
     }
 }
 
@@ -731,32 +825,57 @@
     }
 
     .showingProducts {
-        margin-left: 0px;
-        font-size: 8px;
-    }
-    .bothIcon{
-       margin-top: 6px;
-    }
-    .showIcon{
+        margin-top: 15px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
         font-size: 16px;
+    }
+
+    .GridDiv {
+        width: 33.33%;
+    }
+
+    .bothIcon {
+        margin-top: -2px;
+    }
+
+    .showIcon {
+        font-size: 13px;
 
     }
+
     .customSelect {
-        margin-left: -6px;
-        font-size: 9px;
+        margin-left: -10px;
+        font-size: 14px;
         margin-top: 0px;
-        width: 130%;
+        width: 120%;
 
     }
 
     .dropDown {
-        margin-top: 0px;
-        font-size: 9px;
-        margin-left: -13px;
+        margin-top: -6px;
+        font-size: 14px;
+        margin-left: -16px;
+
+    }
+
+    .dropDiv {
+        margin-top: 7px;
     }
 
     .PaginatenDiv {
-        margin-left: 25px;
+        margin-right: -8px;
+        float: right;
+        margin-bottom: 20px;
+    }
+
+    .paginateAgain {
+        margin-right: -5px;
+    }
+
+    .toogelDiv {
+        margin-right: 35px;
     }
 
     .cardContainer {
@@ -794,7 +913,7 @@
         justify-content: center;
         display: flex;
         margin-left: 30px;
-        margin-top: 30px;
+        margin-top: 40px;
         margin-bottom: 20px;
     }
 
