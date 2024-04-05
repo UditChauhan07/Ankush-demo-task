@@ -1,13 +1,35 @@
-.customSelect {
-    border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    outline: none;
-    width: 100%;
+body {
+    height: fit-content;
 }
 
+.fullContent {
+    height: max-content !important;
+}
+
+
+/* .customSelect {
+    border: none;
+    margin-left: -100px;
+    cursor: pointer;
+   
+    width: 100%;
+    background-color: transparent;
+   
+} */
+.opt{
+    /* height:150px; */
+    /* height: 100%; */
+    max-height: 150px;
+    width: 20%;
+    overflow: auto;
+}
 .bothIcon {
     margin-top: 10px;
+    margin-left: 10px;
+}
+
+.showingProducts2 {
+    display: none;
 }
 
 .showingProducts {
@@ -489,19 +511,19 @@
     }
 
     .bothIcon {
-        margin-top: 10px;
+        margin-left: -5px;
     }
 
     .customSelect {
-        padding: 12px 5px;
-        margin-top: 3px;
+        margin-top: 14px;
         font-size: 12px;
+        margin-left: -10px;
     }
 
     .dropDown {
+        margin-left: -13px;
         font-size: 12px;
         margin-top: 4px;
-
     }
 
     .heading {
@@ -606,13 +628,23 @@
         width: 100%;
     }
 
+    .showingProducts2 {
+        display: block;
+        font-size: 9px;
+        text-align-last: end;
+       
+    }
+    .showingProducts2{
+        text-decoration: underline;
+    }
 
     .showingProducts {
-        margin-top: 15px;
+        display: none;
+        /* margin-top: 15px;
         justify-content: center;
         align-items: center;
-        display: flex;
-        font-size: 16px;
+        display: flex; */
+        /* font-size: 9px; */
     }
 
     .GridDiv {
@@ -620,6 +652,7 @@
     }
 
     .bothIcon {
+        margin-left: -5px;
         margin-top: -2px;
     }
 
@@ -719,14 +752,23 @@
         margin-left: 0px;
         width: 100%;
     }
+    .showingProducts2{
+        text-decoration: underline;
+    }
+    .showingProducts2 {
+        display: block;
+        font-size: 9px;
+        text-align-last: end;
+    }
 
 
     .showingProducts {
-        margin-top: 15px;
+        display: none;
+        /* margin-top: 15px;
         justify-content: center;
         align-items: center;
         display: flex;
-        font-size: 16px;
+        font-size: 16px; */
     }
 
     .GridDiv {
@@ -734,6 +776,7 @@
     }
 
     .bothIcon {
+        margin-left: -5px;
         margin-top: -2px;
     }
 
@@ -823,13 +866,22 @@
         margin-left: 0px;
         width: 100%;
     }
+    .showingProducts2{
+        text-decoration: underline;
+    }
+    .showingProducts2 {
+        display: block;
+        font-size: 9px;
+        text-align-last: end;
+    }
 
     .showingProducts {
-        margin-top: 15px;
+        display: none;
+        /* margin-top: 15px;
         justify-content: center;
         align-items: center;
         display: flex;
-        font-size: 16px;
+        font-size: 16px; */
     }
 
     .GridDiv {
@@ -837,6 +889,7 @@
     }
 
     .bothIcon {
+        margin-left: -5px;
         margin-top: -2px;
     }
 
@@ -857,7 +910,6 @@
         margin-top: -6px;
         font-size: 14px;
         margin-left: -16px;
-
     }
 
     .dropDiv {
@@ -882,7 +934,6 @@
         grid-template-columns: repeat(1, auto);
         margin-left: 30px;
         width: auto;
-
     }
 
     .cardImgLoading {
@@ -933,6 +984,17 @@
 }
 
 @media only screen and (max-width:318px) and (min-width:250px) {
+
+    .showingProducts2{
+        text-decoration: underline;
+    }
+    .showingProducts2 {
+        display: block;
+        font-size: 9px;
+        text-align-last: end;
+    }
+
+
     .cardContainer {
         grid-template-columns: repeat(1, auto);
         margin-left: 0px;
@@ -971,9 +1033,6 @@
 
     .heading {
         display: none;
-        /* margin-top: 40px;
-        font-size: 25px;
-        margin-left: 3px; */
     }
 
     .clear {

@@ -21,7 +21,7 @@ const ShopProducts = () => {
     const ProductShow = 1;
     const PageLimit = 5
     const navigate = useNavigate();
-    const [showReactPaginate, setShowReactPaginate] = useState(true); // State to track switch button status
+    const [showReactPaginate, setShowReactPaginate] = useState(true);
     const [showCheckboxes, setShowCheckboxes] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
     const [selectedRating, setSelectedRating] = useState([]);
@@ -186,7 +186,7 @@ const ShopProducts = () => {
 
     return (
         <>
-            <section>
+            <section className={Style.fullContent}>
                 <div className={`container-fluid  ${Style.productmain}`}>
                     <div className={Style.shorting}>
                         <div className={`row fixed-top ${Style.shortingDiv}`}>
@@ -200,17 +200,31 @@ const ShopProducts = () => {
                                     <span className={Style.showIcon}><BsGrid3X3GapFill /> <span className={Style.showIcon}>< FaListUl /></span></span>
                                 </div>
                             </div>
+
                             <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
-                                <select
-                                    className={`${Style.customSelect} `}
-                                    value={productsPerPage}
-                                    onChange={handleProductsPerPageChange}
-                                >
-                                    {productsPerPageOptions.map(option => (
-                                        <option key={option} value={option}> {option}Per Page</option>
-                                    ))}
-                                </select>
+                                <div className={`dropdown ${Style.dropDown}`}>
+                                    <button className={`dropdown-toggle ${Style.dropDiv}`}
+                                        value={productsPerPage}
+                                        onChange={handleProductsPerPageChange}
+                                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        {productsPerPage} Per page
+                                    </button>
+                                    <ul className={`dropdown-menu ${Style.opt}`} aria-labelledby="dropdownMenuButton1">
+                                        {productsPerPageOptions.map(option => (
+                                            <li>
+                                                <button
+                                                    className="dropdown-item"
+                                                    onClick={(e) => handleProductsPerPageChange(e)}
+                                                    value={option}
+                                                >
+                                                    {option} Per Page
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
+
                             <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
@@ -225,6 +239,11 @@ const ShopProducts = () => {
                                         <li><a className="dropdown-item" onClick={() => handleSortClick('lowestReview')}><FaSortAmountDownAlt /> Lowest-Reviews</a></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div className={Style.showingProducts2}>
+                                <p >
+                                    Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -339,26 +358,27 @@ const ShopProducts = () => {
 
                             {showReactPaginate ? (
                                 <div className={`${Style.paginateAgain}`} >
-                                    <ReactPaginate
-                                        previousLabel="Prev"
-                                        nextLabel="Next"
-                                        pageCount={Math.ceil(totalProducts / productsPerPage)}
-                                        onPageChange={({ selected }) => {
-                                            paginate(selected + 1);
-                                            setCurrentPage(selected + 1);
-                                        }}
-                                        pageClassName={`page-item ${Style.pageItem}`}
-                                        pageLinkClassName={` ${Style.pageLink}`}
-                                        previousLinkClassName={` ${Style.prevPageLink}`}
-                                        nextClassName="page-item"
-                                        nextLinkClassName={` ${Style.prevPageLink}`}
-                                        containerClassName="pagination"
-                                        activeClassName={`active ${Style.Active}`}
-                                        marginPagesDisplayed={1}
-                                        pageRangeDisplayed={2}
-                                        forcePage={currentPage - 1}
-                                    />
-                                </div>
+                                <ReactPaginate
+                                    previousLabel="Prev"
+                                    nextLabel="Next"
+                                    pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                    onPageChange={({ selected }) => {
+                                        paginate(selected + 1);
+                                        setCurrentPage(selected + 1);
+                                    }}
+                                    pageClassName={`page-item ${Style.pageItem}`}
+                                    pageLinkClassName={` ${Style.pageLink}`}
+                                    previousClassName={`page-item ${Style.prevPage}`}
+                                    previousLinkClassName={` ${Style.prevPageLink}`}
+                                    nextClassName={`page-item ${Style.nextPage}`}
+                                    nextLinkClassName={` ${Style.prevPageLink}`}
+                                    containerClassName="pagination"
+                                    activeClassName={`active ${Style.Active}`}
+                                    marginPagesDisplayed={1}
+                                    pageRangeDisplayed={2}
+                                    forcePage={currentPage - 1}
+                                />
+                            </div>
 
                             ) : (
                                 <div className={`pagination  ${Style.PaginatenDiv}`}>
