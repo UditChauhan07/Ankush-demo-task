@@ -16,13 +16,14 @@ body {
     background-color: transparent;
    
 } */
-.opt{
+.opt {
     /* height:150px; */
     /* height: 100%; */
     max-height: 150px;
     width: 20%;
     overflow: auto;
 }
+
 .bothIcon {
     margin-top: 10px;
     margin-left: 10px;
@@ -360,6 +361,84 @@ body {
     margin-bottom: 20px;
 }
 
+/*............... list view css start ..............*/
+.colactionCart2 {
+    background: linear-gradient(90deg, #fff, #eee);
+    /* background-color: red; */
+    cursor: pointer;
+}
+
+.imgWrapper2 {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.img2 {
+    margin-top: 10px;
+    height: 100%;
+    max-height: 180px;
+    width: 100%;
+    max-width: 350px;
+}
+
+
+.listCart {
+    margin-top: 30px;
+    height: 100%;
+    max-height: 140px;
+    /* border: 2px solid red; */
+}
+
+.iconStar {
+    /* font-size: 13px; */
+}
+
+.productText2 {
+    font-size: 16px;
+    margin-bottom: 0px;
+    text-transform: capitalize;
+    /* font-weight: 600; */
+}
+
+.prices {
+    font-size: 13px;
+
+}
+
+.listText {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 0px;
+}
+
+.colorBtn1 {
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    background-color: rgba(47, 217, 223, 0.699);
+    border: none;
+    margin: 1px;
+}
+
+.colorBtn2 {
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    background-color: rgba(212, 127, 230, 0.76);
+    border: none;
+    margin: 1px;
+}
+
+.colorBtn3 {
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    background-color: rgb(131, 131, 131);
+    border: none;
+    margin: 1px;
+}
+
 /* Responsive Start */
 
 
@@ -441,7 +520,7 @@ body {
 
 
     .showingProducts {
-        font-size: 15px;
+        font-size: 14px;
         margin-top: 10px;
     }
 
@@ -496,6 +575,7 @@ body {
     .paginateAgain {
         margin-right: 10px;
     }
+    
 }
 
 @media only screen and (max-width:966px) and (min-width:768px) {
@@ -507,7 +587,7 @@ body {
     .showingProducts {
         margin-top: 15px;
         margin-left: -5px;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .bothIcon {
@@ -584,6 +664,35 @@ body {
     .toogelDiv {
         margin-right: 35px;
     }
+    .img2{
+        margin-left: -50px;
+    }
+    .listCart {
+        margin-top: 30px;
+    /* height: 100%; */
+    width: 100%;
+    margin-left: -136px;
+    display: inline-block;
+    min-width: 270px;
+        /* margin-top: 0px;
+        height: 100%;
+        margin-left: -130px;
+        display: inline-block; */
+    }
+    .productText2{
+        font-size: 13px;
+    }
+    .listText{
+        font-size: 9px;
+    }
+    .colactionCart2{
+        height: 100%;
+        /* border: 2px solid red; */
+        width: 94%;
+        margin-left: 64px;
+        background: linear-gradient(90deg, #fff, #eee);
+        max-height: 210px;
+    }
 }
 
 @media only screen and (max-width:767px) and (min-width:500px) {
@@ -632,9 +741,11 @@ body {
         display: block;
         font-size: 9px;
         text-align-last: end;
-       
+
     }
-    .showingProducts2{
+
+    .showingProducts2 {
+        margin-top: 5px;
         text-decoration: underline;
     }
 
@@ -745,6 +856,16 @@ body {
     .paginateAgain {
         max-width: 370px;
     }
+    .listCart {
+        margin-top: 0px;
+        height: 100%;
+        display: inline-block;
+    }
+    .colactionCart2{
+       
+        width: 106%;
+        background: linear-gradient(180deg, #fff, #eee);
+    }
 }
 
 @media only screen and (max-width:423px) and (min-width:375px) {
@@ -752,9 +873,12 @@ body {
         margin-left: 0px;
         width: 100%;
     }
-    .showingProducts2{
+
+    .showingProducts2 {
+        margin-top: 5px;
         text-decoration: underline;
     }
+
     .showingProducts2 {
         display: block;
         font-size: 9px;
@@ -859,6 +983,17 @@ body {
     .paginateAgain {
         max-width: 305px;
     }
+    /*............... list view css start ..............*/
+    .listCart {
+        margin-top: 0px;
+        height: 100%;
+        display: inline-block;
+    }
+    .colactionCart2{
+        width: 108%;
+        background: linear-gradient(180deg, #fff, #eee);
+    }
+
 }
 
 @media only screen and (max-width:373px) and (min-width:320px) {
@@ -866,10 +1001,11 @@ body {
         margin-left: 0px;
         width: 100%;
     }
-    .showingProducts2{
-        text-decoration: underline;
-    }
+
+   
     .showingProducts2 {
+        margin-top: 5px;
+        text-decoration: underline;
         display: block;
         font-size: 9px;
         text-align-last: end;
@@ -980,14 +1116,25 @@ body {
         margin-left: 30px;
         width: 30%;
     }
+/*............... list view css start ..............*/
+    .listCart {
+        margin-top: 0px;
+        height: 100%;
+        display: inline-block;
+    }
+    .colactionCart2{
+        width: 109%;
+        background: linear-gradient(180deg, #fff, #eee);
+    }
 
 }
 
 @media only screen and (max-width:318px) and (min-width:250px) {
 
-    .showingProducts2{
+    .showingProducts2 {
         text-decoration: underline;
     }
+
     .showingProducts2 {
         display: block;
         font-size: 9px;

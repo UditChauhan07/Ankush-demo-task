@@ -32,6 +32,8 @@ const ShopProducts = () => {
     const [pageRangeStart, setPageRangeStart] = useState(PageLimit);
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
     // console.log(pageRangeEnd)
+    const [viewMode, setViewMode] = useState("list");
+
 
     // Function to toggle display of category checkboxes //
     const toggleCheckboxes = () => {
@@ -184,6 +186,16 @@ const ShopProducts = () => {
 
     const sortInfo = getSortInfo();
 
+    // Function to handle grid view click
+    const handleGridView = () => {
+        setViewMode("grid");
+    };
+
+    // Function to handle list view click
+    const handleListView = () => {
+        setViewMode("list");
+    };
+
     return (
         <>
             <section className={Style.fullContent}>
@@ -197,7 +209,8 @@ const ShopProducts = () => {
                             </div>
                             <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <div className={Style.bothIcon}>
-                                    <span className={Style.showIcon}><BsGrid3X3GapFill /> <span className={Style.showIcon}>< FaListUl /></span></span>
+                                    <span className={Style.showIcon} onClick={handleGridView}><BsGrid3X3GapFill /> </span>
+                                    <span className={Style.showIcon} onClick={handleListView}>< FaListUl /></span>
                                 </div>
                             </div>
 
@@ -318,106 +331,222 @@ const ShopProducts = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-9 col-md-9">
-                            <h1 className={Style.heading}>SHOP PRODUCTS</h1>
-                            <div className={Style.collection_Container}>
-                                <div className={Style.cardContainer}>
-                                    {loading ? (
-                                        Array.from({ length: 10 }).map((_, index) => (
-                                            <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
-                                        ))
-                                    ) : (
-                                        sortedProducts().map((product, index) => (
-                                            <div key={index} className={`${Style.colactionCart}`}>
-                                                <div className={Style.imgWrapper}>
-                                                    <img className={Style.img} src={product.image} alt="" />
-                                                </div>
-                                                <p className={Style.productText}>{product.title}</p>
-                                                <div style={{ height: "40px", display: "flex" }}>
-                                                    <div className={Style.iconStar}>
-                                                        {[...Array(5).keys()].map((i) => (
-                                                            <span key={i}>
-                                                                {i < product.rating ? (
-                                                                    <VscStarFull style={{ color: "rgb(244 172 12)" }} />
-                                                                ) : (
-                                                                    <RiStarLine style={{ color: "#e6bf69" }} />
-                                                                )}
-                                                            </span>
-                                                        ))}
-                                                        <span className={Style.review}>{product.reviews}</span>
+
+                        {viewMode === "grid" ? (
+                            <div className="col-lg-9 col-md-9">
+                                <h1 className={Style.heading}>SHOP PRODUCTS</h1>
+                                <div className={Style.collection_Container}>
+                                    <div className={Style.cardContainer}>
+                                        {loading ? (
+                                            Array.from({ length: 10 }).map((_, index) => (
+                                                <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
+                                            ))
+                                        ) : (
+                                            sortedProducts().map((product, index) => (
+                                                <div key={index} className={`${Style.colactionCart}`}>
+                                                    <div className={Style.imgWrapper}>
+                                                        <img className={Style.img} src={product.image} alt="" />
+                                                    </div>
+                                                    <p className={Style.productText}>{product.title}</p>
+                                                    <div style={{ height: "40px", display: "flex" }}>
+                                                        <div className={Style.iconStar}>
+                                                            {[...Array(5).keys()].map((i) => (
+                                                                <span key={i}>
+                                                                    {i < product.rating ? (
+                                                                        <VscStarFull style={{ color: "rgb(244 172 12)" }} />
+                                                                    ) : (
+                                                                        <RiStarLine style={{ color: "#e6bf69" }} />
+                                                                    )}
+                                                                </span>
+                                                            ))}
+                                                            <span className={Style.review}>{product.reviews}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className={Style.btnDiv}>
+                                                        <button className={Style.buybtn} onClick={() => handleClick(product.id)}>{product.button}</button>
                                                     </div>
                                                 </div>
-                                                <div className={Style.btnDiv}>
-                                                    <button className={Style.buybtn} onClick={() => handleClick(product.id)}>{product.button}</button>
-                                                </div>
-                                            </div>
-                                        ))
-                                    )}
+                                            ))
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
 
-                            {showReactPaginate ? (
-                                <div className={`${Style.paginateAgain}`} >
-                                <ReactPaginate
-                                    previousLabel="Prev"
-                                    nextLabel="Next"
-                                    pageCount={Math.ceil(totalProducts / productsPerPage)}
-                                    onPageChange={({ selected }) => {
-                                        paginate(selected + 1);
-                                        setCurrentPage(selected + 1);
-                                    }}
-                                    pageClassName={`page-item ${Style.pageItem}`}
-                                    pageLinkClassName={` ${Style.pageLink}`}
-                                    previousClassName={`page-item ${Style.prevPage}`}
-                                    previousLinkClassName={` ${Style.prevPageLink}`}
-                                    nextClassName={`page-item ${Style.nextPage}`}
-                                    nextLinkClassName={` ${Style.prevPageLink}`}
-                                    containerClassName="pagination"
-                                    activeClassName={`active ${Style.Active}`}
-                                    marginPagesDisplayed={1}
-                                    pageRangeDisplayed={2}
-                                    forcePage={currentPage - 1}
-                                />
-                            </div>
-
-                            ) : (
-                                <div className={`pagination  ${Style.PaginatenDiv}`}>
-                                    <button className={Style.preBtn}
-                                        onClick={() => {
-                                            if (currentPage > 1) {
-                                                paginate(currentPage - 1);
-                                                setCurrentPage(currentPage - 1);
-                                            }
-                                        }}
-                                        disabled={currentPage === 1}>
-                                        Prev
-                                    </button>
-                                    {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
-                                        <button
-                                            style={{ width: "30px" }}
-                                            key={pageRangeStart + i + 1}
-                                            onClick={() => {
-                                                paginate(pageRangeStart + i + 1);
-                                                setCurrentPage(pageRangeStart + i + 1);
+                                {showReactPaginate ? (
+                                    <div className={`${Style.paginateAgain}`} >
+                                        <ReactPaginate
+                                            previousLabel="Prev"
+                                            nextLabel="Next"
+                                            pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                            onPageChange={({ selected }) => {
+                                                paginate(selected + 1);
+                                                setCurrentPage(selected + 1);
                                             }}
-                                            className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
-                                        >
-                                            {pageRangeStart + i + 1}
+                                            pageClassName={`page-item ${Style.pageItem}`}
+                                            pageLinkClassName={` ${Style.pageLink}`}
+                                            previousClassName={`page-item ${Style.prevPage}`}
+                                            previousLinkClassName={` ${Style.prevPageLink}`}
+                                            nextClassName={`page-item ${Style.nextPage}`}
+                                            nextLinkClassName={` ${Style.prevPageLink}`}
+                                            containerClassName="pagination"
+                                            activeClassName={`active ${Style.Active}`}
+                                            marginPagesDisplayed={1}
+                                            pageRangeDisplayed={2}
+                                            forcePage={currentPage - 1}
+                                        />
+                                    </div>
+
+                                ) : (
+                                    <div className={`pagination  ${Style.PaginatenDiv}`}>
+                                        <button className={Style.preBtn}
+                                            onClick={() => {
+                                                if (currentPage > 1) {
+                                                    paginate(currentPage - 1);
+                                                    setCurrentPage(currentPage - 1);
+                                                }
+                                            }}
+                                            disabled={currentPage === 1}>
+                                            Prev
                                         </button>
-                                    ))}
-                                    <button className={Style.nextBtn}
-                                        onClick={() => {
-                                            if (currentPage < Math.ceil(totalProducts / productsPerPage)) {
-                                                paginate(currentPage + 1);
-                                                setCurrentPage(currentPage + 1);
-                                            }
-                                        }}
-                                        disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
-                                        Next
-                                    </button>
+                                        {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
+                                            <button
+                                                style={{ width: "30px" }}
+                                                key={pageRangeStart + i + 1}
+                                                onClick={() => {
+                                                    paginate(pageRangeStart + i + 1);
+                                                    setCurrentPage(pageRangeStart + i + 1);
+                                                }}
+                                                className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
+                                            >
+                                                {pageRangeStart + i + 1}
+                                            </button>
+                                        ))}
+                                        <button className={Style.nextBtn}
+                                            onClick={() => {
+                                                if (currentPage < Math.ceil(totalProducts / productsPerPage)) {
+                                                    paginate(currentPage + 1);
+                                                    setCurrentPage(currentPage + 1);
+                                                }
+                                            }}
+                                            disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
+                                            Next
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="col-lg-9 col-md-9">
+                                <h1 className={Style.heading}>SHOP PRODUCTS</h1>
+                                <div className={Style.collection_Container2}>
+                                    <div className={Style.cardContainer2}>
+                                        {loading ? (
+                                            Array.from({ length: 10 }).map((_, index) => (
+                                                <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
+                                            ))
+                                        ) : (
+                                            sortedProducts().map((product, index) => (
+                                                <div key={index} className={`${Style.colactionCart2}`}>
+                                                    <div className="row m-2 ">
+                                                        <div className={` col-lg-3 col-md-3 ${Style.imgWrapper2}`}>
+                                                            <img className={Style.img2} src={product.image} alt="" />
+                                                        </div>
+                                                        <div className='col-lg-9 col-md-3'>
+                                                            <div className={Style.listCart}>
+                                                                <div className={Style.iconStar2}>
+                                                                    {[...Array(5).keys()].map((i) => (
+                                                                        <span key={i}>
+                                                                            {i < product.rating ? (
+                                                                                <VscStarFull style={{ color: "rgb(244 172 12)", fontSize: "13px" }} />
+                                                                            ) : (
+                                                                                <RiStarLine style={{ color: "#e6bf69", fontSize: "13px" }} />
+                                                                            )}
+                                                                        </span>
+                                                                    ))}
+
+                                                                </div>
+                                                                <p className={Style.productText2}>{product.title}</p>
+                                                                <p className={Style.listText}>{product.text}</p>
+                                                                <strong className={Style.prices}>{product.price}</strong>
+                                                                <div>
+                                                                    <button className={Style.colorBtn1}></button>
+                                                                    <button className={Style.colorBtn2}></button>
+                                                                    <button className={Style.colorBtn3}></button>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
+
+                                {showReactPaginate ? (
+                                    <div className={`${Style.paginateAgain}`} >
+                                        <ReactPaginate
+                                            previousLabel="Prev"
+                                            nextLabel="Next"
+                                            pageCount={Math.ceil(totalProducts / productsPerPage)}
+                                            onPageChange={({ selected }) => {
+                                                paginate(selected + 1);
+                                                setCurrentPage(selected + 1);
+                                            }}
+                                            pageClassName={`page-item ${Style.pageItem}`}
+                                            pageLinkClassName={` ${Style.pageLink}`}
+                                            previousClassName={`page-item ${Style.prevPage}`}
+                                            previousLinkClassName={` ${Style.prevPageLink}`}
+                                            nextClassName={`page-item ${Style.nextPage}`}
+                                            nextLinkClassName={` ${Style.prevPageLink}`}
+                                            containerClassName="pagination"
+                                            activeClassName={`active ${Style.Active}`}
+                                            marginPagesDisplayed={1}
+                                            pageRangeDisplayed={2}
+                                            forcePage={currentPage - 1}
+                                        />
+                                    </div>
+
+                                ) : (
+                                    <div className={`pagination  ${Style.PaginatenDiv}`}>
+                                        <button className={Style.preBtn}
+                                            onClick={() => {
+                                                if (currentPage > 1) {
+                                                    paginate(currentPage - 1);
+                                                    setCurrentPage(currentPage - 1);
+                                                }
+                                            }}
+                                            disabled={currentPage === 1}>
+                                            Prev
+                                        </button>
+                                        {Array.from({ length: pageRangeEnd - pageRangeStart + 1 }, (_, i) => (
+                                            <button
+                                                style={{ width: "30px" }}
+                                                key={pageRangeStart + i + 1}
+                                                onClick={() => {
+                                                    paginate(pageRangeStart + i + 1);
+                                                    setCurrentPage(pageRangeStart + i + 1);
+                                                }}
+                                                className={`${Style.pageBtn} ${currentPage === pageRangeStart + i + 1 ? Style.active : ''}`}
+                                            >
+                                                {pageRangeStart + i + 1}
+                                            </button>
+                                        ))}
+                                        <button className={Style.nextBtn}
+                                            onClick={() => {
+                                                if (currentPage < Math.ceil(totalProducts / productsPerPage)) {
+                                                    paginate(currentPage + 1);
+                                                    setCurrentPage(currentPage + 1);
+                                                }
+                                            }}
+                                            disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}>
+                                            Next
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
                     </div>
                     <div className={`form-check form-switch  ${Style.toogelDiv}`}>
