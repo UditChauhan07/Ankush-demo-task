@@ -16,10 +16,13 @@ import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import { FaSearch } from "react-icons/fa";
+import { useReactToPrint } from 'react-to-print';
 
 const ShopProducts = () => {
-    const ProductShow = 1;
+    const ProductShow = 3;
     const PageLimit = 5
+    const componentRef = React.useRef();
     const navigate = useNavigate();
     const [showReactPaginate, setShowReactPaginate] = useState(true);
     const [showCheckboxes, setShowCheckboxes] = useState(false);
@@ -32,7 +35,7 @@ const ShopProducts = () => {
     const [pageRangeStart, setPageRangeStart] = useState(PageLimit);
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
     // console.log(pageRangeEnd)
-    const [viewMode, setViewMode] = useState("list");
+    const [viewMode, setViewMode] = useState("grid");
 
 
     // Function to toggle display of category checkboxes //
@@ -195,10 +198,12 @@ const ShopProducts = () => {
     const handleListView = () => {
         setViewMode("list");
     };
-
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
     return (
         <>
-            <section className={Style.fullContent}>
+            <section className={Style.fullContent} ref={componentRef} >
                 <div className={`container-fluid  ${Style.productmain}`}>
                     <div className={Style.shorting}>
                         <div className={`row fixed-top ${Style.shortingDiv}`}>
@@ -259,8 +264,15 @@ const ShopProducts = () => {
                                 </p>
                             </div>
                         </div>
+                        <button onClick={() => window.print()} className={Style.printIcon}><FaSearch />Print</button>
                     </div>
+                    {/* <button onClick={() => window.print()} style={{paddingTop:"50px"}} className="border px-2 py-1 leading-tight d-grid ml-1"> <CiSearch fill="red" width={20} height={20} />
+          <small style={{ fontSize: '9px', letterSpacing: '0.5px', textTransform: 'uppercase' ,}}>Print</small>
+        </button> */}
                     <div className="row w-100 mt-5">
+                       
+
+                        {/* <button className={Style.printIcon} onClick={handlePrint}>Print</button> */}
                         <div className="col-lg-3 col-md-3  mt-1">
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
                             <div className={` card ${Style.filterCard}`}>

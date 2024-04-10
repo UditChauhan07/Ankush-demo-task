@@ -6,7 +6,17 @@ body {
     height: max-content !important;
 }
 
-
+.printIcon{
+   position: fixed;
+    width: auto;
+    border: none;
+    background-color: transparent;
+}
+@media print { 
+    .printIcon{ 
+      display: none!important;
+     } 
+    }
 /* .customSelect {
     border: none;
     margin-left: -100px;
@@ -44,6 +54,11 @@ body {
     margin-right: 10px;
 
 }
+@media print { 
+    .shortingDiv  { 
+      display: none!important;
+     } 
+    }
 
 .dropDiv {
     margin-left: 10px;
@@ -69,6 +84,11 @@ body {
     border-bottom: none;
     max-height: calc(88vh - 38px);
 }
+@media print { 
+    .filterCard { 
+      display: none!important;
+     } 
+    }
 
 @media screen and (max-height: 600px) {
     .filterCard {
@@ -269,6 +289,11 @@ body {
     max-width: 350px;
     float: right;
 }
+@media print { 
+    .paginateAgain{ 
+      display: none!important;
+     } 
+    }
 
 .PaginatenDiv {
     margin-right: 15px;
@@ -276,6 +301,11 @@ body {
     float: right;
     margin-bottom: 20px;
 }
+@media print { 
+    .PaginatenDiv{ 
+      display: none!important;
+     } 
+    }
 
 .preBtn {
     padding: 2px 10px;
@@ -360,6 +390,12 @@ body {
     margin-right: 45px;
     margin-bottom: 20px;
 }
+@media print { 
+    .toogelDiv{ 
+      display: none!important;
+     } 
+    }
+
 
 /*............... list view css start ..............*/
 .colactionCart2 {
@@ -380,6 +416,8 @@ body {
     max-height: 180px;
     width: 100%;
     max-width: 350px;
+    object-fit: cover;
+    object-position: center;
 }
 
 
@@ -398,6 +436,7 @@ body {
     font-size: 16px;
     margin-bottom: 0px;
     text-transform: capitalize;
+    /* font-family: sans-serif; */
     /* font-weight: 600; */
 }
 
@@ -577,7 +616,18 @@ body {
     }
     
 }
+@media only screen and (max-width:1300px) and (min-width:1024px) {
+    .imgWrapper2{
+        margin-left: 0px;
+    }
+    .listCart{
+        margin-left: 114px;
+        width: 96%;
+        max-width: 500px;
+        margin-top: -170px;
+    }
 
+}
 @media only screen and (max-width:966px) and (min-width:768px) {
     .shortingDiv {
         margin-left: 0px;

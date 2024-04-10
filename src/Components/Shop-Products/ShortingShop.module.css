@@ -1,7 +1,11 @@
-.shortingDiv{
-    background-color: rgb(255, 255, 255);
-    /* border: 1px solid gray; */
+.h4name{
+    color: red;
 }
 .customSelect{
     border: none;
 }
+@media print { 
+    .site-footer { 
+      display: none!important;
+     } 
+    }
