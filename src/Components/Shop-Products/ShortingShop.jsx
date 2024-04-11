@@ -5,10 +5,43 @@ import Style from "../Shop-Products/ShortingShop.module.css"
 function Shorting() {
     return (
         <>
-        {/* https://www.tutorialspoint.com/javascript/javascript_page_printing.htm */}
+      
             <h4 className={Style.h4name}>Shorting page</h4>
             <button onClick={() => window.print()} >Print</button>
         </>
+
+// const exportPdf = () => {
+//     const input = contentRef.current;
+  
+//     html2canvas(input).then((canvas) => {
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdf = new jsPDF();
+//       const imgProps = pdf.getImageProperties(imgData);
+//       const pdfWidth = pdf.internal.pageSize.getWidth();
+//       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+//       let position = 0;
+//       let pageHeight = pdf.internal.pageSize.getHeight();
+//       let remainingHeight = imgProps.height;
+  
+//       while (remainingHeight > 0) {
+//         // Calculate height to fit on current page
+//         const heightToPrint = Math.min(pageHeight, remainingHeight);
+//         // Add current portion of image
+//         pdf.addImage(imgData, "PNG", 0, position, pdfWidth, heightToPrint);
+//         remainingHeight -= heightToPrint;
+//         position += heightToPrint;
+  
+//         // Check if there's remaining content
+//         if (remainingHeight > 0) {
+//           pdf.addPage();
+//         }
+//       }
+  
+//       pdf.save("download.pdf");
+//     });
+//   };
+  
 
 ,
 {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Style from "../Shop-Products/ShopProducts.module.css";
 import { useNavigate } from 'react-router-dom';
 import { VscStarFull } from "react-icons/vsc";
@@ -18,9 +18,13 @@ import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useReactToPrint } from 'react-to-print';
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 
 const ShopProducts = () => {
     const ProductShow = 3;
+
     const PageLimit = 5
     const componentRef = React.useRef();
     const navigate = useNavigate();
@@ -31,11 +35,17 @@ const ShopProducts = () => {
     const [loading, setLoading] = useState(true);
     const [sortType, setSortType] = useState('');
     const [productsPerPage, setProductsPerPage] = useState(ProductShow);
+
     const [currentPage, setCurrentPage] = useState(1);
+    // console.log(productsPerPage)
     const [pageRangeStart, setPageRangeStart] = useState(PageLimit);
+
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
     // console.log(pageRangeEnd)
     const [viewMode, setViewMode] = useState("grid");
+    const [isListView, setIsListView] = useState(false);
+    const [allData, setAllData] = useState(data)
+    // console.log(allData)
 
 
     // Function to toggle display of category checkboxes //
@@ -182,28 +192,38 @@ const ShopProducts = () => {
                 return { name: 'Sort Products', icon: null };
         }
     };
-
     const handleSortClick = (sortType) => {
         setSortType(sortType);
     };
-
     const sortInfo = getSortInfo();
 
     // Function to handle grid view click
     const handleGridView = () => {
         setViewMode("grid");
+        setIsListView(false);
     };
 
     // Function to handle list view click
     const handleListView = () => {
         setViewMode("list");
+        setIsListView(true);
     };
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    });
+
+
+    const clickgridLine = (index) => {
+        if (index === 1) {
+            setProductsPerPage(2);
+        } else if (index === 2) {
+            setProductsPerPage(3);
+        } else if (index === 3) {
+            setProductsPerPage(4)
+        } else if (index === 4) {
+            setProductsPerPage(5)
+        }
+    };
     return (
         <>
-            <section className={Style.fullContent} ref={componentRef} >
+            <section className={Style.fullContent}  >
                 <div className={`container-fluid  ${Style.productmain}`}>
                     <div className={Style.shorting}>
                         <div className={`row fixed-top ${Style.shortingDiv}`}>
@@ -212,11 +232,17 @@ const ShopProducts = () => {
                                     Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
                                 </p>
                             </div>
-                            <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
+                            <div className={`col-lg-3 col-3 border ${Style.GridDiv1}`}>
                                 <div className={Style.bothIcon}>
+
                                     <span className={Style.showIcon} onClick={handleGridView}><BsGrid3X3GapFill /> </span>
                                     <span className={Style.showIcon} onClick={handleListView}>< FaListUl /></span>
                                 </div>
+                                {!isListView && (
+                                    <div className={Style.gridLine}>
+                                        <b className={`two ${productsPerPage === 2 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(1)}>||</b> <b className={`three ${productsPerPage === 3 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(2)}>|||</b> <b className={`four ${productsPerPage === 4 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(3)}>||||</b> <b className={`five ${productsPerPage === 5 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(4)}>|||||</b>
+                                    </div>
+                                )}
                             </div>
 
                             <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
@@ -264,13 +290,10 @@ const ShopProducts = () => {
                                 </p>
                             </div>
                         </div>
-                        <button onClick={() => window.print()} className={Style.printIcon}><FaSearch />Print</button>
+                        {/* <button onClick={() => window.print()} className={Style.printIcon}><FaSearch />Print</button> */}
                     </div>
-                    {/* <button onClick={() => window.print()} style={{paddingTop:"50px"}} className="border px-2 py-1 leading-tight d-grid ml-1"> <CiSearch fill="red" width={20} height={20} />
-          <small style={{ fontSize: '9px', letterSpacing: '0.5px', textTransform: 'uppercase' ,}}>Print</small>
-        </button> */}
                     <div className="row w-100 mt-5">
-                       
+
 
                         {/* <button className={Style.printIcon} onClick={handlePrint}>Print</button> */}
                         <div className="col-lg-3 col-md-3  mt-1">
@@ -359,6 +382,7 @@ const ShopProducts = () => {
                                                     <div className={Style.imgWrapper}>
                                                         <img className={Style.img} src={product.image} alt="" />
                                                     </div>
+
                                                     <p className={Style.productText}>{product.title}</p>
                                                     <div style={{ height: "40px", display: "flex" }}>
                                                         <div className={Style.iconStar}>
