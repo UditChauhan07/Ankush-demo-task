@@ -6,55 +6,77 @@ body {
     height: max-content !important;
 }
 
+.Export {
+    padding-top: 4px;
+    margin-left: 90%;
+    position: fixed;
+    width: 20%;
+}
+@media print {
+    .Export {
+        display: none !important;
+    }
+}
+.exportDropDiv{
+    border: 1px solid rgb(236, 236, 236);
+    width: 40%;
+    background-color: white;
+}
 
-.pdfkBtn{
+.pdfkBtn {
     margin-left: 80px;
     position: fixed;
     border: none;
     background-color: transparent;
-
 }
-.printIcon{
+
+/* .printIcon{
    position: fixed;
     width: auto;
     border: none;
     background-color: transparent;
-}
-@media print { 
-    .printIcon{ 
-      display: none!important;
-     } 
+} */
+@media print {
+    .printIcon {
+        display: none !important;
     }
-.GridDiv1{
+}
+
+.GridDiv1 {
     padding-top: 10px;
     cursor: pointer;
 
-    
+
 }
-    .GridDiv{
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        /* width: 100%; */
-    }
-    
-    .gridLine b{
-       
-        font-size: 14px;
-      
-    }
-    .activeGridLine{
-     
-        color: red;
-    }
-    .inactiveGridLine{
-        color: gray;
-    }
-    .gridLine {
-        float: right;
-        /* width: 50%; */
-        /* border: 2px solid rgb(51, 255, 0); */
-    }
+
+.GridDiv {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* width: 100%; */
+}
+
+.gridLine b {
+
+    font-size: 14px;
+
+}
+
+.activeGridLine {
+
+    color: red;
+}
+
+.inactiveGridLine {
+    color: gray;
+}
+
+.gridLine {
+    float: right;
+    /* width: 50%; */
+    /* border: 2px solid rgb(51, 255, 0); */
+}
+
 /* .customSelect {
     border: none;
     margin-left: -100px;
@@ -73,7 +95,7 @@ body {
 }
 
 .bothIcon {
- position: fixed;
+    position: fixed;
     /* width: 20%; */
     /* align-items: center; */
     /* margin-top: 10px;
@@ -95,11 +117,12 @@ body {
     margin-right: 10px;
 
 }
-@media print { 
-    .shortingDiv  { 
-      display: none!important;
-     } 
+
+@media print {
+    .shortingDiv {
+        display: none !important;
     }
+}
 
 .dropDiv {
     margin-left: 10px;
@@ -125,11 +148,12 @@ body {
     border-bottom: none;
     max-height: calc(88vh - 38px);
 }
-@media print { 
-    .filterCard { 
-      display: none!important;
-     } 
+
+@media print {
+    .filterCard {
+        display: none !important;
     }
+}
 
 @media screen and (max-height: 600px) {
     .filterCard {
@@ -330,11 +354,12 @@ body {
     max-width: 350px;
     float: right;
 }
-@media print { 
-    .paginateAgain{ 
-      display: none!important;
-     } 
+
+@media print {
+    .paginateAgain {
+        display: none !important;
     }
+}
 
 .PaginatenDiv {
     margin-right: 15px;
@@ -342,11 +367,12 @@ body {
     float: right;
     margin-bottom: 20px;
 }
-@media print { 
-    .PaginatenDiv{ 
-      display: none!important;
-     } 
+
+@media print {
+    .PaginatenDiv {
+        display: none !important;
     }
+}
 
 .preBtn {
     padding: 2px 10px;
@@ -431,11 +457,12 @@ body {
     margin-right: 45px;
     margin-bottom: 20px;
 }
-@media print { 
-    .toogelDiv{ 
-      display: none!important;
-     } 
+
+@media print {
+    .toogelDiv {
+        display: none !important;
     }
+}
 
 
 /*............... list view css start ..............*/
@@ -652,13 +679,15 @@ body {
     .paginateAgain {
         margin-right: 10px;
     }
-    
+
 }
+
 @media only screen and (max-width:1300px) and (min-width:1024px) {
-    .imgWrapper2{
+    .imgWrapper2 {
         margin-left: 0px;
     }
-    .listCart{
+
+    .listCart {
         margin-left: 114px;
         width: 96%;
         max-width: 500px;
@@ -666,6 +695,7 @@ body {
     }
 
 }
+
 @media only screen and (max-width:966px) and (min-width:768px) {
     .shortingDiv {
         margin-left: 0px;
@@ -753,28 +783,33 @@ body {
     .toogelDiv {
         margin-right: 35px;
     }
-    .img2{
+
+    .img2 {
         margin-left: -50px;
     }
+
     .listCart {
         margin-top: 30px;
-    /* height: 100%; */
-    width: 100%;
-    margin-left: -136px;
-    display: inline-block;
-    min-width: 270px;
+        /* height: 100%; */
+        width: 100%;
+        margin-left: -136px;
+        display: inline-block;
+        min-width: 270px;
         /* margin-top: 0px;
         height: 100%;
         margin-left: -130px;
         display: inline-block; */
     }
-    .productText2{
+
+    .productText2 {
         font-size: 13px;
     }
-    .listText{
+
+    .listText {
         font-size: 9px;
     }
-    .colactionCart2{
+
+    .colactionCart2 {
         height: 100%;
         /* border: 2px solid red; */
         width: 94%;
@@ -948,28 +983,34 @@ body {
         margin-top: 10px;
         max-width: 370px;
     }
+
     .listCart {
         margin-top: 0px;
         height: 100%;
         display: inline-block;
     }
-    .colactionCart2{
-        height: 380px;
+
+    .colactionCart2 {
+        padding: 10px;
         width: 106%;
         background: linear-gradient(180deg, #fff, #eee);
     }
-    .gridLine{
+
+    .gridLine {
         margin-top: -10px;
         /* margin-left: 30px; */
-    
+
     }
-    .gridLine b{
+
+    .gridLine b {
         font-size: 14px;
     }
-    .GridDiv1{
+
+    .GridDiv1 {
         height: 28px;
         width: 100%;
     }
+
     .GridDiv {
         width: 50%;
     }
@@ -1093,29 +1134,35 @@ body {
         margin-top: 10px;
         max-width: 305px;
     }
+
     /*............... list view css start ..............*/
     .listCart {
         margin-top: 0px;
         height: 100%;
         display: inline-block;
     }
-    .colactionCart2{
-        height: 380px;
+
+    .colactionCart2 {
+        padding: 10px;
         width: 108%;
         background: linear-gradient(180deg, #fff, #eee);
     }
-    .gridLine{
+
+    .gridLine {
         margin-top: -10px;
         /* margin-left: 30px; */
-    
+
     }
-    .gridLine b{
+
+    .gridLine b {
         font-size: 14px;
     }
-    .GridDiv1{
+
+    .GridDiv1 {
         height: 28px;
         width: 100%;
     }
+
     .GridDiv {
         width: 50%;
     }
@@ -1128,7 +1175,11 @@ body {
         width: 100%;
     }
 
-   
+    /* .Export {
+      
+        margin-left: 10%;
+       
+    } */
     .showingProducts2 {
         margin-top: 5px;
         text-decoration: underline;
@@ -1146,18 +1197,22 @@ body {
         display: flex;
         font-size: 16px; */
     }
-    .gridLine{
+
+    .gridLine {
         margin-top: -10px;
         /* margin-left: 30px; */
-    
+
     }
-    .gridLine b{
+
+    .gridLine b {
         font-size: 14px;
     }
-    .GridDiv1{
+
+    .GridDiv1 {
         height: 28px;
         width: 100%;
     }
+
     .GridDiv {
         width: 50%;
     }
@@ -1198,7 +1253,7 @@ body {
     }
 
     .paginateAgain {
-            margin-top: 10px;
+        margin-top: 10px;
         margin-right: -5px;
     }
 
@@ -1256,14 +1311,16 @@ body {
         margin-left: 30px;
         width: 30%;
     }
-/*............... list view css start ..............*/
+
+    /*............... list view css start ..............*/
     .listCart {
         margin-top: 0px;
         height: 100%;
         display: inline-block;
     }
-    .colactionCart2{
-        height: 390px;
+
+    .colactionCart2 {
+        padding: 10px;
         width: 109%;
         background: linear-gradient(180deg, #fff, #eee);
     }

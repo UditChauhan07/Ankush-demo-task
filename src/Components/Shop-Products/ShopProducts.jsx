@@ -16,10 +16,18 @@ import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import { FaSearch } from "react-icons/fa";
+import { IoMdSearch } from "react-icons/io";
 import { useReactToPrint } from 'react-to-print';
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { FaRegFilePdf } from "react-icons/fa";
+import { FaRegFileExcel } from "react-icons/fa";
+import { GrDocumentCsv } from "react-icons/gr";
+import { IoDocumentOutline } from "react-icons/io5";
+import { GrDocumentTxt } from "react-icons/gr";
+import * as XLSX from "xlsx";
+import Papa from 'papaparse';
+
 
 
 const ShopProducts = () => {
@@ -44,7 +52,7 @@ const ShopProducts = () => {
     // console.log(pageRangeEnd)
     const [viewMode, setViewMode] = useState("grid");
     const [isListView, setIsListView] = useState(false);
-    const [allData, setAllData] = useState(data)
+    // const [allData, setAllData] = useState(data)
     // console.log(allData)
 
 
@@ -221,6 +229,56 @@ const ShopProducts = () => {
             setProductsPerPage(5)
         }
     };
+//........Export pdf..........//
+    const contentRef = useRef(null);
+    const exportPdf = () => {
+      const input = contentRef.current;
+  
+      html2canvas(input).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("download.pdf");
+      });
+    };
+
+    //..........Export data to Excel..........//
+
+    const exportToExcel = () => {
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(sortedProducts().map(product => ({
+            "Title": product.title,
+            "Rating": product.rating,
+            "Reviews": product.reviews
+           
+        })));
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+        const columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }];
+        worksheet["!cols"] = columns;
+        XLSX.writeFile(workbook, "products.xlsx");
+    };
+//........Export data to Csv file ....////
+const exportToCSV = () => {
+    const csvData = Papa.unparse(sortedProducts().map(product => ({
+        "Title": product.title,
+        "Rating": product.rating,
+        "Reviews": product.reviews
+    })));
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'products.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+};
     return (
         <>
             <section className={Style.fullContent}  >
@@ -290,12 +348,23 @@ const ShopProducts = () => {
                                 </p>
                             </div>
                         </div>
-                        {/* <button onClick={() => window.print()} className={Style.printIcon}><FaSearch />Print</button> */}
+                            <div className={` ${Style.Export}`}>
+                                <div className={`dropdown ${Style.dropDownExport}`}>
+                                    <button className={`dropdown-toggle ${Style.exportDropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        Export
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a className="dropdown-item"  onClick={() => window.print()} ><IoMdSearch /> Print</a></li>
+                                        <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf/> Pdf</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
+                                        <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
+                                        <li><a className="dropdown-item" >< GrDocumentTxt /> Txt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                     </div>
                     <div className="row w-100 mt-5">
-
-
-                        {/* <button className={Style.printIcon} onClick={handlePrint}>Print</button> */}
                         <div className="col-lg-3 col-md-3  mt-1">
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
                             <div className={` card ${Style.filterCard}`}>
@@ -369,8 +438,9 @@ const ShopProducts = () => {
 
                         {viewMode === "grid" ? (
                             <div className="col-lg-9 col-md-9">
+                                <div ref={contentRef}>
                                 <h1 className={Style.heading}>SHOP PRODUCTS</h1>
-                                <div className={Style.collection_Container}>
+                                <div className={Style.collection_Container} >
                                     <div className={Style.cardContainer}>
                                         {loading ? (
                                             Array.from({ length: 10 }).map((_, index) => (
@@ -406,6 +476,8 @@ const ShopProducts = () => {
                                         )}
                                     </div>
                                 </div>
+                                </div>
+                                
 
                                 {showReactPaginate ? (
                                     <div className={`${Style.paginateAgain}`} >
@@ -471,6 +543,7 @@ const ShopProducts = () => {
                             </div>
                         ) : (
                             <div className="col-lg-9 col-md-9">
+                                <div ref={contentRef}>
                                 <h1 className={Style.heading}>SHOP PRODUCTS</h1>
                                 <div className={Style.collection_Container2}>
                                     <div className={Style.cardContainer2}>
@@ -519,6 +592,8 @@ const ShopProducts = () => {
                                         )}
                                     </div>
                                 </div>
+                                </div>
+                               
 
                                 {showReactPaginate ? (
                                     <div className={`${Style.paginateAgain}`} >
