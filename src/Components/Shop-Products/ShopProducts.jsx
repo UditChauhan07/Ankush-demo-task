@@ -229,20 +229,20 @@ const ShopProducts = () => {
             setProductsPerPage(5)
         }
     };
-//........Export pdf..........//
+    //........Export pdf..........//
     const contentRef = useRef(null);
     const exportPdf = () => {
-      const input = contentRef.current;
-  
-      html2canvas(input).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF();
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-        pdf.save("download.pdf");
-      });
+        const input = contentRef.current;
+
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF();
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+            pdf.save("download.pdf");
+        });
     };
 
     //..........Export data to Excel..........//
@@ -252,33 +252,57 @@ const ShopProducts = () => {
         const worksheet = XLSX.utils.json_to_sheet(sortedProducts().map(product => ({
             "Title": product.title,
             "Rating": product.rating,
-            "Reviews": product.reviews
-           
+            "Reviews": product.reviews,
+            "Price": product.price,
+            "Text": product.text,
+            "Button": product.button,
+
+
         })));
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
-        const columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }];
+        const columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 },];
         worksheet["!cols"] = columns;
         XLSX.writeFile(workbook, "products.xlsx");
     };
-//........Export data to Csv file ....////
-const exportToCSV = () => {
-    const csvData = Papa.unparse(sortedProducts().map(product => ({
-        "Title": product.title,
-        "Rating": product.rating,
-        "Reviews": product.reviews
-    })));
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'products.csv');
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
+    //........Export data to Csv file ....////
+    const exportToCSV = () => {
+        const csvData = Papa.unparse(sortedProducts().map(product => ({
+            "Title": product.title,
+            "Rating": product.rating,
+            "Reviews": product.reviews,
+            "Price": product.price,
+            "Text": product.text,
+            "Button": product.button,
+        })));
+        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'products.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+
+    //...........Export Data to Txt............
+
+    const exportToTxt = () => {
+       
+        const headings = 'Title, Rating, Reviews,Price,Text,Button';
+        const txtData = [headings].concat(sortedProducts().map(product => (
+            `${product.title}, ${product.rating}, ${product.reviews},${product.price},${product.text},${product.button}`
+        ))).join('\n');
+        const blob = new Blob([txtData], { type: 'text/plain;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'products.txt';
+
+
         link.click();
-        document.body.removeChild(link);
-    }
-};
+    };
     return (
         <>
             <section className={Style.fullContent}  >
@@ -341,6 +365,19 @@ const exportToCSV = () => {
                                         <li><a className="dropdown-item" onClick={() => handleSortClick('lowestReview')}><FaSortAmountDownAlt /> Lowest-Reviews</a></li>
                                     </ul>
                                 </div>
+                                <div className={`dropdown ${Style.dropDownExport}`}>
+                                    <button className={`dropdown-toggle ${Style.exportDropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        Export
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a className="dropdown-item" onClick={() => window.print()} ><IoMdSearch /> Print</a></li>
+                                        <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf /> Pdf</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
+                                        <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToTxt}>< GrDocumentTxt /> Txt</a></li>
+                                    </ul>
+                                </div>
                             </div>
                             <div className={Style.showingProducts2}>
                                 <p >
@@ -348,21 +385,7 @@ const exportToCSV = () => {
                                 </p>
                             </div>
                         </div>
-                            <div className={` ${Style.Export}`}>
-                                <div className={`dropdown ${Style.dropDownExport}`}>
-                                    <button className={`dropdown-toggle ${Style.exportDropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                        Export
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a className="dropdown-item"  onClick={() => window.print()} ><IoMdSearch /> Print</a></li>
-                                        <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf/> Pdf</a></li>
-                                        <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
-                                        <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
-                                        <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
-                                        <li><a className="dropdown-item" >< GrDocumentTxt /> Txt</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+
                     </div>
                     <div className="row w-100 mt-5">
                         <div className="col-lg-3 col-md-3  mt-1">
@@ -439,45 +462,45 @@ const exportToCSV = () => {
                         {viewMode === "grid" ? (
                             <div className="col-lg-9 col-md-9">
                                 <div ref={contentRef}>
-                                <h1 className={Style.heading}>SHOP PRODUCTS</h1>
-                                <div className={Style.collection_Container} >
-                                    <div className={Style.cardContainer}>
-                                        {loading ? (
-                                            Array.from({ length: 10 }).map((_, index) => (
-                                                <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
-                                            ))
-                                        ) : (
-                                            sortedProducts().map((product, index) => (
-                                                <div key={index} className={`${Style.colactionCart}`}>
-                                                    <div className={Style.imgWrapper}>
-                                                        <img className={Style.img} src={product.image} alt="" />
-                                                    </div>
+                                    <h1 className={Style.heading}>SHOP PRODUCTS</h1>
+                                    <div className={Style.collection_Container} >
+                                        <div className={Style.cardContainer}>
+                                            {loading ? (
+                                                Array.from({ length: 10 }).map((_, index) => (
+                                                    <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
+                                                ))
+                                            ) : (
+                                                sortedProducts().map((product, index) => (
+                                                    <div key={index} className={`${Style.colactionCart}`}>
+                                                        <div className={Style.imgWrapper}>
+                                                            <img className={Style.img} src={product.image} alt="" />
+                                                        </div>
 
-                                                    <p className={Style.productText}>{product.title}</p>
-                                                    <div style={{ height: "40px", display: "flex" }}>
-                                                        <div className={Style.iconStar}>
-                                                            {[...Array(5).keys()].map((i) => (
-                                                                <span key={i}>
-                                                                    {i < product.rating ? (
-                                                                        <VscStarFull style={{ color: "rgb(244 172 12)" }} />
-                                                                    ) : (
-                                                                        <RiStarLine style={{ color: "#e6bf69" }} />
-                                                                    )}
-                                                                </span>
-                                                            ))}
-                                                            <span className={Style.review}>{product.reviews}</span>
+                                                        <p className={Style.productText}>{product.title}</p>
+                                                        <div style={{ height: "40px", display: "flex" }}>
+                                                            <div className={Style.iconStar}>
+                                                                {[...Array(5).keys()].map((i) => (
+                                                                    <span key={i}>
+                                                                        {i < product.rating ? (
+                                                                            <VscStarFull style={{ color: "rgb(244 172 12)" }} />
+                                                                        ) : (
+                                                                            <RiStarLine style={{ color: "#e6bf69" }} />
+                                                                        )}
+                                                                    </span>
+                                                                ))}
+                                                                <span className={Style.review}>{product.reviews}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className={Style.btnDiv}>
+                                                            <button className={Style.buybtn} onClick={() => handleClick(product.id)}>{product.button}</button>
                                                         </div>
                                                     </div>
-                                                    <div className={Style.btnDiv}>
-                                                        <button className={Style.buybtn} onClick={() => handleClick(product.id)}>{product.button}</button>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        )}
+                                                ))
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                                
+
 
                                 {showReactPaginate ? (
                                     <div className={`${Style.paginateAgain}`} >
@@ -544,56 +567,57 @@ const exportToCSV = () => {
                         ) : (
                             <div className="col-lg-9 col-md-9">
                                 <div ref={contentRef}>
-                                <h1 className={Style.heading}>SHOP PRODUCTS</h1>
-                                <div className={Style.collection_Container2}>
-                                    <div className={Style.cardContainer2}>
-                                        {loading ? (
-                                            Array.from({ length: 10 }).map((_, index) => (
-                                                <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
-                                            ))
-                                        ) : (
-                                            sortedProducts().map((product, index) => (
-                                                <div key={index} className={`${Style.colactionCart2}`}>
-                                                    <div className="row m-2 ">
-                                                        <div className={` col-lg-3 col-md-3 ${Style.imgWrapper2}`}>
-                                                            <img className={Style.img2} src={product.image} alt="" />
-                                                        </div>
-                                                        <div className='col-lg-9 col-md-3'>
-                                                            <div className={Style.listCart}>
-                                                                <div className={Style.iconStar2}>
-                                                                    {[...Array(5).keys()].map((i) => (
-                                                                        <span key={i}>
-                                                                            {i < product.rating ? (
-                                                                                <VscStarFull style={{ color: "rgb(244 172 12)", fontSize: "13px" }} />
-                                                                            ) : (
-                                                                                <RiStarLine style={{ color: "#e6bf69", fontSize: "13px" }} />
-                                                                            )}
-                                                                        </span>
-                                                                    ))}
+                                    <h1 className={Style.heading}>SHOP PRODUCTS</h1>
+                                    <div className={Style.collection_Container2}>
+                                        <div className={Style.cardContainer2}>
+                                            {loading ? (
+                                                Array.from({ length: 10 }).map((_, index) => (
+                                                    <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
+                                                ))
+                                            ) : (
+                                                sortedProducts().map((product, index) => (
+                                                    <div key={index} className={`${Style.colactionCart2}`}>
+                                                        <div className="row m-2 ">
+                                                            <div className={` col-lg-3 col-md-3 ${Style.imgWrapper2}`}>
+                                                                <img className={Style.img2} src={product.image} alt="" />
+                                                            </div>
+                                                            <div className='col-lg-9 col-md-3'>
+                                                                <div className={Style.listCart}>
+                                                                    <div className={Style.iconStar2}>
+                                                                        {[...Array(5).keys()].map((i) => (
+                                                                            <span key={i}>
+                                                                                {i < product.rating ? (
+                                                                                    <VscStarFull style={{ color: "rgb(244 172 12)", fontSize: "13px" }} />
+                                                                                ) : (
+                                                                                    <RiStarLine style={{ color: "#e6bf69", fontSize: "13px" }} />
+                                                                                )}
+                                                                            </span>
+                                                                        ))}
 
-                                                                </div>
-                                                                <p className={Style.productText2}>{product.title}</p>
-                                                                <p className={Style.listText}>{product.text}</p>
-                                                                <strong className={Style.prices}>{product.price}</strong>
-                                                                <div>
-                                                                    <button className={Style.colorBtn1}></button>
-                                                                    <button className={Style.colorBtn2}></button>
-                                                                    <button className={Style.colorBtn3}></button>
+                                                                    </div>
+                                                                    <p className={Style.productText2}>{product.title}</p>
+                                                                    <p className={Style.listText}>{product.text}</p>
+                                                                    <strong className={Style.prices}>{product.price}</strong>
+                                                                    <div>
+                                                                        {[...Array(3).keys()].map((i) => (
+                                                                            (product.colorVeriont >= i + 1) && 
+                                                                            <button key={i} className={Style["colorBtn" + (i + 1)]}></button>
+                                                                        ))}
+                                                                    </div>
+
                                                                 </div>
 
                                                             </div>
-
                                                         </div>
+
+
                                                     </div>
-
-
-                                                </div>
-                                            ))
-                                        )}
+                                                ))
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                               
+
 
                                 {showReactPaginate ? (
                                     <div className={`${Style.paginateAgain}`} >

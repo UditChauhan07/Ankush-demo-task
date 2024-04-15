@@ -7,9 +7,9 @@
         "rating": 5,
         "categories":["Skin","Bones"],
         "reviews": "78 Review",
-        "button": "buy now",
+        "button": "BUY NOW",
         "price":"$21.00",
-        "color":2,
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -21,6 +21,7 @@
         "reviews": "24 Review",
         "button": "BUY NOW",
         "price":"$32.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -32,18 +33,19 @@
         "reviews": "7 Review",
         "button": "BUY NOW",
         "price":"$42.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
         "id": 3,
         "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
-        
         "title": "Cholestq10 60 V Caps 30 Servings",
         "rating": 2,
         "categories":["Skin","Heart","Vision"],
         "reviews": "6 Review",
         "button": "BUY NOW",
         "price":"$52.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
 
     },
@@ -56,6 +58,7 @@
         "reviews": "33 review",
         "button": "PRE-ORDER",
         "price":"$12.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -67,6 +70,7 @@
         "reviews": "32 Review",
         "button": "PRE-ORDER",
         "price":"$13.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -78,6 +82,7 @@
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER",
         "price":"$16.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }, 
       {
@@ -87,8 +92,9 @@
         "rating": 3,
         "categories":["Skin","Bones"],
         "reviews": "98 Review",
-        "button": "buy now",
+        "button": "BUY NOW",
         "price":"$28.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -100,6 +106,7 @@
         "reviews": "14 Review",
         "button": "BUY NOW",
         "price":"$90.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -111,6 +118,7 @@
         "reviews": "17 Review",
         "button": "BUY NOW",
         "price":"$100.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -120,8 +128,9 @@
         "rating": 5,
         "categories":["Skin","Bones"],
         "reviews": "28 Review",
-        "button": "buy now",
+        "button": "BUY NOW",
         "price":"$200.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -133,6 +142,7 @@
         "reviews": "44 Review",
         "button": "BUY NOW",
         "price":"$95.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -144,6 +154,7 @@
         "reviews": "37 Review",
         "button": "BUY NOW",
         "price":"$39.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -155,6 +166,7 @@
         "reviews": "16 Review",
         "button": "BUY NOW",
         "price":"$76.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
 
     },
@@ -167,6 +179,7 @@
         "reviews": "22 review",
         "button": "PRE-ORDER",
         "price":"$38.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -178,6 +191,7 @@
         "reviews": "12 Review",
         "button": "PRE-ORDER",
         "price":"$34.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -189,6 +203,7 @@
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER",
         "price":"$30.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }, 
       {
@@ -198,8 +213,9 @@
         "rating": 3,
         "categories":["Skin","Bones"],
         "reviews": "58 Review",
-        "button": "buy now",
+        "button": "BUY NOW",
         "price":"$31.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -211,6 +227,7 @@
         "reviews": "34 Review",
         "button": "BUY NOW",
         "price":"$22.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -222,6 +239,7 @@
         "reviews": "77 Review",
         "button": "BUY NOW",
         "price":"$23.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -231,8 +249,9 @@
         "rating": 5,
         "categories":["Skin","Bones"],
         "reviews": "66 Review",
-        "button": "buy now",
+        "button": "BUY NOW",
         "price":"$12.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -244,6 +263,7 @@
         "reviews": "29 Review",
         "button": "BUY NOW",
         "price":"$20.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -255,6 +275,7 @@
         "reviews": "71 Review",
         "button": "BUY NOW",
         "price":"$12.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -266,6 +287,7 @@
         "reviews": "100 Review",
         "button": "BUY NOW",
         "price":"$42.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
 
     },
@@ -278,6 +300,7 @@
         "reviews": "30 review",
         "button": "PRE-ORDER",
         "price":"$62.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -289,6 +312,7 @@
         "reviews": "10 Review",
         "button": "PRE-ORDER",
         "price":"$87.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -300,6 +324,7 @@
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER",
         "price":"$90.00",
+        "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }, 
       {
@@ -309,8 +334,9 @@
         "rating": 3,
         "categories":["Skin","Bones"],
         "reviews": "50 Review",
-        "button": "buy now",
+        "button": "BUY NOW",
         "price":"$39.00",
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -322,6 +348,7 @@
         "reviews": "4 Review",
         "button": "BUY NOW",
         "price":"$30.00",
+        "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
@@ -333,7 +360,7 @@
         "reviews": "59 Review",
         "button": "BUY NOW",
         "price":"$17.00",
-        "color":3,
+        "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }
       
