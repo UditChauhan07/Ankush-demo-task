@@ -256,6 +256,7 @@ const ShopProducts = () => {
             "Price": product.price,
             "Text": product.text,
             "Button": product.button,
+            "Variont":product.colorVeriont
 
 
         })));
@@ -273,6 +274,7 @@ const ShopProducts = () => {
             "Price": product.price,
             "Text": product.text,
             "Button": product.button,
+            "Variont":product.colorVeriont
         })));
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
@@ -291,24 +293,23 @@ const ShopProducts = () => {
 
     const exportToTxt = () => {
        
-        const headings = 'Title, Rating, Reviews,Price,Text,Button';
+        const headings = 'Title, Rating, Reviews,Price,Text,Button,Variont';
         const txtData = [headings].concat(sortedProducts().map(product => (
-            `${product.title}, ${product.rating}, ${product.reviews},${product.price},${product.text},${product.button}`
+            `${product.title}, ${product.rating}, ${product.reviews},${product.price},${product.text},${product.button},${product.colorVeriont}`
         ))).join('\n');
         const blob = new Blob([txtData], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'products.txt';
-
-
         link.click();
-    };
+    };  
+    
     return (
         <>
             <section className={Style.fullContent}  >
                 <div className={`container-fluid  ${Style.productmain}`}>
                     <div className={Style.shorting}>
-                        <div className={`row fixed-top ${Style.shortingDiv}`}>
+                        <div className={`row  ${Style.shortingDiv}`}>
                             <div className="col-lg-3 col-sm-3 border">
                                 <p className={Style.showingProducts}>
                                     Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
@@ -385,14 +386,161 @@ const ShopProducts = () => {
                                 </p>
                             </div>
                         </div>
-
                     </div>
+                    <div className={Style.shorting2}>
+                        <div className={`row  ${Style.shortingDiv2}`}>
+                            <div className={` border ${Style.GridDiv}`}>
+                                <p className={Style.showingProducts}>
+                                    Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
+                                </p>
+                            </div>
+                            <div className={` border ${Style.GridDiv}`}>
+                                <div className={Style.bothIcon}>
+
+                                    <span className={Style.showIcon} onClick={handleGridView}><BsGrid3X3GapFill /> </span>
+                                    <span className={Style.showIcon} onClick={handleListView}>< FaListUl /></span>
+                                </div>
+                                {!isListView && (
+                                    <div className={Style.gridLine}>
+                                        <b className={`two ${productsPerPage === 2 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(1)}>||</b> <b className={`three ${productsPerPage === 3 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(2)}>|||</b> <b className={`four ${productsPerPage === 4 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(3)}>||||</b> <b className={`five ${productsPerPage === 5 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(4)}>|||||</b>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className={` border ${Style.GridDiv}`}>
+                                <div className={`dropdown ${Style.dropDown}`}>
+                                    <button className={`dropdown-toggle ${Style.dropDiv}`}
+                                        value={productsPerPage}
+                                        onChange={handleProductsPerPageChange}
+                                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        {productsPerPage} Per page
+                                    </button>
+                                    <ul className={`dropdown-menu ${Style.opt}`} aria-labelledby="dropdownMenuButton1">
+                                        {productsPerPageOptions.map(option => (
+                                            <li>
+                                                <button
+                                                    className="dropdown-item"
+                                                    onClick={(e) => handleProductsPerPageChange(e)}
+                                                    value={option}
+                                                >
+                                                    {option} Per Page
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className={` border ${Style.GridDiv}`}>
+                                <div className={`dropdown ${Style.dropDown}`}>
+                                    <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        {sortInfo.icon} {sortInfo.name}
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('asc')}><FaSortAlphaDown /> A-Z</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('desc')}><FaSortAlphaDownAlt /> Z-A</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('highestRating')}><FaSortNumericUpAlt /> Highest-Rating</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('lowestRating')}><FaSortNumericDown /> Lowest-Rating</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('highestReview')}><FaSortAmountDown /> Highest-Review</a></li>
+                                        <li><a className="dropdown-item" onClick={() => handleSortClick('lowestReview')}><FaSortAmountDownAlt /> Lowest-Reviews</a></li>
+                                    </ul>
+                                </div>
+                                <div className={`dropdown ${Style.dropDownExport}`}>
+                                    <button className={`dropdown-toggle ${Style.exportDropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                        Export
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a className="dropdown-item" onClick={() => window.print()} ><IoMdSearch /> Print</a></li>
+                                        <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf /> Pdf</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
+                                        <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToTxt}>< GrDocumentTxt /> Txt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={Style.showingProducts2}>
+                                <p >
+                                    Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                     <div className="row w-100 mt-5">
                         <div className="col-lg-3 col-md-3  mt-1">
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
-                            <div className={` card ${Style.filterCard}`}>
+                            <div className={` card  ${Style.filterCard}`}>
                                 <div className="row ">
                                     <div className={Style.mainDiv}>
+                                        <div className={`col-lg-8 col-md-8  ${Style.filtername}`}>
+                                            <strong className={Style.filertText} onClick={toggleCheckboxes}>FILTERS</strong>
+                                        </div>
+                                        <div className={`col-lg-4 col-md-4 ${Style.clearname}`}>
+                                            <p className={Style.clear} style={{ cursor: "pointer" }} onClick={handleClearFilters}>Clear</p>
+                                        </div>
+                                    </div>
+                                    <div className={Style.line1}><hr /></div>
+                                    <div className={Style.categories}>
+                                        <strong className={Style.catfilter} style={{ cursor: "pointer" }}>Categories</strong>
+                                    </div>
+                                    <div className={Style.categorycheck} style={{ marginLeft: "20px" }}>
+                                        {checkboxes.map((checkbox, index) => (
+                                            <div key={index}>
+                                                <input
+                                                    className=' ' style={{ cursor: 'pointer' }}
+                                                    type="checkbox"
+                                                    id={`checkbox-${index}`}
+                                                    checked={checkedItems[checkbox.label] || false}
+                                                    onChange={() => handleCheckboxChange(checkbox.label)}
+                                                />
+                                                <label style={{ marginLeft: "10px", cursor: "pointer" }} htmlFor={`checkbox-${index}`}>{checkbox.label}</label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div><hr style={{ width: "80%", margin: "20px", color: "#b3b1b193" }} /></div>
+                                    <div className={Style.categories}>
+                                        <strong className={Style.catfilter} style={{ cursor: "pointer" }} >Customer Rating</strong>
+                                    </div>
+                                    <div className={Style.ratingBody} style={{ marginLeft: "20px", marginBottom: "15px" }}>
+                                        {[...Array(5).keys()].map((index) => (
+                                            <div key={index}>
+                                                <label style={{ marginLeft: "20px", cursor: "pointer" }}>
+                                                    <input type="checkbox"
+                                                        className={Style.starcheck}
+                                                        value={5 - index}
+                                                        id='chekbox'
+                                                        checked={selectedRating.includes(5 - index)}
+                                                        onChange={(e) => {
+                                                            const { value, checked } = e.target;
+                                                            const rating = parseInt(value);
+                                                            if (checked) {
+                                                                setSelectedRating([...selectedRating, rating]);
+                                                            } else {
+                                                                setSelectedRating(selectedRating.filter(rating => rating !== parseInt(value)))
+                                                            }
+                                                        }}
+                                                    />
+                                                    {[...Array(5 - index).keys()].map((i) => (
+                                                        <span id='starIcon' className={Style.starimg} key={i}>
+                                                            <VscStarFull style={{ color: "rgb(244 172 12)" }} />
+                                                        </span>
+                                                    ))}
+                                                    {[...Array(index).keys()].map((i) => (
+                                                        <span id='starIcon' keys={5 - index + 1}>
+                                                            <RiStarLine style={{ color: "#e6bf69" }} />
+                                                        </span>
+                                                    ))}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={` card  ${Style.filterCard2}`}>
+                                <div className="row ">
+                                    <div className={Style.mainDiv2}>
                                         <div className={`col-lg-8 col-md-8  ${Style.filtername}`}>
                                             <strong className={Style.filertText} onClick={toggleCheckboxes}>FILTERS</strong>
                                         </div>

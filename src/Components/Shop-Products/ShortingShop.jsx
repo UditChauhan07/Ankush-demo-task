@@ -13,6 +13,7 @@ function Shorting() {
                 <div className={Style.clearName}>  
                  <p className={Style.clear} style={{ cursor: "pointer" }} >Clear</p></div>
             </div>
+            <button onClick={() => window.print()}>print</button>
         </div>
         </>
 
