@@ -16,8 +16,8 @@ import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import { IoMdSearch } from "react-icons/io";
-import { useReactToPrint } from 'react-to-print';
+import { PiPrinterBold } from "react-icons/pi";
+// import { useReactToPrint } from 'react-to-print';
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { FaRegFilePdf } from "react-icons/fa";
@@ -231,19 +231,27 @@ const ShopProducts = () => {
     };
     //........Export pdf..........//
     const contentRef = useRef(null);
+    // console.log(contentRef)
+    
     const exportPdf = () => {
         const input = contentRef.current;
 
         html2canvas(input).then((canvas) => {
             const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF();
-            const imgProps = pdf.getImageProperties(imgData);
+            const pdf = new jsPDF("p","mm","a4",true);
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const imgWidth =canvas.width;
+            const imgHeight= canvas.height;
+            const ratio=Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight);
+            const imgX=(pdfWidth-imgWidth*ratio)/2;
+            const imgY=0;
+            pdf.addImage(imgData, "PNG", imgX,imgY, imgWidth*ratio,imgHeight*ratio);
             pdf.save("download.pdf");
         });
     };
+
+    
 
     //..........Export data to Excel..........//
 
@@ -306,8 +314,8 @@ const ShopProducts = () => {
     
     return (
         <>
-            <section className={Style.fullContent}  >
-                <div className={`container-fluid  ${Style.productmain}`}>
+            <section ref={contentRef} >
+                <div className={`container-fluid  ${Style.productmain}`} >
                     <div className={Style.shorting}>
                         <div className={`row  ${Style.shortingDiv}`}>
                             <div className="col-lg-3 col-sm-3 border">
@@ -366,12 +374,12 @@ const ShopProducts = () => {
                                         <li><a className="dropdown-item" onClick={() => handleSortClick('lowestReview')}><FaSortAmountDownAlt /> Lowest-Reviews</a></li>
                                     </ul>
                                 </div>
-                                <div className={`dropdown ${Style.dropDownExport}`}>
+                                <div className={`dropdown ${Style.dropDownExport}`} data-html2canvas-ignore="true">
                                     <button className={`dropdown-toggle ${Style.exportDropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                                         Export
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a className="dropdown-item" onClick={() => window.print()} ><IoMdSearch /> Print</a></li>
+                                        <li><a className="dropdown-item" onClick={() => window.print()} >< PiPrinterBold /> Print</a></li>
                                         <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf /> Pdf</a></li>
                                         <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
                                         <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
@@ -450,7 +458,7 @@ const ShopProducts = () => {
                                         Export
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a className="dropdown-item" onClick={() => window.print()} ><IoMdSearch /> Print</a></li>
+                                        <li><a className="dropdown-item" onClick={() => window.print()} >< PiPrinterBold /> Print</a></li>
                                         <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf /> Pdf</a></li>
                                         <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
                                         <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
@@ -469,11 +477,11 @@ const ShopProducts = () => {
                     
                     
                     <div className="row w-100 mt-5">
-                        <div className="col-lg-3 col-md-3  mt-1">
+                        <div className="col-lg-3 col-md-3  mt-1" >
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
-                            <div className={` card  ${Style.filterCard}`}>
+                            <div className={` card  ${Style.filterCard}`} >
                                 <div className="row ">
-                                    <div className={Style.mainDiv}>
+                                    <div className={Style.mainDiv} >
                                         <div className={`col-lg-8 col-md-8  ${Style.filtername}`}>
                                             <strong className={Style.filertText} onClick={toggleCheckboxes}>FILTERS</strong>
                                         </div>
@@ -609,7 +617,7 @@ const ShopProducts = () => {
 
                         {viewMode === "grid" ? (
                             <div className="col-lg-9 col-md-9">
-                                <div ref={contentRef}>
+                                <div >
                                     <h1 className={Style.heading}>SHOP PRODUCTS</h1>
                                     <div className={Style.collection_Container} >
                                         <div className={Style.cardContainer}>

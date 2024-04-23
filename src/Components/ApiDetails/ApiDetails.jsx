@@ -37,7 +37,7 @@ const ApiDetails = () => {
   const hanleBack = () => {
     if (location.state && location.state.currentPage) {
     }
-    navigate("/", { state: { page: location.state.currentPage } });
+    navigate("/data-filter", { state: { page: location.state.currentPage } });
   };
 
   return (

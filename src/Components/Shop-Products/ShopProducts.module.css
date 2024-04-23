@@ -121,7 +121,7 @@
     }
 
     .heading {
-        margin-top: -550px !important;
+        margin-top: -480px !important;
         margin-left: 300px !important;
     }
 
@@ -140,10 +140,15 @@
     }
 
     .filterCard2 {
-    width: 30% !important;
+        width: 30% !important;
         /* width: 1000px !important; */
         margin-left: -10px !important;
         display: block !important;
+
+    }
+
+    .line1 {
+        margin-top: -20px !important;
 
     }
 
@@ -165,12 +170,14 @@
     .bothIcon {
         width: 25% !important;
     }
-    .gridLine{
+
+    .gridLine {
         position: relative;
     }
-    .gridLine b{
-      position:relative ;
-      top: 0.8rem !important;
+
+    .gridLine b {
+        position: relative;
+        top: 0.8rem !important;
     }
 
     @page :first {
@@ -211,16 +218,23 @@
 
 .mainDiv {
     background-color: rgb(255, 255, 255);
+    /* border-bottom: 1px solid rgb(224, 6, 6);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px; */
+    padding: 1px;
     position: fixed;
-    border-radius: 10px;
+      /* border-radius: 10px; */
     margin-top: 0px;
-    max-width: 200px;
+    max-width: 280px;
     width: 100%;
-    margin-left: 13px;
+    margin-left: 17px;
 }
 
 .filtername {
-    margin-top: 20px;
+    /* position: fixed; */
+
+    /* position: absolute; */
+    margin-top: 18px;
     width: 100%;
 }
 
@@ -236,6 +250,7 @@
 
 .line1 {
     margin-top: 40px;
+
     color: #b3b1b193;
 }
 
@@ -1001,9 +1016,6 @@
     }
 
     .mainDiv {
-        justify-content: center;
-        display: flex;
-        align-items: center;
         position: absolute;
     }
 
@@ -1041,7 +1053,6 @@
 
     .gridLine {
         margin-top: -25px;
-        /* margin-left: 30px; */
 
     }
 
