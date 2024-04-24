@@ -60,13 +60,17 @@
     margin-top: 10px;
     margin-left: 10px;
 }
-
+.shorting{
+    /* position: fixed;
+    width: 100%; */
+    /* margin-top: 0px; */
+}
 .shortingDiv {
     background-color: rgb(255, 255, 255);
     margin-left: 10px;
     margin-right: 10px;
     position: fixed;
-    top: 0;
+    top: -0;
     left: 0;
     right: 0;
     z-index: 1000;

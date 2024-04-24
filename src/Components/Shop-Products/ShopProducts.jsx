@@ -27,12 +27,14 @@ import { IoDocumentOutline } from "react-icons/io5";
 import { GrDocumentTxt } from "react-icons/gr";
 import * as XLSX from "xlsx";
 import Papa from 'papaparse';
-
+import { usePDF } from 'react-to-pdf';
+import html2pdf from 'html2pdf.js';
 
 
 const ShopProducts = () => {
+    const { toPDF, targetRef } = usePDF({filename: 'Shop-Product.pdf'});
+    // const targetRef = useRef();
     const ProductShow = 3;
-
     const PageLimit = 5
     const componentRef = React.useRef();
     const navigate = useNavigate();
@@ -231,8 +233,6 @@ const ShopProducts = () => {
     };
     //........Export pdf..........//
     const contentRef = useRef(null);
-    // console.log(contentRef)
-    
     const exportPdf = () => {
         const input = contentRef.current;
 
@@ -248,10 +248,30 @@ const ShopProducts = () => {
             const imgY=0;
             pdf.addImage(imgData, "PNG", imgX,imgY, imgWidth*ratio,imgHeight*ratio);
             pdf.save("download.pdf");
+          
         });
     };
 
-    
+    //.........html2pdf package example.............
+    const generatePDF = () => {
+        const element = document.getElementById('content-to-pdf'); 
+
+        const opt = {
+            margin: 0,
+            filename: 'myfile.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 1 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+            // pagebreak: { mode: ['avoid-all'] },
+           
+        };
+
+        html2pdf()
+            .from(element)
+            .set(opt) // Set options
+            .save();
+    };
+
 
     //..........Export data to Excel..........//
 
@@ -314,10 +334,10 @@ const ShopProducts = () => {
     
     return (
         <>
-            <section ref={contentRef} >
-                <div className={`container-fluid  ${Style.productmain}`} >
+            <section  id="content-to-pdf">
+                <div className="container-fluid" ref={contentRef}  >
                     <div className={Style.shorting}>
-                        <div className={`row  ${Style.shortingDiv}`}>
+                        {true&&<div  className={`row  ${Style.shortingDiv}`}>
                             <div className="col-lg-3 col-sm-3 border">
                                 <p className={Style.showingProducts}>
                                     Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
@@ -380,7 +400,9 @@ const ShopProducts = () => {
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a className="dropdown-item" onClick={() => window.print()} >< PiPrinterBold /> Print</a></li>
-                                        <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf /> Pdf</a></li>
+                                        <li><a className="dropdown-item"  onClick={generatePDF} ><FaRegFilePdf /> Pdf</a></li>
+                                        <li><a className="dropdown-item" onClick={() => toPDF()} ><FaRegFilePdf /> Pdf2</a></li>
+
                                         <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
                                         <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
                                         <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
@@ -393,7 +415,7 @@ const ShopProducts = () => {
                                     Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
                                 </p>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                     <div className={Style.shorting2}>
                         <div className={`row  ${Style.shortingDiv2}`}>
