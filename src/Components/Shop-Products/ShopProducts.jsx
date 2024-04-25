@@ -17,9 +17,9 @@ import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { PiPrinterBold } from "react-icons/pi";
-// import { useReactToPrint } from 'react-to-print';
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+
+// import { jsPDF } from "jspdf";
+// import html2canvas from "html2canvas";
 import { FaRegFilePdf } from "react-icons/fa";
 import { FaRegFileExcel } from "react-icons/fa";
 import { GrDocumentCsv } from "react-icons/gr";
@@ -28,11 +28,11 @@ import { GrDocumentTxt } from "react-icons/gr";
 import * as XLSX from "xlsx";
 import Papa from 'papaparse';
 import { usePDF } from 'react-to-pdf';
-import html2pdf from 'html2pdf.js';
+
 
 
 const ShopProducts = () => {
-    const { toPDF, targetRef } = usePDF({filename: 'Shop-Product.pdf'});
+   
     // const targetRef = useRef();
     const ProductShow = 3;
     const PageLimit = 5
@@ -54,8 +54,7 @@ const ShopProducts = () => {
     // console.log(pageRangeEnd)
     const [viewMode, setViewMode] = useState("grid");
     const [isListView, setIsListView] = useState(false);
-    // const [allData, setAllData] = useState(data)
-    // console.log(allData)
+
 
 
     // Function to toggle display of category checkboxes //
@@ -232,45 +231,11 @@ const ShopProducts = () => {
         }
     };
     //........Export pdf..........//
-    const contentRef = useRef(null);
-    const exportPdf = () => {
-        const input = contentRef.current;
+    const { toPDF, targetRef } = usePDF({filename: 'Shop-Product.pdf',});
 
-        html2canvas(input).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF("p","mm","a4",true);
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const imgWidth =canvas.width;
-            const imgHeight= canvas.height;
-            const ratio=Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight);
-            const imgX=(pdfWidth-imgWidth*ratio)/2;
-            const imgY=0;
-            pdf.addImage(imgData, "PNG", imgX,imgY, imgWidth*ratio,imgHeight*ratio);
-            pdf.save("download.pdf");
-          
-        });
-    };
 
-    //.........html2pdf package example.............
-    const generatePDF = () => {
-        const element = document.getElementById('content-to-pdf'); 
 
-        const opt = {
-            margin: 0,
-            filename: 'myfile.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 1 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-            // pagebreak: { mode: ['avoid-all'] },
-           
-        };
 
-        html2pdf()
-            .from(element)
-            .set(opt) // Set options
-            .save();
-    };
 
 
     //..........Export data to Excel..........//
@@ -334,8 +299,8 @@ const ShopProducts = () => {
     
     return (
         <>
-            <section  id="content-to-pdf">
-                <div className="container-fluid" ref={contentRef}  >
+            <section ref={targetRef} >
+                <div className="container-fluid" >
                     <div className={Style.shorting}>
                         {true&&<div  className={`row  ${Style.shortingDiv}`}>
                             <div className="col-lg-3 col-sm-3 border">
@@ -400,8 +365,7 @@ const ShopProducts = () => {
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a className="dropdown-item" onClick={() => window.print()} >< PiPrinterBold /> Print</a></li>
-                                        <li><a className="dropdown-item"  onClick={generatePDF} ><FaRegFilePdf /> Pdf</a></li>
-                                        <li><a className="dropdown-item" onClick={() => toPDF()} ><FaRegFilePdf /> Pdf2</a></li>
+                                        <li><a className="dropdown-item" onClick={() => toPDF()} ><FaRegFilePdf /> Pdf</a></li>
 
                                         <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
                                         <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
@@ -481,7 +445,6 @@ const ShopProducts = () => {
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a className="dropdown-item" onClick={() => window.print()} >< PiPrinterBold /> Print</a></li>
-                                        <li><a className="dropdown-item" onClick={exportPdf} ><FaRegFilePdf /> Pdf</a></li>
                                         <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
                                         <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
                                         <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
@@ -498,7 +461,7 @@ const ShopProducts = () => {
                     </div>
                     
                     
-                    <div className="row w-100 mt-5">
+                    <div className="row w-100 ">
                         <div className="col-lg-3 col-md-3  mt-1" >
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
                             <div className={` card  ${Style.filterCard}`} >
@@ -744,7 +707,7 @@ const ShopProducts = () => {
                             </div>
                         ) : (
                             <div className="col-lg-9 col-md-9">
-                                <div ref={contentRef}>
+                                <div >
                                     <h1 className={Style.heading}>SHOP PRODUCTS</h1>
                                     <div className={Style.collection_Container2}>
                                         <div className={Style.cardContainer2}>
@@ -860,8 +823,7 @@ const ShopProducts = () => {
                                 )}
                             </div>
                         )}
-
-                    </div>
+                    </div> 
                     <div className={`form-check form-switch  ${Style.toogelDiv}`}>
                         <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={showReactPaginate} onChange={handleSwitchChange} />
                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
