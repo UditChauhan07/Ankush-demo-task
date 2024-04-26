@@ -39,17 +39,12 @@
 .gridLine {
     margin-top: -25px;
     float: right;
-
 }
 
 .opt {
     max-height: 150px;
     width: 20%;
     overflow: auto;
-}
-
-.bothIcon {
-    /* position: fixed; */
 }
 
 .showingProducts2 {
@@ -61,22 +56,23 @@
     margin-left: 10px;
 }
 
-.shorting{
+.shorting {
     /* position: -webkit-sticky; */
     position: sticky;
     top: 0;
     background-color: rgb(255, 255, 255);
     z-index: 1000;
 }
+
 .shortingDiv {
-    
-     /* margin-left: 10px;  */
+
+    /* margin-left: 10px;  */
     /* margin-right: 10px; */
     /* position: fixed; */
     /* top: 0; */
     /* left: 0; */
-    /* right: 0; */ 
- 
+    /* right: 0; */
+
 }
 
 
@@ -129,6 +125,7 @@
     .heading {
         margin-top: -480px !important;
         margin-left: 300px !important;
+        font-size: 26px !important;
     }
 
     .collection_Container {
@@ -137,8 +134,6 @@
         justify-content: flex-start;
         align-items: self-start;
         display: flex;
-
-
     }
 
     .filterCard {
@@ -147,10 +142,16 @@
 
     .filterCard2 {
         width: 30% !important;
-        /* width: 1000px !important; */
         margin-left: -10px !important;
         display: block !important;
 
+    }
+
+    .clear {
+        margin-left: -60px !important;
+        /* color: red !important;
+        display: block !important;
+        margin-top: -40px; */
     }
 
     .line1 {
@@ -165,8 +166,6 @@
 
     .shortingDiv2 {
         display: flex !important;
-
-        /* display: block !important; */
     }
 
     .GridDiv {
@@ -200,11 +199,16 @@
         display: none;
     }
 
+    .clear2 {
+        margin-left: -60px !important;
+    }
+
     .colactionCart2 {
-        /* margin-left: 240px; */
+        margin-left: 280px;
         justify-content: flex-start;
         align-items: self-start;
         display: flex;
+
     }
 
 
@@ -224,12 +228,8 @@
 
 .mainDiv {
     background-color: rgb(255, 255, 255);
-    /* border-bottom: 1px solid rgb(224, 6, 6);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px; */
     padding: 1px;
     position: fixed;
-      /* border-radius: 10px; */
     margin-top: 0px;
     max-width: 280px;
     width: 100%;
@@ -237,9 +237,6 @@
 }
 
 .filtername {
-    /* position: fixed; */
-
-    /* position: absolute; */
     margin-top: 18px;
     width: 100%;
 }
@@ -301,6 +298,7 @@
 
 .colactionCart {
     margin-bottom: 30px;
+    page-break-inside: avoid;
 }
 
 .cardContainer {

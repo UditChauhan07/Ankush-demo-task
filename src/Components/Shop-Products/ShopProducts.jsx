@@ -18,8 +18,8 @@ import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { PiPrinterBold } from "react-icons/pi";
 
-// import { jsPDF } from "jspdf";
-// import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 import { FaRegFilePdf } from "react-icons/fa";
 import { FaRegFileExcel } from "react-icons/fa";
 import { GrDocumentCsv } from "react-icons/gr";
@@ -32,7 +32,7 @@ import { usePDF } from 'react-to-pdf';
 
 
 const ShopProducts = () => {
-   
+
     // const targetRef = useRef();
     const ProductShow = 3;
     const PageLimit = 5
@@ -231,12 +231,12 @@ const ShopProducts = () => {
         }
     };
     //........Export pdf..........//
-    const { toPDF, targetRef } = usePDF({filename: 'Shop-Product.pdf',});
+    const { toPDF, targetRef } = usePDF(
+        {
+            filename: 'Shop-Product.pdf',
+        });
 
-
-
-
-
+      
 
     //..........Export data to Excel..........//
 
@@ -249,7 +249,7 @@ const ShopProducts = () => {
             "Price": product.price,
             "Text": product.text,
             "Button": product.button,
-            "Variont":product.colorVeriont
+            "Variont": product.colorVeriont
 
 
         })));
@@ -267,7 +267,7 @@ const ShopProducts = () => {
             "Price": product.price,
             "Text": product.text,
             "Button": product.button,
-            "Variont":product.colorVeriont
+            "Variont": product.colorVeriont
         })));
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
@@ -285,7 +285,7 @@ const ShopProducts = () => {
     //...........Export Data to Txt............
 
     const exportToTxt = () => {
-       
+
         const headings = 'Title, Rating, Reviews,Price,Text,Button,Variont';
         const txtData = [headings].concat(sortedProducts().map(product => (
             `${product.title}, ${product.rating}, ${product.reviews},${product.price},${product.text},${product.button},${product.colorVeriont}`
@@ -295,14 +295,14 @@ const ShopProducts = () => {
         link.href = window.URL.createObjectURL(blob);
         link.download = 'products.txt';
         link.click();
-    };  
-    
+    };
+
     return (
         <>
-            <section ref={targetRef} >
-                <div className="container-fluid" >
+            <section ref={targetRef}  >
+                <div className="container-fluid"  >
                     <div className={Style.shorting}>
-                        {true&&<div  className={`row  ${Style.shortingDiv}`}>
+                        {true && <div className={`row  ${Style.shortingDiv}`}>
                             <div className="col-lg-3 col-sm-3 border">
                                 <p className={Style.showingProducts}>
                                     Show Products {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filterProducts().length)} of {filterProducts().length} Results
@@ -320,7 +320,6 @@ const ShopProducts = () => {
                                     </div>
                                 )}
                             </div>
-
                             <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`}
@@ -344,7 +343,6 @@ const ShopProducts = () => {
                                     </ul>
                                 </div>
                             </div>
-
                             <div className={`col-lg-3 col-3 border ${Style.GridDiv}`}>
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
@@ -400,7 +398,6 @@ const ShopProducts = () => {
                                     </div>
                                 )}
                             </div>
-
                             <div className={` border ${Style.GridDiv}`}>
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`}
@@ -424,7 +421,6 @@ const ShopProducts = () => {
                                     </ul>
                                 </div>
                             </div>
-
                             <div className={` border ${Style.GridDiv}`}>
                                 <div className={`dropdown ${Style.dropDown}`}>
                                     <button className={`dropdown-toggle ${Style.dropDiv}`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
@@ -459,8 +455,6 @@ const ShopProducts = () => {
                             </div>
                         </div>
                     </div>
-                    
-                    
                     <div className="row w-100 ">
                         <div className="col-lg-3 col-md-3  mt-1" >
                             <h1 className={Style.heading2}>SHOP PRODUCTS</h1>
@@ -539,6 +533,8 @@ const ShopProducts = () => {
                                         </div>
                                         <div className={`col-lg-4 col-md-4 ${Style.clearname}`}>
                                             <p className={Style.clear} style={{ cursor: "pointer" }} onClick={handleClearFilters}>Clear</p>
+                                            {/* <p className={Style.clear2} style={{ cursor: "pointer" }} onClick={handleClearFilters}>Clear</p> */}
+
                                         </div>
                                     </div>
                                     <div className={Style.line1}><hr /></div>
@@ -599,12 +595,11 @@ const ShopProducts = () => {
                                 </div>
                             </div>
                         </div>
-
                         {viewMode === "grid" ? (
-                            <div className="col-lg-9 col-md-9">
+                            <div className="col-lg-9 col-md-9" >
                                 <div >
                                     <h1 className={Style.heading}>SHOP PRODUCTS</h1>
-                                    <div className={Style.collection_Container} >
+                                    <div className={Style.collection_Container}  >
                                         <div className={Style.cardContainer}>
                                             {loading ? (
                                                 Array.from({ length: 10 }).map((_, index) => (
@@ -612,11 +607,10 @@ const ShopProducts = () => {
                                                 ))
                                             ) : (
                                                 sortedProducts().map((product, index) => (
-                                                    <div key={index} className={`${Style.colactionCart}`}>
+                                                    <div key={index} className={`${Style.colactionCart}`} >
                                                         <div className={Style.imgWrapper}>
                                                             <img className={Style.img} src={product.image} alt="" />
                                                         </div>
-
                                                         <p className={Style.productText}>{product.title}</p>
                                                         <div style={{ height: "40px", display: "flex" }}>
                                                             <div className={Style.iconStar}>
@@ -641,10 +635,8 @@ const ShopProducts = () => {
                                         </div>
                                     </div>
                                 </div>
-
-
                                 {showReactPaginate ? (
-                                    <div className={`${Style.paginateAgain}`} >
+                                    <div className={`${Style.paginateAgain}`} data-html2canvas-ignore="true" >
                                         <ReactPaginate
                                             previousLabel="Prev"
                                             nextLabel="Next"
@@ -666,7 +658,6 @@ const ShopProducts = () => {
                                             forcePage={currentPage - 1}
                                         />
                                     </div>
-
                                 ) : (
                                     <div className={`pagination  ${Style.PaginatenDiv}`}>
                                         <button className={Style.preBtn}
@@ -734,34 +725,27 @@ const ShopProducts = () => {
                                                                                 )}
                                                                             </span>
                                                                         ))}
-
                                                                     </div>
                                                                     <p className={Style.productText2}>{product.title}</p>
                                                                     <p className={Style.listText}>{product.text}</p>
                                                                     <strong className={Style.prices}>{product.price}</strong>
                                                                     <div>
                                                                         {[...Array(3).keys()].map((i) => (
-                                                                            (product.colorVeriont >= i + 1) && 
+                                                                            (product.colorVeriont >= i + 1) &&
                                                                             <button key={i} className={Style["colorBtn" + (i + 1)]}></button>
                                                                         ))}
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
                                                         </div>
-
-
                                                     </div>
                                                 ))
                                             )}
                                         </div>
                                     </div>
                                 </div>
-
-
                                 {showReactPaginate ? (
-                                    <div className={`${Style.paginateAgain}`} >
+                                    <div className={`${Style.paginateAgain}`} data-html2canvas-ignore="true" >
                                         <ReactPaginate
                                             previousLabel="Prev"
                                             nextLabel="Next"
@@ -783,7 +767,6 @@ const ShopProducts = () => {
                                             forcePage={currentPage - 1}
                                         />
                                     </div>
-
                                 ) : (
                                     <div className={`pagination  ${Style.PaginatenDiv}`}>
                                         <button className={Style.preBtn}
@@ -823,7 +806,7 @@ const ShopProducts = () => {
                                 )}
                             </div>
                         )}
-                    </div> 
+                    </div>
                     <div className={`form-check form-switch  ${Style.toogelDiv}`}>
                         <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={showReactPaginate} onChange={handleSwitchChange} />
                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">

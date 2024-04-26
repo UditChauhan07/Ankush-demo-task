@@ -1,27 +1,104 @@
-import React from "react";
+import React, { useRef } from "react";
 import Style from "../Shop-Products/ShortingShop.module.css"
+import { PDFExport } from "@progress/kendo-react-pdf";
+
+
+
 
 
 function Shorting() {
-    return (
-        <>
-         <div>
-      <p>Try to <b>scroll</b> inside this frame to understand how sticky positioning works.</p>
 
-      <div className={Style.sticky}>I am sticky!</div>
+  const pdfExportComponent = useRef(null);
 
-      <div style={{ paddingBottom: '2000px' }}>
-        <p>In this example, the sticky element sticks to the top of the page (top: 0), when you reach its scroll position.</p>
-        <p>Scroll back up to remove the stickyness.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  const handleExportPDF = () => {
+    if (pdfExportComponent.current) {
+      pdfExportComponent.current.save();
+    }
+  };
+  return (
+    <>
+      <div>
+        <div className="example-config">
+          <button
+            className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
+            onClick={handleExportPDF}
+          >
+            Export PDF
+            </button>
+            <PDFExport paperSize="A4" margin="2cm" ref={pdfExportComponent}>  
+            <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis
+          libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat,
+          cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem
+          pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo
+          diam eget risus. Integer facilisis, justo cursus venenatis vehicula,
+          massa nisl tempor sem, in ullamcorper neque mauris in orci. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit. Integer felis
+          libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat,
+          cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem
+          pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo
+          diam eget risus. Integer facilisis, justo cursus venenatis vehicula,
+          massa nisl tempor sem, in ullamcorper neque mauris in orci.
+        </p>
+        <p>
+          Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris
+          pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus
+          orci luctus et ultrices posuere cubilia Curae; Aenean velit ligula,
+          pharetra quis aliquam sed, scelerisque sed sapien. Class aptent taciti
+          sociosqu ad litora torquent per conubia nostra, per inceptos
+          himenaeos. Aliquam dui mi, vulputate vitae pulvinar ac, condimentum
+          sed eros. Ut orci ligula, varius ac consequat in, rhoncus in dolor.
+          Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Aenean velit
+          ligula, pharetra quis aliquam sed, scelerisque sed sapien. Class
+          aptent taciti sociosqu ad litora torquent per conubia nostra, per
+          inceptos himenaeos. Aliquam dui mi, vulputate vitae pulvinar ac,
+          condimentum sed eros.
+        </p>
+        <p>
+          Aliquam at nisl quis est adipiscing bibendum. Nam malesuada eros
+          facilisis arcu vulputate at aliquam nunc tempor. In commodo
+          scelerisque enim, eget sodales lorem condimentum rutrum. Phasellus sem
+          metus, ultricies at commodo in, tristique non est. Morbi vel mauris
+          eget mauris commodo elementum. Nam eget libero lacus, ut sollicitudin
+          ante. Nam odio quam, suscipit a fringilla eget, dignissim nec arcu.
+          Donec tristique arcu ut sapien elementum pellentesque. Aliquam at nisl
+          quis est adipiscing bibendum. Nam malesuada eros facilisis arcu
+          vulputate at aliquam nunc tempor. In commodo scelerisque enim, eget
+          sodales lorem condimentum rutrum. Phasellus sem metus, ultricies at
+          commodo in, tristique non est. Morbi vel mauris eget mauris commodo
+          elementum. Nam eget libero lacus, ut sollicitudin ante. Nam odio quam,
+          suscipit a fringilla eget, dignissim nec arcu. Donec tristique arcu ut
+          sapien elementum pellentesque.
+        </p>
+        <p>
+          Maecenas vitae eros vel enim molestie cursus. Proin ut lacinia ipsum.
+          Nam at elit arcu, at porttitor ipsum. Praesent id viverra lorem. Nam
+          lacinia elementum fermentum. Nulla facilisi. Nulla bibendum erat sed
+          sem interdum suscipit. Vestibulum eget molestie leo. Aliquam erat
+          volutpat. Ut sed nulla libero. Suspendisse id euismod quam. Aliquam
+          interdum turpis vitae purus consectetur in pulvinar libero accumsan.
+          In id augue dui, ac volutpat ante. Suspendisse purus est, ullamcorper
+          id bibendum sed, placerat id leo. Maecenas vitae eros vel enim
+          molestie cursus. Proin ut lacinia ipsum. Nam at elit arcu, at
+          porttitor ipsum. Praesent id viverra lorem. Nam lacinia elementum
+          fermentum. Nulla facilisi. Nulla bibendum erat sed sem interdum
+          suscipit. Vestibulum eget molestie leo. Aliquam erat volutpat. Ut sed
+          nulla libero. Suspendisse id euismod quam. Aliquam interdum turpis
+          vitae purus consectetur in pulvinar libero accumsan. In id augue dui,
+          ac volutpat ante. Suspendisse purus est, ullamcorper id bibendum sed,
+          placerat id leo.
+        </p>
+        
+              </PDFExport>
+        
+        </div>
       </div>
-    </div>
-        </>
+    </>
 
 
 
-    );
+  );
 }
 
 export default Shorting;
