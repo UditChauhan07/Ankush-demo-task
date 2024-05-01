@@ -1,8 +1,7 @@
-.sticky {
-    /* position: -webkit-sticky; */
-    position: sticky;
-    top: 0;
-    padding: 5px;
-    background-color: #cae8ca;
-    border: 2px solid #4CAF50;
-  }
+.pdfContent {
+  /* page-break-before: always;
+  page-break-after: always; */
+  /* page-break-inside: avoid; */
+  margin: auto;
+  break-inside: avoid;
+}

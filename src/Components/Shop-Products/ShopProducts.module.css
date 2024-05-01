@@ -186,7 +186,7 @@
     }
 
     @page :first {
-        margin: 2cm 2cm;
+        margin: 1cm 1cm;
     }
 
 
@@ -313,7 +313,10 @@
     height: 450px;
     /* width: 260px; */
 }
-
+.colactionCart{
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
 .colactionCart {
     width: 100%;
     max-width: 260px;

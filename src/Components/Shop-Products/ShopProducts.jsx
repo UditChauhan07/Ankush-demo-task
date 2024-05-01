@@ -18,8 +18,8 @@ import { FaSortAmountDown } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { PiPrinterBold } from "react-icons/pi";
 
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+// import { jsPDF } from "jspdf";
+// import html2canvas from "html2canvas";
 import { FaRegFilePdf } from "react-icons/fa";
 import { FaRegFileExcel } from "react-icons/fa";
 import { GrDocumentCsv } from "react-icons/gr";
@@ -28,8 +28,7 @@ import { GrDocumentTxt } from "react-icons/gr";
 import * as XLSX from "xlsx";
 import Papa from 'papaparse';
 import { usePDF } from 'react-to-pdf';
-
-
+import { saveAs } from 'file-saver';
 
 const ShopProducts = () => {
 
@@ -236,66 +235,134 @@ const ShopProducts = () => {
             filename: 'Shop-Product.pdf',
         });
 
-      
+
 
     //..........Export data to Excel..........//
-
     const exportToExcel = () => {
         const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(sortedProducts().map(product => ({
-            "Title": product.title,
-            "Rating": product.rating,
-            "Reviews": product.reviews,
-            "Price": product.price,
-            "Text": product.text,
-            "Button": product.button,
-            "Variont": product.colorVeriont
-
-
-        })));
+        let products = sortedProducts(); 
+        let columns;
+        if (viewMode === "grid") {
+            products = products.map(product => ({
+                "Title": product.title,
+                "Rating": product.rating,
+                "Reviews": product.reviews,
+                "Button": product.button
+            }));
+            columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 15 }];
+        } else {
+            products = products.map(product => ({
+                "Title": product.title,
+                "Rating": product.rating,
+                "Reviews": product.reviews,
+                "Price": product.price,
+                "Text": product.text,
+                // "Button": product.button,
+                "Variont": product.colorVeriont 
+            }));
+            columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 }];
+        }
+    
+        const worksheet = XLSX.utils.json_to_sheet(products);
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
-        const columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 },];
         worksheet["!cols"] = columns;
-        XLSX.writeFile(workbook, "products.xlsx");
+        XLSX.writeFile(workbook, "Shop-Product.xlsx");
     };
-    //........Export data to Csv file ....////
+    
+    //........Export data to Csv file ....//
     const exportToCSV = () => {
-        const csvData = Papa.unparse(sortedProducts().map(product => ({
-            "Title": product.title,
-            "Rating": product.rating,
-            "Reviews": product.reviews,
-            "Price": product.price,
-            "Text": product.text,
-            "Button": product.button,
-            "Variont": product.colorVeriont
-        })));
+        let products = sortedProducts(); 
+    
+        let csvData;
+        if (viewMode === "grid") {
+            csvData = Papa.unparse(products.map(product => ({
+                "Title": product.title,
+                "Rating": product.rating,
+                "Reviews": product.reviews,
+                "Button": product.button
+            })));
+        } else {
+            csvData = Papa.unparse(products.map(product => ({
+                "Title": product.title,
+                "Rating": product.rating,
+                "Reviews": product.reviews,
+                "Price": product.price,
+                "Text": product.text,
+                // "Button": product.button,
+                "Variont": product.colorVeriont 
+            })));
+        }
+    
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         if (link.download !== undefined) {
             const url = URL.createObjectURL(blob);
             link.setAttribute('href', url);
-            link.setAttribute('download', 'products.csv');
+            link.setAttribute('download', 'Shop-Product.csv');
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
     };
-
+    //...............Export Data to Doc.................//
+    const exportToWord = () => {
+        const generateWordContent = () => {
+            let content = '';
+            let products = sortedProducts(); 
+    
+            products.forEach(product => {
+                if (viewMode === "grid") {
+                    content += `Title: ${product.title}\n`;
+                    content += `Rating: ${product.rating}\n`;
+                    content += `Reviews: ${product.reviews}\n`; 
+                    content += `Button: ${product.button}\n\n`;
+                } else {
+                    content += `Title: ${product.title}\n`;
+                    content += `Rating: ${product.rating}\n`;
+                    content += `Reviews: ${product.reviews}\n`;
+                    content += `Price: ${product.price}\n`;
+                    content += `Text: ${product.text}\n`;
+                    // content += `Button: ${product.button}\n`;
+                    content += `Variont: ${product.colorVeriont}\n\n`;
+                }
+            });
+            return content;
+        };
+        const wordContent = generateWordContent();
+        const blob = new Blob([wordContent], { type: 'application/msword' });
+        saveAs(blob, 'Shop-Product.doc');
+    };
+    
     //...........Export Data to Txt............
-
     const exportToTxt = () => {
-
-        const headings = 'Title, Rating, Reviews,Price,Text,Button,Variont';
-        const txtData = [headings].concat(sortedProducts().map(product => (
-            `${product.title}, ${product.rating}, ${product.reviews},${product.price},${product.text},${product.button},${product.colorVeriont}`
-        ))).join('\n');
-        const blob = new Blob([txtData], { type: 'text/plain;charset=utf-8' });
+        let content = '';
+        let products = sortedProducts(); 
+    
+        products.forEach(product => {
+            if (viewMode === "grid") {
+                content += `Title: ${product.title}\n`;
+                content += `Rating: ${product.rating}\n`;
+                content += `Reviews: ${product.reviews}\n`;
+                content += `Button: ${product.button}\n\n`;
+            } else {
+                content += `Title: ${product.title}\n`;
+                content += `Rating: ${product.rating}\n`;
+                content += `Reviews: ${product.reviews}\n`;
+                content += `Price: ${product.price}\n`;
+                content += `Text: ${product.text}\n`;
+                // content += `Button: ${product.button}\n`;
+                content += `Variont: ${product.colorVeriont}\n\n`; 
+            }
+        });
+    
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = 'products.txt';
+        link.download = 'Shop-Product.txt';
         link.click();
     };
+    
 
     return (
         <>
@@ -364,11 +431,10 @@ const ShopProducts = () => {
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a className="dropdown-item" onClick={() => window.print()} >< PiPrinterBold /> Print</a></li>
                                         <li><a className="dropdown-item" onClick={() => toPDF()} ><FaRegFilePdf /> Pdf</a></li>
-
                                         <li><a className="dropdown-item" onClick={exportToExcel}><FaRegFileExcel /> Excel</a></li>
                                         <li><a className="dropdown-item" onClick={exportToCSV}><GrDocumentCsv /> Csv</a></li>
-                                        <li><a className="dropdown-item" >< IoDocumentOutline /> Doc</a></li>
-                                        <li><a className="dropdown-item" onClick={exportToTxt}>< GrDocumentTxt /> Txt</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToWord} ><IoDocumentOutline /> Docx</a></li>
+                                        <li><a className="dropdown-item" onClick={exportToTxt}><GrDocumentTxt /> Txt</a></li>
                                     </ul>
                                 </div>
                             </div>
