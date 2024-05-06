@@ -27,7 +27,7 @@
     {
         "id": 3,
         "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
-        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "title": "Bluerex Visionsc 60 SoftGels 30 ",
         "rating": 3,
         "categories":["Skin","Vision"],
         "reviews": "7 Review",
@@ -37,7 +37,7 @@
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
-        "id": 3,
+        "id": 4,
         "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
         "title": "Cholestq10 60 V Caps 30 Servings",
         "rating": 2,
@@ -52,7 +52,7 @@
     {
         "id": 5,
         "image": "Images/RCP-SP-StrawberryAcai-01452NR-framed.webp",
-        "title": "Royal Collagen Peptides Stick  20 Units",
+        "title": "Royal Collagen Peptides Stick 20 ",
         "rating": 1,
         "categories":["Bones","Immunity","Vision"],
         "reviews": "33 review",
@@ -64,7 +64,7 @@
     {
         "id": 6,
         "image": "Images/RCP-SP-BloodOrange-01452NR-framed.webp",
-        "title": "Royal Collagen Peptides  Blood Orange 20 Units",
+        "title": "Royal Collagen Blood Orange 20 ",
         "rating": 5,
         "categories":["Bones","Immunity","Heart"],
         "reviews": "32 Review",
@@ -76,7 +76,7 @@
     {
         "id": 7,
         "image": "Images/BRONU6409.webp",
-        "title": "Royal Collagen Peptides Stick Packs Dragon Fruit 20 Units",
+        "title": "Royal Collagen Stick Packs Fruit ",
         "rating": 4,
         "reviews": "52 Review",
         "categories":["Skin","Immunity","Heart"],
@@ -100,7 +100,7 @@
     {
         "id": 9,
         "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
-        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "title": "Bluerex Vision 60 30 Servings",
         "rating": 2,
         "categories":["Joints","Heart","Immunity"],
         "reviews": "14 Review",
@@ -112,7 +112,7 @@
     {
         "id": 10,
         "image": "Images/fake1.jpg",
-        "title": "Istockphoto-1300459022-612x612",
+        "title": "Istockphoto-130-612x612",
         "rating": 1,
         "categories":["Skin","Vision"],
         "reviews": "17 Review",
@@ -124,7 +124,7 @@
     {
         "id": 11,
            "image": "Images/fake1.avif",
-        "title": "Zimone 90 V-Caps 30 servings",
+        "title": "Zimone 90  30 servings",
         "rating": 5,
         "categories":["Skin","Bones"],
         "reviews": "28 Review",
@@ -136,7 +136,7 @@
     {
         "id": 12,
         "image": "Images/fake2.jpg",
-        "title": "Ximone 30 servings 90 V-Caps",
+        "title": "Ximone vings 90 V-Caps",
         "rating": 4,
         "categories":["Joints","Heart","Immunity"],
         "reviews": "44 Review",
@@ -148,7 +148,7 @@
     {
         "id": 13,
         "image": "Images/fake3.jpg",
-        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "title": "Bluerex Vision 60 SoftGels ",
         "rating": 3,
         "categories":["Skin","Vision"],
         "reviews": "37 Review",
@@ -173,7 +173,7 @@
     {
         "id": 15,
         "image": "Images/fake15.avif",
-        "title": "still-life-care-products_23-2149371308",
+        "title": "still-life-care-products_",
         "rating": 1,
         "categories":["Bones","Immunity","Vision"],
         "reviews": "22 review",
@@ -185,7 +185,7 @@
     {
         "id": 16,
         "image": "Images/fake16.jpg",
-        "title": "F_360_272372012_2aOG JaFmaqlkG CHSv",
+        "title": "F_360_272372012_2a JaFmaqlkG CHSv",
         "rating": 5,
         "categories":["Bones","Immunity","Heart"],
         "reviews": "12 Review",
@@ -197,7 +197,7 @@
     {
         "id": 17,
         "image": "Images/fake17.jpeg",
-        "title": "Product Photography 5 Trends in 2023",
+        "title": "Product Photography 5 ",
         "rating": 4,
         "reviews": "51 Review",
         "categories":["Skin","Immunity","Heart"],
@@ -209,7 +209,7 @@
       {
         "id": 18,
         "image": "Images/fake8.jpg",
-        "title": "pexels-kristina-paukshtite-3270223",
+        "title": "pexels-kristina-paukshtite-",
         "rating": 3,
         "categories":["Skin","Bones"],
         "reviews": "58 Review",
@@ -221,7 +221,7 @@
     {
         "id": 19,
         "image": "Images/Abstockphoto-1303478443-1024x1024.jpg",
-        "title": "products ima&gslcrp EgZjaHJvb",
+        "title": "products img EgZjaHJvb",
         "rating": 2,
         "categories":["Joints","Heart","Immunity"],
         "reviews": "34 Review",
@@ -233,7 +233,7 @@
     {
         "id": 20,
         "image": "Images/Abtockphoto-142535505-1024x1024.jpg",
-        "title": "pexels-jefferson-palomique-3020129",
+        "title": "pexels-jefferson-palomique",
         "rating": 1,
         "categories":["Skin","Vision"],
         "reviews": "77 Review",
@@ -257,7 +257,7 @@
     {
         "id":22,
         "image": "Images/fake12.jpeg",
-        "title": "Zexels-photo-3259584 584 pexels",
+        "title": "Zexels-photo-32595 pexels",
         "rating": 4,
         "categories":["Joints","Heart","Immunity"],
         "reviews": "29 Review",
@@ -269,7 +269,7 @@
     {
         "id": 23,
         "image": "Images/fake13.jpg",
-        "title": "Bluerex Vision 60 SoftGels 30 Servings",
+        "title": "Bluerex Vision 60 30 Servings",
         "rating": 3,
         "categories":["Skin","Vision"],
         "reviews": "71 Review",
@@ -281,7 +281,7 @@
     {
         "id": 24,
         "image": "Images/vecteezy_medicine-bottle-drugs-pills-pharmaceutical-pills-pharmacy_22221636.png",
-        "title": "jam-beans-428094_1280_720_720",
+        "title": "jam-beans-428094__720",
         "rating": 2,
         "categories":["Skin","Heart","Vision"],
         "reviews": "100 Review",
@@ -306,7 +306,7 @@
     {
         "id": 26,
         "image": "Images/fake16.jpg",
-        "title": "istockphoto-1463681745-1024x1024",
+        "title": "istockphoto-1024x1024",
         "rating": 5,
         "categories":["Bones","Immunity","Heart"],
         "reviews": "10 Review",
@@ -318,7 +318,7 @@
     {
         "id": 27,
         "image": "Images/qwtockphoto-1152206084-1024x1024.jpg",
-        "title": "ar Medicinals-1463681745-1024x1024",
+        "title": "ar Medicinals-1465-1024x1024",
         "rating": 4,
         "reviews": "40 Review",
         "categories":["Skin","Immunity","Heart"],
@@ -330,7 +330,7 @@
       {
         "id": 28,
         "image": "Images/fake28.webp",
-        "title": "A Bottle of Hemp Extract with Dropper",
+        "title": "A Bottle of Hemp with Dropper",
         "rating": 3,
         "categories":["Skin","Bones"],
         "reviews": "50 Review",
@@ -342,7 +342,7 @@
     {
         "id": 29,
         "image": "Images/fake29.webp",
-        "title": "Close-up of a Bottle of Hemp Oil",
+        "title": "A Bottle of Hemp Oil",
         "rating": 2,
         "categories":["Joints","Heart","Immunity"],
         "reviews": "4 Review",

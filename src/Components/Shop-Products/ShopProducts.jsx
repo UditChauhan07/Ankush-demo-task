@@ -45,10 +45,10 @@ const ShopProducts = () => {
     const [sortType, setSortType] = useState('');
     const [productsPerPage, setProductsPerPage] = useState(ProductShow);
 
+    const [selectedLine, setSelectedLine] = useState(2);
     const [currentPage, setCurrentPage] = useState(1);
     // console.log(productsPerPage)
     const [pageRangeStart, setPageRangeStart] = useState(PageLimit);
-
     const [pageRangeEnd, setPageRangeEnd] = useState(9);
     // console.log(pageRangeEnd)
     const [viewMode, setViewMode] = useState("grid");
@@ -86,6 +86,7 @@ const ShopProducts = () => {
         setSortType("");
         setProductsPerPage(ProductShow);
         setCurrentPage(1);
+        setSelectedLine(2)
     };
 
     // Function to filter products based on checked categories and selected rating..//
@@ -216,31 +217,22 @@ const ShopProducts = () => {
         setViewMode("list");
         setIsListView(true);
     };
+    //............Function  Grid-Line Handle UI..........
 
-
-    const clickgridLine = (index) => {
-        if (index === 1) {
-            setProductsPerPage(2);
-        } else if (index === 2) {
-            setProductsPerPage(3);
-        } else if (index === 3) {
-            setProductsPerPage(4)
-        } else if (index === 4) {
-            setProductsPerPage(5)
-        }
+    const clickgridLine = (lineNumber) => {
+        setSelectedLine(lineNumber);
     };
+
     //........Export pdf..........//
     const { toPDF, targetRef } = usePDF(
         {
             filename: 'Shop-Product.pdf',
         });
 
-
-
     //..........Export data to Excel..........//
     const exportToExcel = () => {
         const workbook = XLSX.utils.book_new();
-        let products = sortedProducts(); 
+        let products = sortedProducts();
         let columns;
         if (viewMode === "grid") {
             products = products.map(product => ({
@@ -258,21 +250,21 @@ const ShopProducts = () => {
                 "Price": product.price,
                 "Text": product.text,
                 // "Button": product.button,
-                "Variont": product.colorVeriont 
+                "Variont": product.colorVeriont
             }));
             columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 }];
         }
-    
+
         const worksheet = XLSX.utils.json_to_sheet(products);
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
         worksheet["!cols"] = columns;
         XLSX.writeFile(workbook, "Shop-Product.xlsx");
     };
-    
+
     //........Export data to Csv file ....//
     const exportToCSV = () => {
-        let products = sortedProducts(); 
-    
+        let products = sortedProducts();
+
         let csvData;
         if (viewMode === "grid") {
             csvData = Papa.unparse(products.map(product => ({
@@ -289,10 +281,10 @@ const ShopProducts = () => {
                 "Price": product.price,
                 "Text": product.text,
                 // "Button": product.button,
-                "Variont": product.colorVeriont 
+                "Variont": product.colorVeriont
             })));
         }
-    
+
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         if (link.download !== undefined) {
@@ -309,22 +301,22 @@ const ShopProducts = () => {
     const exportToWord = () => {
         const generateWordContent = () => {
             let content = '';
-            let products = sortedProducts(); 
-    
+            let products = sortedProducts();
+
             products.forEach(product => {
                 if (viewMode === "grid") {
-                    content += `Title: ${product.title}\n`;
-                    content += `Rating: ${product.rating}\n`;
-                    content += `Reviews: ${product.reviews}\n`; 
-                    content += `Button: ${product.button}\n\n`;
+                    content += `<p><b>Title:</b>${product.title}\n</p> `;
+                    content += `<p><b>Rating:</b>${product.rating}\n</p> `;
+                    content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
+                    content += `<p><b>Button: </b>${product.button}\n\n</p>`;
                 } else {
-                    content += `Title: ${product.title}\n`;
-                    content += `Rating: ${product.rating}\n`;
-                    content += `Reviews: ${product.reviews}\n`;
-                    content += `Price: ${product.price}\n`;
-                    content += `Text: ${product.text}\n`;
+                    content += `<p><b>Title:</b>${product.title}\n</p> `;
+                    content += `<p><b>Rating:</b>${product.rating}\n</p> `;
+                    content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
+                    content += `<p><b>Price:</b>${product.price}\n</p> `;
+                    content += `<p><b>Text:</b>${product.text}\n</p>`;
                     // content += `Button: ${product.button}\n`;
-                    content += `Variont: ${product.colorVeriont}\n\n`;
+                    content += `<p><b>Variont:</b>${product.colorVeriont}\n\n</p> `;
                 }
             });
             return content;
@@ -333,12 +325,12 @@ const ShopProducts = () => {
         const blob = new Blob([wordContent], { type: 'application/msword' });
         saveAs(blob, 'Shop-Product.doc');
     };
-    
+
     //...........Export Data to Txt............
     const exportToTxt = () => {
         let content = '';
-        let products = sortedProducts(); 
-    
+        let products = sortedProducts();
+
         products.forEach(product => {
             if (viewMode === "grid") {
                 content += `Title: ${product.title}\n`;
@@ -352,17 +344,17 @@ const ShopProducts = () => {
                 content += `Price: ${product.price}\n`;
                 content += `Text: ${product.text}\n`;
                 // content += `Button: ${product.button}\n`;
-                content += `Variont: ${product.colorVeriont}\n\n`; 
+                content += `Variont: ${product.colorVeriont}\n\n`;
             }
         });
-    
+
         const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'Shop-Product.txt';
         link.click();
     };
-    
+
 
     return (
         <>
@@ -383,7 +375,10 @@ const ShopProducts = () => {
                                 </div>
                                 {!isListView && (
                                     <div className={Style.gridLine}>
-                                        <b className={`two ${productsPerPage === 2 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(1)}>||</b> <b className={`three ${productsPerPage === 3 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(2)}>|||</b> <b className={`four ${productsPerPage === 4 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(3)}>||||</b> <b className={`five ${productsPerPage === 5 ? Style.activeGridLine : Style.inactiveGridLine}`} onClick={() => clickgridLine(4)}>|||||</b>
+                                        <b className={selectedLine === 1 ? `${Style.two} ${Style.activeGridLine}` : `${Style.two} ${Style.inactiveGridLine}`} onClick={() => clickgridLine(1)}>||</b>&nbsp;
+                                        <b className={selectedLine === 2 ? `${Style.three} ${Style.activeGridLine}` : `${Style.three} ${Style.inactiveGridLine}`} onClick={() => clickgridLine(2)}>|||</b>&nbsp;
+                                        <b className={selectedLine === 3 ? `${Style.four} ${Style.activeGridLine}` : `${Style.four} ${Style.inactiveGridLine}`} onClick={() => clickgridLine(3)}>||||</b>&nbsp;
+                                        <b className={selectedLine === 4 ? `${Style.five} ${Style.activeGridLine}` : `${Style.five} ${Style.inactiveGridLine}`} onClick={() => clickgridLine(4)}>|||||</b>
                                     </div>
                                 )}
                             </div>
@@ -666,14 +661,14 @@ const ShopProducts = () => {
                                 <div >
                                     <h1 className={Style.heading}>SHOP PRODUCTS</h1>
                                     <div className={Style.collection_Container}  >
-                                        <div className={Style.cardContainer}>
+                                        <div className={`${Style.cardContainer}`} data-selected-line={selectedLine}>
                                             {loading ? (
                                                 Array.from({ length: 10 }).map((_, index) => (
                                                     <Skeleton width={260} highlightColor='' className={Style.cardImgLoading} />
                                                 ))
                                             ) : (
                                                 sortedProducts().map((product, index) => (
-                                                    <div key={index} className={`${Style.colactionCart}`} >
+                                                    <div key={index} className={`${Style.colactionCart}`} data-selected-line={selectedLine}  >
                                                         <div className={Style.imgWrapper}>
                                                             <img className={Style.img} src={product.image} alt="" />
                                                         </div>
