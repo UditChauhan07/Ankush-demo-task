@@ -1,4 +1,6 @@
+
 .animatedButton {
+  margin: 20%;
   /* Define button styles */
   padding: 10px 20px;
   font-size: 16px;
@@ -7,27 +9,34 @@
   border-radius: 5px;
   cursor: pointer;
   outline: none;
+  border-radius: 20px;
+  font-weight: bold;
   transition: border-color 0.3s ease;
 }
 
 .animatedButton:hover {
-  /* Change border color on hover */
-  border-color: #007bff;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  border: 2px solid black;
+  animation: rotateBorder 2s linear infinite;
+  background: linear-gradient(var(--gradient-angle), rgb(0, 0, 0), rgba(248, 247, 247, 0.096));
+  
 }
 
 /* Define animation */
 @keyframes rotateBorder {
   0% {
-    border-color: #007bff;
-    transform: rotate(0deg);
+    --gradient-angle: 0deg;
   }
   100% {
-    border-color: #007bff;
-    transform: rotate(360deg);
+    --gradient-angle: 360deg;
   }
 }
-
-.animatedButton:hover {
-  /* Apply animation on border rotation on hover */
-  animation: rotateBorder 2s linear infinite;
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
+
+

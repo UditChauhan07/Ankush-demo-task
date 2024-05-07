@@ -322,6 +322,7 @@
     padding: 4rem 1rem 2rem;
     cursor: pointer;
 }
+
 .cardContainer[data-selected-line="1"] {
     grid-template-columns: repeat(2, auto);
     max-width: 100% !important;
@@ -333,8 +334,8 @@
 }
 
 .cardContainer[data-selected-line="3"] {
-    grid-template-columns: repeat(4, auto);
-    max-width: 75% !important;
+    grid-template-columns: repeat(4, 230px);
+    max-width: 75%;
 }
 
 .cardContainer[data-selected-line="4"] {
@@ -810,7 +811,22 @@
         grid-template-columns: repeat(2, auto);
         margin-left: 70px;
     }
-
+    .cardContainer[data-selected-line="1"] {
+        grid-template-columns: repeat(2, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="2"] {
+        grid-template-columns: repeat(2, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="3"] {
+        grid-template-columns: repeat(2, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="4"] {
+        grid-template-columns: repeat(2, auto);
+        max-width: 100% !important;
+    }
     .filterCard {
         margin-left: 10px;
         width: 100%;
@@ -1245,6 +1261,22 @@
     .GridDiv {
         width: 50%;
     }
+    .cardContainer[data-selected-line="1"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="2"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="3"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="4"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
 
 }
 
@@ -1253,7 +1285,22 @@
         margin-left: 0px;
         width: 100%;
     }
-
+    .cardContainer[data-selected-line="1"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="2"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="3"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
+    .cardContainer[data-selected-line="4"] {
+        grid-template-columns: repeat(1, auto);
+        max-width: 100% !important;
+    }
     /* .Export {
       
         margin-left: 10%;

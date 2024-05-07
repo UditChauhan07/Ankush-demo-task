@@ -34,7 +34,7 @@ const ShopProducts = () => {
 
     // const targetRef = useRef();
     const ProductShow = 3;
-    const PageLimit = 5
+    const PageLimit = 5;
     const componentRef = React.useRef();
     const navigate = useNavigate();
     const [showReactPaginate, setShowReactPaginate] = useState(true);
@@ -44,7 +44,6 @@ const ShopProducts = () => {
     const [loading, setLoading] = useState(true);
     const [sortType, setSortType] = useState('');
     const [productsPerPage, setProductsPerPage] = useState(ProductShow);
-
     const [selectedLine, setSelectedLine] = useState(2);
     const [currentPage, setCurrentPage] = useState(1);
     // console.log(productsPerPage)
@@ -56,6 +55,15 @@ const ShopProducts = () => {
 
 
 
+
+
+    const cardContainer = {
+
+        color: 'blue',
+
+        backgroundColor: 'lightgray',
+
+    };
     // Function to toggle display of category checkboxes //
     const toggleCheckboxes = () => {
         setShowCheckboxes(prevState => !prevState);
@@ -224,22 +232,65 @@ const ShopProducts = () => {
     };
 
     //........Export pdf..........//
-    const { toPDF, targetRef } = usePDF(
-        {
-            filename: 'Shop-Product.pdf',
-        });
+
+    const { toPDF, targetRef } = usePDF({
+        filename: generatePDFFileName(),
+    });
+
+    function generatePDFFileName() {
+        let prefix = "Products";
+        const checkedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+
+        if (checkedLabels.length > 0) {
+            if (checkedLabels.length === 1) {
+                prefix = `${checkedLabels[0]}'s Products`;
+            } else if (checkedLabels.length === 2) {
+                prefix = `${checkedLabels[0]}'s , ${checkedLabels[1]}'s Products`;
+            } else {
+                const lastLabel = checkedLabels.pop();
+                const labelNames = checkedLabels.map(label => `${label}'s`).join(", ");
+                prefix = `${labelNames}, and ${lastLabel}'s Products`;
+            }
+        }
+
+        return `${prefix}, ${getCurrentTime()}.pdf`;
+    }
+
+
+
+
+    function getCurrentTime() {
+        const now = new Date();
+        return formatDate(now);
+    }
+
+    function formatDate(date) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'Asia/Kolkata',
+        };
+        return date.toLocaleString('en-US', options).replace(/,/g, '').replace(/:/g, '-');
+    }
+
 
     //..........Export data to Excel..........//
     const exportToExcel = () => {
         const workbook = XLSX.utils.book_new();
         let products = sortedProducts();
         let columns;
+        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+
         if (viewMode === "grid") {
             products = products.map(product => ({
                 "Title": product.title,
                 "Rating": product.rating,
                 "Reviews": product.reviews,
-                "Button": product.button
+                // "Button": product.button
             }));
             columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 15 }];
         } else {
@@ -258,20 +309,52 @@ const ShopProducts = () => {
         const worksheet = XLSX.utils.json_to_sheet(products);
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
         worksheet["!cols"] = columns;
-        XLSX.writeFile(workbook, "Shop-Product.xlsx");
+
+        const now = new Date();
+        const formattedDateTime = formatDate(now);
+
+        let filenamePrefix = "Products";
+        if (selectedLabels.length > 0) {
+            if (selectedLabels.length > 2) {
+                const lastLabel = selectedLabels.pop();
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s and ${lastLabel}'s Products`;
+            } else if (selectedLabels.length === 2) {
+                filenamePrefix = `${selectedLabels.join("'s,")}'s Products`;
+            } else {
+                filenamePrefix = `${selectedLabels[0]}'s Products`;
+            }
+        }
+
+        const filename = `${filenamePrefix}, ${formattedDateTime}.xlsx`;
+
+        XLSX.writeFile(workbook, filename);
     };
+
+    function formatDate(date) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
+    }
+
 
     //........Export data to Csv file ....//
     const exportToCSV = () => {
         let products = sortedProducts();
-
+        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+    
         let csvData;
         if (viewMode === "grid") {
             csvData = Papa.unparse(products.map(product => ({
                 "Title": product.title,
                 "Rating": product.rating,
                 "Reviews": product.reviews,
-                "Button": product.button
+                // "Button": product.button
             })));
         } else {
             csvData = Papa.unparse(products.map(product => ({
@@ -284,31 +367,63 @@ const ShopProducts = () => {
                 "Variont": product.colorVeriont
             })));
         }
-
+    
+        const now = new Date();
+        const formattedDateTime = formatDate(now);
+    
+        let filenamePrefix = "Products";
+        if (selectedLabels.length > 0) {
+            if (selectedLabels.length > 2) {
+                const lastLabel = selectedLabels.pop();
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s and ${lastLabel}'s Products`;
+            } else if (selectedLabels.length === 2) {
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s Products`;
+            } else {
+                filenamePrefix = `${selectedLabels[0]}'s Products`;
+            }
+        }
+    
+        const filename = `${filenamePrefix}, ${formattedDateTime}.csv`;
+    
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         if (link.download !== undefined) {
             const url = URL.createObjectURL(blob);
             link.setAttribute('href', url);
-            link.setAttribute('download', 'Shop-Product.csv');
+            link.setAttribute('download', filename);
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
     };
+    
+    function formatDate(date) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            weekday: 'short',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
+    }
+    
+
     //...............Export Data to Doc.................//
     const exportToWord = () => {
         const generateWordContent = () => {
             let content = '';
             let products = sortedProducts();
-
+    
             products.forEach(product => {
                 if (viewMode === "grid") {
                     content += `<p><b>Title:</b>${product.title}\n</p> `;
                     content += `<p><b>Rating:</b>${product.rating}\n</p> `;
                     content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
-                    content += `<p><b>Button: </b>${product.button}\n\n</p>`;
+                    // content += `<p><b>Button: </b>${product.button}\n\n</p>`;
                 } else {
                     content += `<p><b>Title:</b>${product.title}\n</p> `;
                     content += `<p><b>Rating:</b>${product.rating}\n</p> `;
@@ -321,22 +436,54 @@ const ShopProducts = () => {
             });
             return content;
         };
+    
         const wordContent = generateWordContent();
+        const now = new Date();
+        const formattedDateTime = formatDate(now);
+    
+        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+        let filenamePrefix = "";
+        if (selectedLabels.length > 0) {
+            if (selectedLabels.length > 2) {
+                const lastLabel = selectedLabels.pop();
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s, and ${lastLabel}'s Products`;
+            } else {
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s Products`;
+            }
+        } else {
+            filenamePrefix = "Products";
+        }
+        const filename = `${filenamePrefix} ${formattedDateTime}.doc`;
+    
         const blob = new Blob([wordContent], { type: 'application/msword' });
-        saveAs(blob, 'Shop-Product.doc');
+        saveAs(blob, filename);
     };
-
+    
+    function formatDate(date) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
+    }
+    
     //...........Export Data to Txt............
+
     const exportToTxt = () => {
         let content = '';
         let products = sortedProducts();
-
+        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+    
         products.forEach(product => {
             if (viewMode === "grid") {
                 content += `Title: ${product.title}\n`;
                 content += `Rating: ${product.rating}\n`;
                 content += `Reviews: ${product.reviews}\n`;
-                content += `Button: ${product.button}\n\n`;
+                // content += `Button: ${product.button}\n\n`;
             } else {
                 content += `Title: ${product.title}\n`;
                 content += `Rating: ${product.rating}\n`;
@@ -347,14 +494,42 @@ const ShopProducts = () => {
                 content += `Variont: ${product.colorVeriont}\n\n`;
             }
         });
-
+    
+        const now = new Date();
+        const formattedDateTime = formatDate(now);
+    
+        let filenamePrefix = "";
+        if (selectedLabels.length > 0) {
+            if (selectedLabels.length > 2) {
+                const lastLabel = selectedLabels.pop();
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s, and ${lastLabel}'s Products`;
+            } else {
+                filenamePrefix = `${selectedLabels.join("'s, ")}'s Products`;
+            }
+        } else {
+            filenamePrefix = "Product";
+        }
+        const filename = `${filenamePrefix} ${formattedDateTime}.txt`;
+    
         const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = 'Shop-Product.txt';
+        link.download = filename;
         link.click();
     };
-
+    
+    function formatDate(date) {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
+    }
+    
 
     return (
         <>
@@ -660,7 +835,7 @@ const ShopProducts = () => {
                             <div className="col-lg-9 col-md-9" >
                                 <div >
                                     <h1 className={Style.heading}>SHOP PRODUCTS</h1>
-                                    <div className={Style.collection_Container}  >
+                                    <div className={Style.collection_Container} >
                                         <div className={`${Style.cardContainer}`} data-selected-line={selectedLine}>
                                             {loading ? (
                                                 Array.from({ length: 10 }).map((_, index) => (
