@@ -245,37 +245,28 @@ const ShopProducts = () => {
             if (checkedLabels.length === 1) {
                 prefix = `${checkedLabels[0]}'s Products`;
             } else if (checkedLabels.length === 2) {
-                prefix = `${checkedLabels[0]}'s , ${checkedLabels[1]}'s Products`;
+                prefix = `${checkedLabels[0]}'s and ${checkedLabels[1]}'s Products`;
             } else {
                 const lastLabel = checkedLabels.pop();
                 const labelNames = checkedLabels.map(label => `${label}'s`).join(", ");
-                prefix = `${labelNames}, and ${lastLabel}'s Products`;
+                prefix = `${labelNames} and ${lastLabel}'s Products`;
             }
         }
 
-        return `${prefix}, ${getCurrentTime()}.pdf`;
+        let starPrefix = '';
+        if (selectedRating.length > 0) {
+            const sortedRatings = selectedRating.sort((a, b) => a - b);
+            if (sortedRatings.length === 1) {
+                starPrefix = `with ${sortedRatings[0]} star `;
+            } else {
+                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+            }
+        }
+
+        const currentDateAndTime = new Date();
+        return `${prefix} ${starPrefix}${currentDateAndTime}.pdf`;
     }
 
-
-
-
-    function getCurrentTime() {
-        const now = new Date();
-        return formatDate(now);
-    }
-
-    function formatDate(date) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            timeZone: 'Asia/Kolkata',
-        };
-        return date.toLocaleString('en-US', options).replace(/,/g, '').replace(/:/g, '-');
-    }
 
 
     //..........Export data to Excel..........//
@@ -290,7 +281,6 @@ const ShopProducts = () => {
                 "Title": product.title,
                 "Rating": product.rating,
                 "Reviews": product.reviews,
-                // "Button": product.button
             }));
             columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 15 }];
         } else {
@@ -300,8 +290,7 @@ const ShopProducts = () => {
                 "Reviews": product.reviews,
                 "Price": product.price,
                 "Text": product.text,
-                // "Button": product.button,
-                "Variont": product.colorVeriont
+                "Variant": product.colorVeriont
             }));
             columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 }];
         }
@@ -310,51 +299,49 @@ const ShopProducts = () => {
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
         worksheet["!cols"] = columns;
 
-        const now = new Date();
-        const formattedDateTime = formatDate(now);
+        const currentDateAndTime = new Date();
+
 
         let filenamePrefix = "Products";
         if (selectedLabels.length > 0) {
-            if (selectedLabels.length > 2) {
-                const lastLabel = selectedLabels.pop();
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s and ${lastLabel}'s Products`;
-            } else if (selectedLabels.length === 2) {
-                filenamePrefix = `${selectedLabels.join("'s,")}'s Products`;
-            } else {
+            if (selectedLabels.length === 1) {
                 filenamePrefix = `${selectedLabels[0]}'s Products`;
+            } else if (selectedLabels.length === 2) {
+                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
+            } else {
+                const lastLabel = selectedLabels.pop();
+                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
             }
         }
 
-        const filename = `${filenamePrefix}, ${formattedDateTime}.xlsx`;
+        let starPrefix = '';
+        if (selectedRating.length > 0) {
+            const sortedRatings = selectedRating.sort((a, b) => a - b);
+            if (sortedRatings.length === 1) {
+                starPrefix = `with ${sortedRatings[0]} star `;
+            } else {
+                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+            }
+        }
 
+        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.xlsx`;
         XLSX.writeFile(workbook, filename);
     };
-
-    function formatDate(date) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        };
-        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
-    }
 
 
     //........Export data to Csv file ....//
     const exportToCSV = () => {
         let products = sortedProducts();
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-    
+
         let csvData;
         if (viewMode === "grid") {
             csvData = Papa.unparse(products.map(product => ({
                 "Title": product.title,
                 "Rating": product.rating,
                 "Reviews": product.reviews,
-                // "Button": product.button
+
             })));
         } else {
             csvData = Papa.unparse(products.map(product => ({
@@ -363,28 +350,38 @@ const ShopProducts = () => {
                 "Reviews": product.reviews,
                 "Price": product.price,
                 "Text": product.text,
-                // "Button": product.button,
-                "Variont": product.colorVeriont
+
+                "Variant": product.colorVeriont
             })));
         }
-    
-        const now = new Date();
-        const formattedDateTime = formatDate(now);
-    
+
+        const currentDateAndTime = new Date();
+
         let filenamePrefix = "Products";
         if (selectedLabels.length > 0) {
-            if (selectedLabels.length > 2) {
-                const lastLabel = selectedLabels.pop();
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s and ${lastLabel}'s Products`;
-            } else if (selectedLabels.length === 2) {
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s Products`;
-            } else {
+            if (selectedLabels.length === 1) {
                 filenamePrefix = `${selectedLabels[0]}'s Products`;
+            } else if (selectedLabels.length === 2) {
+                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
+            } else {
+                const lastLabel = selectedLabels.pop();
+                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
             }
         }
-    
-        const filename = `${filenamePrefix}, ${formattedDateTime}.csv`;
-    
+
+        let starPrefix = '';
+        if (selectedRating.length > 0) {
+            const sortedRatings = selectedRating.sort((a, b) => a - b);
+            if (sortedRatings.length === 1) {
+                starPrefix = `with ${sortedRatings[0]} star `;
+            } else {
+                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+            }
+        }
+
+        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.csv`;
+
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         if (link.download !== undefined) {
@@ -397,139 +394,116 @@ const ShopProducts = () => {
             document.body.removeChild(link);
         }
     };
-    
-    function formatDate(date) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            weekday: 'short',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        };
-        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
-    }
-    
 
     //...............Export Data to Doc.................//
     const exportToWord = () => {
         const generateWordContent = () => {
             let content = '';
             let products = sortedProducts();
-    
+
             products.forEach(product => {
                 if (viewMode === "grid") {
                     content += `<p><b>Title:</b>${product.title}\n</p> `;
                     content += `<p><b>Rating:</b>${product.rating}\n</p> `;
                     content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
-                    // content += `<p><b>Button: </b>${product.button}\n\n</p>`;
                 } else {
                     content += `<p><b>Title:</b>${product.title}\n</p> `;
                     content += `<p><b>Rating:</b>${product.rating}\n</p> `;
                     content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
                     content += `<p><b>Price:</b>${product.price}\n</p> `;
                     content += `<p><b>Text:</b>${product.text}\n</p>`;
-                    // content += `Button: ${product.button}\n`;
                     content += `<p><b>Variont:</b>${product.colorVeriont}\n\n</p> `;
                 }
             });
             return content;
         };
-    
+
         const wordContent = generateWordContent();
-        const now = new Date();
-        const formattedDateTime = formatDate(now);
-    
+        const currentDateAndTime = new Date();
+
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-        let filenamePrefix = "";
+        let filenamePrefix = "Products";
         if (selectedLabels.length > 0) {
-            if (selectedLabels.length > 2) {
-                const lastLabel = selectedLabels.pop();
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s, and ${lastLabel}'s Products`;
+            if (selectedLabels.length === 1) {
+                filenamePrefix = `${selectedLabels[0]}'s Products`;
+            } else if (selectedLabels.length === 2) {
+                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
             } else {
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s Products`;
+                const lastLabel = selectedLabels.pop();
+                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
             }
-        } else {
-            filenamePrefix = "Products";
         }
-        const filename = `${filenamePrefix} ${formattedDateTime}.doc`;
-    
+
+        let starPrefix = '';
+        if (selectedRating.length > 0) {
+            const sortedRatings = selectedRating.sort((a, b) => a - b);
+            if (sortedRatings.length === 1) {
+                starPrefix = `with ${sortedRatings[0]} star `;
+            } else {
+                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+            }
+        }
+        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.doc`;
+
         const blob = new Blob([wordContent], { type: 'application/msword' });
         saveAs(blob, filename);
     };
-    
-    function formatDate(date) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        };
-        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
-    }
-    
+
     //...........Export Data to Txt............
 
     const exportToTxt = () => {
         let content = '';
         let products = sortedProducts();
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-    
+
         products.forEach(product => {
             if (viewMode === "grid") {
                 content += `Title: ${product.title}\n`;
                 content += `Rating: ${product.rating}\n`;
                 content += `Reviews: ${product.reviews}\n`;
-                // content += `Button: ${product.button}\n\n`;
             } else {
                 content += `Title: ${product.title}\n`;
                 content += `Rating: ${product.rating}\n`;
                 content += `Reviews: ${product.reviews}\n`;
                 content += `Price: ${product.price}\n`;
                 content += `Text: ${product.text}\n`;
-                // content += `Button: ${product.button}\n`;
                 content += `Variont: ${product.colorVeriont}\n\n`;
             }
         });
-    
-        const now = new Date();
-        const formattedDateTime = formatDate(now);
-    
-        let filenamePrefix = "";
+
+        const currentDateAndTime = new Date();
+
+        let filenamePrefix = "Products";
         if (selectedLabels.length > 0) {
-            if (selectedLabels.length > 2) {
-                const lastLabel = selectedLabels.pop();
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s, and ${lastLabel}'s Products`;
+            if (selectedLabels.length === 1) {
+                filenamePrefix = `${selectedLabels[0]}'s Products`;
+            } else if (selectedLabels.length === 2) {
+                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
             } else {
-                filenamePrefix = `${selectedLabels.join("'s, ")}'s Products`;
+                const lastLabel = selectedLabels.pop();
+                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
             }
-        } else {
-            filenamePrefix = "Product";
         }
-        const filename = `${filenamePrefix} ${formattedDateTime}.txt`;
-    
+
+        let starPrefix = '';
+        if (selectedRating.length > 0) {
+            const sortedRatings = selectedRating.sort((a, b) => a - b);
+            if (sortedRatings.length === 1) {
+                starPrefix = `with ${sortedRatings[0]} star `;
+            } else {
+                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+            }
+        }
+        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.txt`;
+
         const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = filename;
         link.click();
     };
-    
-    function formatDate(date) {
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        };
-        return date.toLocaleString('en-IN', options).replace(/:/g, '-');
-    }
-    
 
     return (
         <>
