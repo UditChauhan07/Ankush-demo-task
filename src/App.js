@@ -16,7 +16,7 @@ function App() {
           <Route path="/post/:postId" element={<ApiDetails />}></Route>
           <Route path="/data-filter" element={<DataFilter />}></Route>
           <Route path="/products" element={<Products />}></Route>
-          <Route path="/shorting-shop" element={<ShortingShop />}></Route>
+          {/* <Route path="/shorting-shop" element={<ShortingShop />}></Route> */}
 
           
 

@@ -1,19 +1,17 @@
-
-   [
+ [
     {
         "id": 1,
-        "image": "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/RCPJarfrontwithoutshadow_2a36b317-b9e8-48b5-afe9-625c9e10334e.webp?v=1696930536",
-        "images": [
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/RCPJarfrontwithoutshadow_2a36b317-b9e8-48b5-afe9-625c9e10334e.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/RCPJarsupplementfactswithoutshadow_7fc7ce07-05ab-4d24-8db1-a235a29e9378.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-06b.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-05b.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-02b_13aa78ea-0c36-4bb6-a041-86fa26717a62.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-03b_02764c30-a49d-46f3-993a-81817c056316.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-07b_aa0f533b-b33a-4fbd-9c1c-84fa6038e3c2.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-06b_9fdf47ea-7d4e-4d17-a3f2-b2b3f0eac563.webp?v=1696930536",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-RCP-Benefit-Card-04b_42c848d0-aa29-4a13-b944-c7a85b27a564.webp?v=1696930536"
-           
+        "image": "Images/Royal-Collagen-Peptides.webp",
+        "sliderimage": [
+            {"Image1": "Royal-Collagen-Peptides.webp"},
+            {"Image2": "NEWBMD-RCP-BenefitCard-02.webp"},
+            {"Image3": "BMD-RCP-Benefit-Card-03.webp"},
+            {"Image4": "BMD-RCP-Benefit-Card-04.webp"},
+            {"Image5": "BMD-RCP-Benefit-Card-05.webp"},
+            {"Image6": "BMD-RCP-Benefit-Card-06.webp"},
+            {"Image7": "Jointhealthbenefitcard08.webp"},
+            {"Image8": "BMD-RCP-Benefit-Card.webp"},
+            {"Image9": "bruno9.webp"}
           ],
         "title": "Royal Collagen Peptides Servings",
         "rating": 5,
@@ -26,18 +24,7 @@
     },
     {
         "id": 2,
-        "image": "https://brunomd.com/images/BRUNOPHARMA1.webp",
-        "images": [
-            "https://brunomd.com/images/BRUNOPHARMA1.webp",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BRUNOPHARMA15001_c3e835eb-5d96-4a01-8b83-2abbc55bde48.webp?v=1696853301",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Riboflam-Benefit-Card-01b-v3_337bb8ff-1259-4421-8ec5-8bcfd927afa7.webp?v=1696853300",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Riboflam-Benefit-Card-05b_50ceae86-6cf4-428d-b7c0-50789ee405ce.webp?v=1696853316",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Riboflam-Benefit-Card-02b_3c63b7a5-9a7e-437c-ab3f-a6a2fd070371.webp?v=1696853316",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Riboflam-Benefit-Card-06b.webp?v=1696853316",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Riboflam-Benefit-Card-04b.webp?v=1696853316",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Riboflam-Benefit-Card-03b.webp?v=1696853316"
-           
-          ],
+        "image": "Images/BRUNOPHARMA1.webp",
         "title": "Riboflam 90 V-Caps 30 servings",
         "rating": 4,
         "categories":["Joints","Heart","Immunity"],
@@ -49,20 +36,7 @@
     },
     {
         "id": 3,
-        "image": "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/bruno-md-bluerex_418x_1.webp?v=1696852520",
-        "images": [
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/bruno-md-bluerex_418x_1.webp?v=1696852520",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BronuPharma9406b.webp?v=1696852524",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BronuPharma943591.webp?v=1696852526",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-01b.webp?v=1696852550",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-03b_246cfdd1-1f67-42a8-8cd0-e83f988ae726.webp?v=1696852559",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-05b_27d501ac-485c-46a8-baa8-6376690cdb5c.webp?v=1696852562",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-04b_79427f2e-edb2-42c1-9d8c-e4f8.webp?v=1696852577",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-06b.webp?v=1696852582",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-02b_e7349929-fa12-41b2-8174-3835f702f6c0.webp?v=1696852585"
-            
-           
-          ],
+        "image": "Images/bruno-md-bluerex_418x_1 (1).webp",
         "title": "Bluerex Visionsc 60 SoftGels 30 ",
         "rating": 3,
         "categories":["Skin","Vision"],
@@ -74,20 +48,7 @@
     },
     {
         "id": 4,
-        "image": "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BRONU6409_b1f76aa1-8733-4bd8-9898-4b37453049e3.webp?v=1696853173",
-        "images": [
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BRONU6409_b1f76aa1-8733-4bd8-9898-4b37453049e3.webp?v=1696853173",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/CholestQ10-Back-1500x1500_584450ed-3dd9-4a89-a128-7ebce72f59b9.webp?v=1696853173",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BRONU6465_9e716528-18c3-407a-8585-9ead6fd67c9e.webp?v=1696853173",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-01b.webp?v=1696852550",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-03b_246cfdd1-1f67-42a8-8cd0-e83f988ae726.webp?v=1696852559",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-05b_27d501ac-485c-46a8-baa8-6376690cdb5c.webp?v=1696852562",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-04b_79427f2e-edb2-42c1-9d8c-e4f8.webp?v=1696852577",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-06b.webp?v=1696852582",
-            "https://cdn.shopify.com/s/files/1/0021/0573/7291/files/BMD-Bluerex-Vision-Benefit-Card-02b_e7349929-fa12-41b2-8174-3835f702f6c0.webp?v=1696852585"
-            
-           
-          ],
+        "image": "Images/Royal-Collagen-Peptides-Stick-Packs-Dragon-Fruit.webp",
         "title": "Cholestq10 60 V Caps 30 Servings",
         "rating": 2,
         "categories":["Skin","Heart","Vision"],
@@ -414,3 +375,4 @@
     }
       
 ]
+

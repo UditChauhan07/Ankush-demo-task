@@ -9,6 +9,7 @@ import { BsGrid3X3GapFill } from "react-icons/bs";
 import { FaListUl } from "react-icons/fa6";
 import swal from 'sweetalert';
 import data from './ShopPoducts.json';
+// import data2 from '../Products/ProductsData/Details.json'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { FaSortNumericDown } from "react-icons/fa";
@@ -53,10 +54,6 @@ const ShopProducts = () => {
     const [viewMode, setViewMode] = useState("grid");
     const [isListView, setIsListView] = useState(false);
 
-
-
-
-
     const cardContainer = {
 
         color: 'blue',
@@ -79,12 +76,16 @@ const ShopProducts = () => {
     };
 
     // Function to handle click on product //
-    const handleClick = (id) => {
-        if (id === 3) {
-            navigate('/products');
-        } else {
-            showAlert();
-        }
+    const handleClick = (product) => {
+        // if (id === 3) {
+        //     navigate(`/products/${id}`);
+        // } else {
+        //     showAlert();
+        // }
+        // navigate(`/products/${id}`);
+       
+        // Navigate to the "/products" page and pass the product data as state
+        navigate("/products", { state: { productData: product } });
     };
 
     // Function to clear all filters
@@ -240,7 +241,7 @@ const ShopProducts = () => {
     function generatePDFFileName() {
         let prefix = "Products";
         const checkedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-
+    
         if (checkedLabels.length > 0) {
             if (checkedLabels.length === 1) {
                 prefix = `${checkedLabels[0]}'s Products`;
@@ -252,7 +253,7 @@ const ShopProducts = () => {
                 prefix = `${labelNames} and ${lastLabel}'s Products`;
             }
         }
-
+    
         let starPrefix = '';
         if (selectedRating.length > 0) {
             const sortedRatings = selectedRating.sort((a, b) => a - b);
@@ -262,10 +263,16 @@ const ShopProducts = () => {
                 starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
             }
         }
-
+    
         const currentDateAndTime = new Date();
-        return `${prefix} ${starPrefix}${currentDateAndTime}.pdf`;
+    
+        if (checkedLabels.length === 5 && selectedRating.length === 5) {
+            return `Products ${currentDateAndTime}.pdf`;
+        } else {
+            return `${prefix} ${starPrefix}${currentDateAndTime}.pdf`;
+        }
     }
+    
 
 
 
@@ -275,7 +282,7 @@ const ShopProducts = () => {
         let products = sortedProducts();
         let columns;
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-
+    
         if (viewMode === "grid") {
             products = products.map(product => ({
                 "Title": product.title,
@@ -294,69 +301,76 @@ const ShopProducts = () => {
             }));
             columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 }];
         }
-
+    
         const worksheet = XLSX.utils.json_to_sheet(products);
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
         worksheet["!cols"] = columns;
-
+    
         const currentDateAndTime = new Date();
-
-
-        let filenamePrefix = "Products";
-        if (selectedLabels.length > 0) {
-            if (selectedLabels.length === 1) {
-                filenamePrefix = `${selectedLabels[0]}'s Products`;
-            } else if (selectedLabels.length === 2) {
-                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
-            } else {
-                const lastLabel = selectedLabels.pop();
-                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
-                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
+    
+        let filename;
+        if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
+            filename = `Products ${currentDateAndTime}.xlsx`;
+        } else {
+            let filenamePrefix = "Products";
+            if (selectedLabels.length > 0) {
+                if (selectedLabels.length === 1) {
+                    filenamePrefix = `${selectedLabels[0]}'s Products`;
+                } else if (selectedLabels.length === 2) {
+                    filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
+                } else {
+                    const lastLabel = selectedLabels.pop();
+                    const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                    filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
+                }
             }
-        }
-
-        let starPrefix = '';
-        if (selectedRating.length > 0) {
-            const sortedRatings = selectedRating.sort((a, b) => a - b);
-            if (sortedRatings.length === 1) {
-                starPrefix = `with ${sortedRatings[0]} star `;
-            } else {
-                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+    
+            let starPrefix = '';
+            if (selectedRating.length > 0) {
+                const sortedRatings = selectedRating.sort((a, b) => a - b);
+                if (sortedRatings.length === 1) {
+                    starPrefix = `with ${sortedRatings[0]} star `;
+                } else {
+                    starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+                }
             }
+            filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.xlsx`;
         }
-
-        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.xlsx`;
         XLSX.writeFile(workbook, filename);
     };
+    
+    
 
 
     //........Export data to Csv file ....//
-    const exportToCSV = () => {
-        let products = sortedProducts();
-        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+   const exportToCSV = () => {
+    let products = sortedProducts();
+    let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
 
-        let csvData;
-        if (viewMode === "grid") {
-            csvData = Papa.unparse(products.map(product => ({
-                "Title": product.title,
-                "Rating": product.rating,
-                "Reviews": product.reviews,
+    let csvData;
+    if (viewMode === "grid") {
+        csvData = Papa.unparse(products.map(product => ({
+            "Title": product.title,
+            "Rating": product.rating,
+            "Reviews": product.reviews,
+        })));
+    } else {
+        csvData = Papa.unparse(products.map(product => ({
+            "Title": product.title,
+            "Rating": product.rating,
+            "Reviews": product.reviews,
+            "Price": product.price,
+            "Text": product.text,
+            "Variant": product.colorVeriont
+        })));
+    }
 
-            })));
-        } else {
-            csvData = Papa.unparse(products.map(product => ({
-                "Title": product.title,
-                "Rating": product.rating,
-                "Reviews": product.reviews,
-                "Price": product.price,
-                "Text": product.text,
+    const currentDateAndTime = new Date();
 
-                "Variant": product.colorVeriont
-            })));
-        }
-
-        const currentDateAndTime = new Date();
-
+    let filename;
+    if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
+        filename = `Products ${currentDateAndTime}.csv`;
+    } else {
         let filenamePrefix = "Products";
         if (selectedLabels.length > 0) {
             if (selectedLabels.length === 1) {
@@ -379,28 +393,29 @@ const ShopProducts = () => {
                 starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
             }
         }
+        filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.csv`;
+    }
 
-        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.csv`;
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+};
 
-        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        if (link.download !== undefined) {
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', filename);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    };
 
     //...............Export Data to Doc.................//
     const exportToWord = () => {
         const generateWordContent = () => {
             let content = '';
             let products = sortedProducts();
-
+    
             products.forEach(product => {
                 if (viewMode === "grid") {
                     content += `<p><b>Title:</b>${product.title}\n</p> `;
@@ -412,29 +427,19 @@ const ShopProducts = () => {
                     content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
                     content += `<p><b>Price:</b>${product.price}\n</p> `;
                     content += `<p><b>Text:</b>${product.text}\n</p>`;
-                    content += `<p><b>Variont:</b>${product.colorVeriont}\n\n</p> `;
+                    content += `<p><b>Variant:</b>${product.colorVariant}\n\n</p> `;
                 }
             });
             return content;
         };
-
+    
         const wordContent = generateWordContent();
         const currentDateAndTime = new Date();
-
+    
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
         let filenamePrefix = "Products";
-        if (selectedLabels.length > 0) {
-            if (selectedLabels.length === 1) {
-                filenamePrefix = `${selectedLabels[0]}'s Products`;
-            } else if (selectedLabels.length === 2) {
-                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
-            } else {
-                const lastLabel = selectedLabels.pop();
-                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
-                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
-            }
-        }
-
+        let filename = ''; 
+    
         let starPrefix = '';
         if (selectedRating.length > 0) {
             const sortedRatings = selectedRating.sort((a, b) => a - b);
@@ -444,37 +449,73 @@ const ShopProducts = () => {
                 starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
             }
         }
-        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.doc`;
-
+    
+        if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
+            filename = `Products ${currentDateAndTime}.doc`;
+        } else {
+            if (selectedLabels.length > 0) {
+                if (selectedLabels.length === 1) {
+                    filenamePrefix = `${selectedLabels[0]}'s Products`;
+                } else if (selectedLabels.length === 2) {
+                    filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
+                } else {
+                    const lastLabel = selectedLabels.pop();
+                    const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                    filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
+                }
+            }
+            filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.doc`;
+        }
         const blob = new Blob([wordContent], { type: 'application/msword' });
         saveAs(blob, filename);
     };
+    
+    
 
     //...........Export Data to Txt............
 
-    const exportToTxt = () => {
+   const exportToTxt = () => {
+    const generateWordContent = () => {
         let content = '';
         let products = sortedProducts();
-        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
 
         products.forEach(product => {
             if (viewMode === "grid") {
-                content += `Title: ${product.title}\n`;
-                content += `Rating: ${product.rating}\n`;
-                content += `Reviews: ${product.reviews}\n`;
+                content += `<p><b>Title:</b>${product.title}\n</p> `;
+                content += `<p><b>Rating:</b>${product.rating}\n</p> `;
+                content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
             } else {
-                content += `Title: ${product.title}\n`;
-                content += `Rating: ${product.rating}\n`;
-                content += `Reviews: ${product.reviews}\n`;
-                content += `Price: ${product.price}\n`;
-                content += `Text: ${product.text}\n`;
-                content += `Variont: ${product.colorVeriont}\n\n`;
+                content += `<p><b>Title:</b>${product.title}\n</p> `;
+                content += `<p><b>Rating:</b>${product.rating}\n</p> `;
+                content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
+                content += `<p><b>Price:</b>${product.price}\n</p> `;
+                content += `<p><b>Text:</b>${product.text}\n</p>`;
+                content += `<p><b>Variant:</b>${product.colorVariant}\n\n</p> `;
             }
         });
+        return content;
+    };
 
-        const currentDateAndTime = new Date();
+    const wordContent = generateWordContent();
+    const currentDateAndTime = new Date();
 
-        let filenamePrefix = "Products";
+    let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+    let filenamePrefix = "Products";
+    let filename = '';
+    let starPrefix = '';
+
+    if (selectedRating.length > 0) {
+        const sortedRatings = selectedRating.sort((a, b) => a - b);
+        if (sortedRatings.length === 1) {
+            starPrefix = `with ${sortedRatings[0]} star `;
+        } else {
+            starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+        }
+    }
+
+    if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
+        filename = `Products ${currentDateAndTime}.txt`;
+    } else {
         if (selectedLabels.length > 0) {
             if (selectedLabels.length === 1) {
                 filenamePrefix = `${selectedLabels[0]}'s Products`;
@@ -486,24 +527,13 @@ const ShopProducts = () => {
                 filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
             }
         }
+        filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.doc`;
+    }
 
-        let starPrefix = '';
-        if (selectedRating.length > 0) {
-            const sortedRatings = selectedRating.sort((a, b) => a - b);
-            if (sortedRatings.length === 1) {
-                starPrefix = `with ${sortedRatings[0]} star `;
-            } else {
-                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
-            }
-        }
-        const filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.txt`;
+    const blob = new Blob([wordContent], { type: 'application/msword' });
+    saveAs(blob, filename);
+};
 
-        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = filename;
-        link.click();
-    };
 
     return (
         <>
@@ -819,7 +849,7 @@ const ShopProducts = () => {
                                                 sortedProducts().map((product, index) => (
                                                     <div key={index} className={`${Style.colactionCart}`} data-selected-line={selectedLine}  >
                                                         <div className={Style.imgWrapper}>
-                                                            <img className={Style.img} src={product.image} alt="" />
+                                                        <img className={Style.img} src={product.image} alt="" />
                                                         </div>
                                                         <p className={Style.productText}>{product.title}</p>
                                                         <div style={{ height: "40px", display: "flex" }}>
@@ -837,7 +867,7 @@ const ShopProducts = () => {
                                                             </div>
                                                         </div>
                                                         <div className={Style.btnDiv}>
-                                                            <button className={Style.buybtn} onClick={() => handleClick(product.id)}>{product.button}</button>
+                                                            <button className={Style.buybtn} onClick={() => handleClick(product)}>{product.button}</button>
                                                         </div>
                                                     </div>
                                                 ))
