@@ -34,7 +34,7 @@ import { saveAs } from 'file-saver';
 const ShopProducts = () => {
 
     // const targetRef = useRef();
-    const ProductShow = 3;
+    const ProductShow = 30;
     const PageLimit = 5;
     const componentRef = React.useRef();
     const navigate = useNavigate();

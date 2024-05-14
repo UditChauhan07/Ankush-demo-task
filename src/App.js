@@ -6,6 +6,7 @@ import DataFilter from "./Components/MemoDataFilter/DataFilter";
 import Products from "./Components/Products/Slider01A/Slider01A"
 import ShopProducts from "./Components/Shop-Products/ShopProducts";
 import ShortingShop from "./Components/Shop-Products/ShortingShop"
+import CartProduct from "./Components/Products/CartProduct/CartProduct";
 function App() {
   return (
     <div >
@@ -16,7 +17,8 @@ function App() {
           <Route path="/post/:postId" element={<ApiDetails />}></Route>
           <Route path="/data-filter" element={<DataFilter />}></Route>
           <Route path="/products" element={<Products />}></Route>
-          {/* <Route path="/shorting-shop" element={<ShortingShop />}></Route> */}
+          <Route path="/cart" element={<CartProduct />}></Route>
+          <Route path="/shorting-shop" element={<ShortingShop />}></Route>
 
           
 

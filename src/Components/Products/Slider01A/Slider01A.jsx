@@ -6,8 +6,8 @@ import Slider01B from '../Slider01B/Slider01B';
 import Slider01C2 from '../Slider01C2/Slider01C2';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Detail from '../ProductsData/Details.json'
-import img from '../../../Img/BMD-RCP-Benefit-Card-04.webp'
+
+
 import { useLocation } from 'react-router-dom';
 
 
@@ -69,7 +69,7 @@ const Slider01A = () => {
           <Slider01B data={ productData}  />
         </div>
         <div className="col-lg-4">
-          <Slider01C2 />
+          <Slider01C2 data={ productData} />
         </div>
       </div>
     </div>

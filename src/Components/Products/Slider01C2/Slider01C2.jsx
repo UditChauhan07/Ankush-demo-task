@@ -4,11 +4,16 @@ import { IoIosArrowDown } from 'react-icons/io';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Fade } from 'react-reveal';
-
-const Slider01C2 = () => {
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../../features/ProductData/ProductSlice';
+const Slider01C2 = (props) => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [activeAccordion, setActiveAccordion] = useState("collapseTwo");
     const [isOpen, setIsOpen] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
+    const [selectedQuantity, setSelectedQuantity] = useState('1');
 
 
     const handleAccordionChange = (accordionId) => {
@@ -24,6 +29,12 @@ const Slider01C2 = () => {
     const toggleInfo = () => {
         setShowInfo(!showInfo);
     };
+    const addToCart = (data,quantity) => {
+        console.log(data)
+        const productWithQuantity = { ...data, quantity: quantity };
+        dispatch(addProduct(data,productWithQuantity));
+        navigate('/cart')
+    }
 
     useEffect(() => {
         AOS.init({
@@ -34,6 +45,16 @@ const Slider01C2 = () => {
             once: true,
         });
     }, [])
+
+    if (!props.data) {
+        return null;
+    }
+
+    const handleQuantityChange = (event) => {
+        const selectedValue = event.target.value;
+        setSelectedQuantity(selectedValue);
+        console.log('Selected Quantity:', selectedValue);
+    };
     return (
         <>
             <div className={`accordion ${Style.AccordianDiv}`}
@@ -58,9 +79,9 @@ const Slider01C2 = () => {
                                 ONE-TIME PURCHASE
 
                                 <div className={Style.price}>
-                                    <span className={Style.dollar}>$</span>
-                                    <span className={Style.mainPrice}>54</span>
-                                    <span className={Style.cents}>.98</span>
+                                    <span className={Style.dollar}>{props.data.dollor}</span>
+                                    <span className={Style.mainPrice}>{props.data.price}</span>
+                                    <span className={Style.cents}>{props.data.pese}</span>
                                 </div>
                             </div>
                         </div>
@@ -74,19 +95,19 @@ const Slider01C2 = () => {
                             <div className={Style.stocDiv}>
                                 <h6 className={Style.stock}>In Stock.</h6>
                                 <div className={Style.customSelect}>
-                                    <select className={Style.selectDiv}>
+                                    <select className={Style.selectDiv} value={selectedQuantity} onChange={handleQuantityChange}>
                                         <option value="1" className={Style.qty}>
-                                            QTY: 1{' '}
-                                        </option>{' '}
+                                            QTY: 1
+                                        </option>
                                         <span style={{ color: 'black' }}> 1 Bluerex Vision 60 softgels</span>
-                                        <option value="1">1</option>
-                                        <option value=" 2">2</option>
-                                        <option value="3">3</option>
+                                        {props.data.quantity.map((qty, index) => (
+                                            <option key={index} value={qty.qty}>{qty.qty}</option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
                             <div className={Style.cartBtnDiv}>
-                                <button className={Style.cartBtn}>Add to Cart</button>
+                                <button className={Style.cartBtn} onClick={() => addToCart(props.data, selectedQuantity)}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
