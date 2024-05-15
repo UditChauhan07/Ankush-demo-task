@@ -57,6 +57,7 @@ const Slider01C2 = (props) => {
     };
     return (
         <>
+        
             <div className={`accordion ${Style.AccordianDiv}`}
                 id="accordionExample"
                 data-aos="zoom-in-up" >
@@ -79,9 +80,9 @@ const Slider01C2 = (props) => {
                                 ONE-TIME PURCHASE
 
                                 <div className={Style.price}>
-                                    <span className={Style.dollar}>{props.data.dollor}</span>
+                                    <span className={Style.dollar}>$</span>
                                     <span className={Style.mainPrice}>{props.data.price}</span>
-                                    <span className={Style.cents}>{props.data.pese}</span>
+                                    <span className={Style.cents}>.00</span>
                                 </div>
                             </div>
                         </div>

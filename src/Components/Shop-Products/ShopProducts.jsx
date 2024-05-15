@@ -54,13 +54,6 @@ const ShopProducts = () => {
     const [viewMode, setViewMode] = useState("grid");
     const [isListView, setIsListView] = useState(false);
 
-    const cardContainer = {
-
-        color: 'blue',
-
-        backgroundColor: 'lightgray',
-
-    };
     // Function to toggle display of category checkboxes //
     const toggleCheckboxes = () => {
         setShowCheckboxes(prevState => !prevState);
@@ -968,7 +961,7 @@ const ShopProducts = () => {
                                                                     </div>
                                                                     <p className={Style.productText2}>{product.title}</p>
                                                                     <p className={Style.listText}>{product.text}</p>
-                                                                    <strong className={Style.prices}>{product.price}</strong>
+                                                                    <strong className={Style.prices}>${product.price}.00</strong>
                                                                     <div>
                                                                         {[...Array(3).keys()].map((i) => (
                                                                             (product.colorVeriont >= i + 1) &&
