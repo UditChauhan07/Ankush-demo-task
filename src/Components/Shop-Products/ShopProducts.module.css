@@ -958,7 +958,10 @@
         text-align-last: end;
 
     }
-
+    .cardContainer[data-selected-line="2"] {
+        grid-template-columns: repeat(2, auto);
+        max-width: 100% !important;
+    }
     .showingProducts2 {
         margin-top: 5px;
         margin-bottom: -10px;

@@ -7,13 +7,14 @@ import { Fade } from 'react-reveal';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../features/ProductData/ProductSlice';
+import { quantity } from '../../../features/ProductData/QuantitySlice';
 const Slider01C2 = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [activeAccordion, setActiveAccordion] = useState("collapseTwo");
     const [isOpen, setIsOpen] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
-    const [selectedQuantity, setSelectedQuantity] = useState('1');
+    const [selectedQuantity, setSelectedQuantity] = useState(1);
 
 
     const handleAccordionChange = (accordionId) => {
@@ -33,6 +34,8 @@ const Slider01C2 = (props) => {
         console.log(data)
         const productWithQuantity = { ...data, quantity: quantity };
         dispatch(addProduct(data,productWithQuantity));
+        setSelectedQuantity(1);
+        console.log(setSelectedQuantity); 
         navigate('/cart')
     }
 
@@ -54,6 +57,7 @@ const Slider01C2 = (props) => {
         const selectedValue = event.target.value;
         setSelectedQuantity(selectedValue);
         console.log('Selected Quantity:', selectedValue);
+        dispatch(quantity(selectedValue))
     };
     return (
         <>
@@ -97,7 +101,7 @@ const Slider01C2 = (props) => {
                                 <h6 className={Style.stock}>In Stock.</h6>
                                 <div className={Style.customSelect}>
                                     <select className={Style.selectDiv} value={selectedQuantity} onChange={handleQuantityChange}>
-                                        <option value="1" className={Style.qty}>
+                                        <option value="1" className={Style.qty} >
                                             QTY: 1
                                         </option>
                                         <span style={{ color: 'black' }}> 1 Bluerex Vision 60 softgels</span>

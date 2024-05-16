@@ -1,4 +1,4 @@
-.updatBtn{
+.updatBtn {
   border-style: none;
   text-transform: uppercase;
   padding: 2% 12px;
@@ -9,110 +9,205 @@
   transition: background .5s;
   border-radius: 10px;
 }
-.updatBtn:hover{
+
+.updatBtn:hover {
   background: #f0ffe6;
   color: #56ff6a;
 }
-.removeBtn{
+
+.removeBtn {
   border-style: none;
-    font-weight: bolder;
-    padding: 2% 2.5%;
-    width: 100%;
-    height: 30px;
-    background: #ff7b67;
-    transition: background .5s;
-    color: #fff1e7;
-    border-radius: 10px;
+  font-weight: bolder;
+  padding: 2% 2.5%;
+  width: 100%;
+  height: 30px;
+  background: #ff7b67;
+  transition: background .5s;
+  color: #fff1e7;
+  border-radius: 10px;
 }
-.removeBtn:hover{
+
+.removeBtn:hover {
   background: #fff1e7;
   color: #ff7b67;
 }
-.totalDiv{
+
+.totalDiv {
   align-items: center;
   justify-content: center;
   display: flex;
 }
-.subTotalDiv{
+
+.subTotalDiv {
   display: flex;
 }
-.subTotalDiv p{
+
+.subTotalDiv p {
   /* margin-right: 250px; */
 }
-.promoDiv{
+
+.promoDiv {
   display: flex;
   width: 50%;
 }
-.promo{
+
+.promo {
   width: 10em;
-  padding:  0.7em 0.7em;
-    border-radius: 4px;
+  padding: 0.7em 0.7em;
+  border-radius: 4px;
 }
 
-.allBtn{
+.allBtn {
   border-style: none;
-    width: 10em;
-   padding:  0.7em 0.7em;
-    background: #7762ff;
-    color: white;
-    transition: background .5s;
-    border-radius: 4px;
+  width: 10em;
+  padding: 0.7em 0.7em;
+  background: #7762ff;
+  color: white;
+  transition: background .5s;
+  border-radius: 4px;
 }
-.allBtn:hover{
+
+.allBtn:hover {
   background: #56ff6a;
 }
+
 @media only screen and (max-width: 2800px)and (min-width:1500px) {
-  .promoDiv{
+  .promoDiv {
     width: 50%;
-   }
-   .mainDiv{
+  }
+
+  .mainDiv {
     width: 50%;
-   }
-}
-@media only screen and (max-width:1300px) and (min-width:1024px) {
-  .promoDiv{
-    width: 65%;
-   }
-}
-@media only screen and (max-width:966px) and (min-width:768px) {
-  .promoDiv{
-   width: 90%;
   }
 }
+
+@media only screen and (max-width:1300px) and (min-width:1024px) {
+  .promoDiv {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width:966px) and (min-width:768px) {
+  .promoDiv {
+    width: 90%;
+  }
+}
+
 @media only screen and (max-width:766px) and (min-width:425px) {
-  .promoDiv{
+  .promoDiv {
     flex-direction: column;
   }
-  .promo{
+
+  .promo {
     margin: 10px;
   }
-  .allBtn{
+
+  .allBtn {
     margin: 10px;
+  }
+
+  .updatBtn {
+    padding: 0% 2px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .removeBtn {
+    padding: 0% 2px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .Thead {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  .Tbody {
+    margin-top: 10px;
+    font-size: 8px;
   }
 }
 
 @media only screen and (max-width:423px) and (min-width:375px) {
-  .promoDiv{
+  .promoDiv {
     flex-direction: column;
   }
-  .promo{
+
+  .promo {
     margin: 10px;
   }
-  .allBtn{
+
+  .allBtn {
     margin: 10px;
   }
- 
+
+  .updatBtn {
+    padding: 0% 2px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .removeBtn {
+    padding: 0% 2px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .Thead {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .Tbody {
+    margin-top: 10px;
+    font-size: 8px;
+  }
+  .productName{
+    width: 30%;
+  }
+
 }
+
 @media only screen and (max-width:373px) and (min-width:320px) {
-  .promoDiv{
+  .promoDiv {
     flex-direction: column;
     width: 100%;
+    /* margin-left: 30px; */
   }
-  .promo{
+
+  .Thead {
+    margin-top: 10px;
+    font-size: 8px;
+  }
+
+  .Tbody {
+    margin-top: 10px;
+    font-size: 8px;
+  }
+
+  .productName{
+    width: 20%;
+  }
+
+  .promo {
     margin: 10px;
 
   }
-  .allBtn{
+
+  .updatBtn {
+    padding: 0% 2px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .removeBtn {
+    padding: 0% 2px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .allBtn {
     margin: 10px;
     /* width: 150%; */
   }
