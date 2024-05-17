@@ -15,8 +15,7 @@ export const ProductsSlice = createSlice({
             } else {
                 state.push({ ...newProduct, quantity: 1 });
             }
-        },  
-        
+        },
         removeProduct: (state, action) => {
             const productIdToRemove = action.payload;
             const existingProductIndex = state.findIndex(product => product.id === parseInt(productIdToRemove));

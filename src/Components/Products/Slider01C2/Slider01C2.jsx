@@ -15,8 +15,7 @@ const Slider01C2 = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
     const [selectedQuantity, setSelectedQuantity] = useState(1);
-
-
+    
     const handleAccordionChange = (accordionId) => {
         if (activeAccordion === accordionId) {
             return;
@@ -30,15 +29,16 @@ const Slider01C2 = (props) => {
     const toggleInfo = () => {
         setShowInfo(!showInfo);
     };
-    const addToCart = (data,quantity) => {
-        console.log(data)
+    const addToCart = (data, quantity) => {
         const productWithQuantity = { ...data, quantity: quantity };
-        dispatch(addProduct(data,productWithQuantity));
-        setSelectedQuantity(1);
-        console.log(setSelectedQuantity); 
-        navigate('/cart')
-    }
-
+        const existingData = JSON.parse(localStorage.getItem('cartData')) || [];
+        const updatedData = [...existingData, productWithQuantity];
+        localStorage.setItem('cartData', JSON.stringify(updatedData));
+        dispatch(addProduct(data, productWithQuantity));
+        setSelectedQuantity();
+        navigate('/cart');
+    };
+    
     useEffect(() => {
         AOS.init({
             offset: 200,
@@ -61,7 +61,7 @@ const Slider01C2 = (props) => {
     };
     return (
         <>
-        
+
             <div className={`accordion ${Style.AccordianDiv}`}
                 id="accordionExample"
                 data-aos="zoom-in-up" >

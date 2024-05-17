@@ -76,7 +76,7 @@ const ShopProducts = () => {
         //     showAlert();
         // }
         // navigate(`/products/${id}`);
-       
+
         // Navigate to the "/products" page and pass the product data as state
         navigate("/products", { state: { productData: product } });
     };
@@ -234,7 +234,7 @@ const ShopProducts = () => {
     function generatePDFFileName() {
         let prefix = "Products";
         const checkedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-    
+
         if (checkedLabels.length > 0) {
             if (checkedLabels.length === 1) {
                 prefix = `${checkedLabels[0]}'s Products`;
@@ -246,7 +246,7 @@ const ShopProducts = () => {
                 prefix = `${labelNames} and ${lastLabel}'s Products`;
             }
         }
-    
+
         let starPrefix = '';
         if (selectedRating.length > 0) {
             const sortedRatings = selectedRating.sort((a, b) => a - b);
@@ -256,16 +256,16 @@ const ShopProducts = () => {
                 starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
             }
         }
-    
+
         const currentDateAndTime = new Date();
-    
+
         if (checkedLabels.length === 5 && selectedRating.length === 5) {
             return `Products ${currentDateAndTime}.pdf`;
         } else {
             return `${prefix} ${starPrefix}${currentDateAndTime}.pdf`;
         }
     }
-    
+
 
 
 
@@ -275,7 +275,7 @@ const ShopProducts = () => {
         let products = sortedProducts();
         let columns;
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-    
+
         if (viewMode === "grid") {
             products = products.map(product => ({
                 "Title": product.title,
@@ -294,13 +294,13 @@ const ShopProducts = () => {
             }));
             columns = [{ wch: 50 }, { wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 150 }, { wch: 15 }];
         }
-    
+
         const worksheet = XLSX.utils.json_to_sheet(products);
         XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
         worksheet["!cols"] = columns;
-    
+
         const currentDateAndTime = new Date();
-    
+
         let filename;
         if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
             filename = `Products ${currentDateAndTime}.xlsx`;
@@ -317,7 +317,7 @@ const ShopProducts = () => {
                     filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
                 }
             }
-    
+
             let starPrefix = '';
             if (selectedRating.length > 0) {
                 const sortedRatings = selectedRating.sort((a, b) => a - b);
@@ -331,76 +331,76 @@ const ShopProducts = () => {
         }
         XLSX.writeFile(workbook, filename);
     };
-    
-    
+
+
 
 
     //........Export data to Csv file ....//
-   const exportToCSV = () => {
-    let products = sortedProducts();
-    let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+    const exportToCSV = () => {
+        let products = sortedProducts();
+        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
 
-    let csvData;
-    if (viewMode === "grid") {
-        csvData = Papa.unparse(products.map(product => ({
-            "Title": product.title,
-            "Rating": product.rating,
-            "Reviews": product.reviews,
-        })));
-    } else {
-        csvData = Papa.unparse(products.map(product => ({
-            "Title": product.title,
-            "Rating": product.rating,
-            "Reviews": product.reviews,
-            "Price": product.price,
-            "Text": product.text,
-            "Variant": product.colorVeriont
-        })));
-    }
-
-    const currentDateAndTime = new Date();
-
-    let filename;
-    if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
-        filename = `Products ${currentDateAndTime}.csv`;
-    } else {
-        let filenamePrefix = "Products";
-        if (selectedLabels.length > 0) {
-            if (selectedLabels.length === 1) {
-                filenamePrefix = `${selectedLabels[0]}'s Products`;
-            } else if (selectedLabels.length === 2) {
-                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
-            } else {
-                const lastLabel = selectedLabels.pop();
-                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
-                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
-            }
+        let csvData;
+        if (viewMode === "grid") {
+            csvData = Papa.unparse(products.map(product => ({
+                "Title": product.title,
+                "Rating": product.rating,
+                "Reviews": product.reviews,
+            })));
+        } else {
+            csvData = Papa.unparse(products.map(product => ({
+                "Title": product.title,
+                "Rating": product.rating,
+                "Reviews": product.reviews,
+                "Price": product.price,
+                "Text": product.text,
+                "Variant": product.colorVeriont
+            })));
         }
 
-        let starPrefix = '';
-        if (selectedRating.length > 0) {
-            const sortedRatings = selectedRating.sort((a, b) => a - b);
-            if (sortedRatings.length === 1) {
-                starPrefix = `with ${sortedRatings[0]} star `;
-            } else {
-                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
-            }
-        }
-        filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.csv`;
-    }
+        const currentDateAndTime = new Date();
 
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-};
+        let filename;
+        if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
+            filename = `Products ${currentDateAndTime}.csv`;
+        } else {
+            let filenamePrefix = "Products";
+            if (selectedLabels.length > 0) {
+                if (selectedLabels.length === 1) {
+                    filenamePrefix = `${selectedLabels[0]}'s Products`;
+                } else if (selectedLabels.length === 2) {
+                    filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
+                } else {
+                    const lastLabel = selectedLabels.pop();
+                    const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                    filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
+                }
+            }
+
+            let starPrefix = '';
+            if (selectedRating.length > 0) {
+                const sortedRatings = selectedRating.sort((a, b) => a - b);
+                if (sortedRatings.length === 1) {
+                    starPrefix = `with ${sortedRatings[0]} star `;
+                } else {
+                    starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
+                }
+            }
+            filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.csv`;
+        }
+
+        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
 
 
     //...............Export Data to Doc.................//
@@ -408,7 +408,7 @@ const ShopProducts = () => {
         const generateWordContent = () => {
             let content = '';
             let products = sortedProducts();
-    
+
             products.forEach(product => {
                 if (viewMode === "grid") {
                     content += `<p><b>Title:</b>${product.title}\n</p> `;
@@ -425,14 +425,14 @@ const ShopProducts = () => {
             });
             return content;
         };
-    
+
         const wordContent = generateWordContent();
         const currentDateAndTime = new Date();
-    
+
         let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
         let filenamePrefix = "Products";
-        let filename = ''; 
-    
+        let filename = '';
+
         let starPrefix = '';
         if (selectedRating.length > 0) {
             const sortedRatings = selectedRating.sort((a, b) => a - b);
@@ -442,7 +442,7 @@ const ShopProducts = () => {
                 starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
             }
         }
-    
+
         if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
             filename = `Products ${currentDateAndTime}.doc`;
         } else {
@@ -462,70 +462,70 @@ const ShopProducts = () => {
         const blob = new Blob([wordContent], { type: 'application/msword' });
         saveAs(blob, filename);
     };
-    
-    
+
+
 
     //...........Export Data to Txt............
 
-   const exportToTxt = () => {
-    const generateWordContent = () => {
-        let content = '';
-        let products = sortedProducts();
+    const exportToTxt = () => {
+        const generateWordContent = () => {
+            let content = '';
+            let products = sortedProducts();
 
-        products.forEach(product => {
-            if (viewMode === "grid") {
-                content += `<p><b>Title:</b>${product.title}\n</p> `;
-                content += `<p><b>Rating:</b>${product.rating}\n</p> `;
-                content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
+            products.forEach(product => {
+                if (viewMode === "grid") {
+                    content += `Title:${product.title}\n `;
+                    content += `Rating:${product.rating}\n `;
+                    content += `Reviews:${product.reviews}\n`;
+                } else {
+                    content += `Title:${product.title}\n `;
+                    content += `Rating:${product.rating}\n `;
+                    content += `Reviews:${product.reviews}\n`;
+                    content += `Price:${product.price}\n `;
+                    content += `Text:</b>${product.text}\n`;
+                    content += `Variant:</b>${product.colorVariant}\n\n `;
+                }
+            });
+            return content;
+        };
+
+        const wordContent = generateWordContent();
+        const currentDateAndTime = new Date();
+
+        let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
+        let filenamePrefix = "Products";
+        let filename = '';
+        let starPrefix = '';
+
+        if (selectedRating.length > 0) {
+            const sortedRatings = selectedRating.sort((a, b) => a - b);
+            if (sortedRatings.length === 1) {
+                starPrefix = `with ${sortedRatings[0]} star `;
             } else {
-                content += `<p><b>Title:</b>${product.title}\n</p> `;
-                content += `<p><b>Rating:</b>${product.rating}\n</p> `;
-                content += `<p><b>Reviews:</b> ${product.reviews}\n</p>`;
-                content += `<p><b>Price:</b>${product.price}\n</p> `;
-                content += `<p><b>Text:</b>${product.text}\n</p>`;
-                content += `<p><b>Variant:</b>${product.colorVariant}\n\n</p> `;
+                starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
             }
-        });
-        return content;
-    };
+        }
 
-    const wordContent = generateWordContent();
-    const currentDateAndTime = new Date();
-
-    let selectedLabels = Object.keys(checkedItems).filter(label => checkedItems[label]);
-    let filenamePrefix = "Products";
-    let filename = '';
-    let starPrefix = '';
-
-    if (selectedRating.length > 0) {
-        const sortedRatings = selectedRating.sort((a, b) => a - b);
-        if (sortedRatings.length === 1) {
-            starPrefix = `with ${sortedRatings[0]} star `;
+        if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
+            filename = `Products ${currentDateAndTime}.txt`;
         } else {
-            starPrefix = `with ${sortedRatings.slice(0, -1).join(', ')} and ${sortedRatings.slice(-1)} star `;
-        }
-    }
-
-    if (selectedLabels.length === Object.keys(checkedItems).length && selectedRating.length === 5) {
-        filename = `Products ${currentDateAndTime}.txt`;
-    } else {
-        if (selectedLabels.length > 0) {
-            if (selectedLabels.length === 1) {
-                filenamePrefix = `${selectedLabels[0]}'s Products`;
-            } else if (selectedLabels.length === 2) {
-                filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
-            } else {
-                const lastLabel = selectedLabels.pop();
-                const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
-                filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
+            if (selectedLabels.length > 0) {
+                if (selectedLabels.length === 1) {
+                    filenamePrefix = `${selectedLabels[0]}'s Products`;
+                } else if (selectedLabels.length === 2) {
+                    filenamePrefix = `${selectedLabels[0]}'s and ${selectedLabels[1]}'s Products`;
+                } else {
+                    const lastLabel = selectedLabels.pop();
+                    const labelNames = selectedLabels.map(label => `${label}'s`).join(", ");
+                    filenamePrefix = `${labelNames} and ${lastLabel}'s Products`;
+                }
             }
+            filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.txt`;
         }
-        filename = `${filenamePrefix} ${starPrefix} ${currentDateAndTime}.doc`;
-    }
 
-    const blob = new Blob([wordContent], { type: 'application/msword' });
-    saveAs(blob, filename);
-};
+        const blob = new Blob([wordContent], { type: 'application/msword' });
+        saveAs(blob, filename);
+    };
 
 
     return (
@@ -842,7 +842,7 @@ const ShopProducts = () => {
                                                 sortedProducts().map((product, index) => (
                                                     <div key={index} className={`${Style.colactionCart}`} data-selected-line={selectedLine}  >
                                                         <div className={Style.imgWrapper}>
-                                                        <img className={Style.img} src={product.image} alt="" />
+                                                            <img className={Style.img} src={product.image} alt="" />
                                                         </div>
                                                         <p className={Style.productText}>{product.title}</p>
                                                         <div style={{ height: "40px", display: "flex" }}>

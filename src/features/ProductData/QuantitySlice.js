@@ -12,7 +12,8 @@ export const QtySlice = createSlice({
             console.log(action.payload)
             state.qty = action.payload;
           
-        }
+        },
+        
     }
 
 })
