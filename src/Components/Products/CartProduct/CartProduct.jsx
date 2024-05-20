@@ -10,10 +10,13 @@ const CartProduct = () => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.product);
     // const qty = useSelector((state) => state.quanti);
+    
     const [addData, setAddData] = useState([]);
     const [subtotal, setSubtotal] = useState(0);
     const [total, setTotal] = useState(0);
-
+    const [updatedPrice, setupdatedPrice] = useState(0)
+    const [updateClicked, setUpdateClicked] = useState(false);
+    
     const getProduct = JSON.parse(localStorage.getItem("cartData"))
 
     const handlePromo = () => {
@@ -30,28 +33,40 @@ const CartProduct = () => {
         const updatedData = addData.filter(item => item.id !== id);
         localStorage.setItem('cartData', JSON.stringify(updatedData));
         dispatch(removeProduct(id));
+        setSubtotal()
+        setTotal()
         console.log("Product removed");
     };
     useEffect(() => {
         setAddData(getProduct);
     }, [data]);
-    
+
     const handleQuantityChange = (event, id) => {
         const updatedQuantity = parseInt(event.target.value);
         const newQuantity = updatedQuantity < 1 ? 1 : updatedQuantity;
         const updatedData = addData.map(item => {
             if (item.id === id) {
-                return { ...item, quantity: newQuantity };
+                const updatedItem = { ...item, quantity: newQuantity };
+                updatedItem.subtotal = updatedItem.quantity * updatedItem.price; // Calculate subtotal for the updated item
+                return updatedItem;
             }
             return item;
         });
         setAddData(updatedData);
     };
     useEffect(() => {
-        const subtotalAmount = addData.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        setSubtotal(subtotalAmount);
-        setTotal(subtotalAmount);
-    }, [addData]);
+        if (updateClicked) {
+            const subtotalAmount = addData.reduce((acc, item) => acc + item.quantity * item.price, 0);
+            setSubtotal(subtotalAmount);
+            setTotal(subtotalAmount);
+            setupdatedPrice(subtotalAmount)
+            setUpdateClicked(false);
+        }
+    }, [addData, updateClicked]);
+    const handleUpdateClick = () => {
+        setUpdateClicked(true);
+        localStorage.setItem('cartData', JSON.stringify(addData));
+    };
     return (
         <div className={`container-fluid ${Style.mainDiv}`}>
             <table className="table" style={{ border: " transparent" }}>
@@ -77,13 +92,14 @@ const CartProduct = () => {
                                 />
                             </td>
                             <td className={Style.TD}><span>&nbsp;$</span>{item.price}<span>.00</span></td>
-                            <td className={Style.TD}><span>$</span>{(item.price * item.quantity)}<span>.00</span></td>
-                            <td className={Style.TD}><button className={Style.updatBtn}>Update</button></td>
+                            <td className={Style.TD}><span>$</span>{(updatedPrice)}<span>.00</span></td>
+                            <td className={Style.TD}><button className={Style.updatBtn} onClick={handleUpdateClick}>Update</button></td>
                             <td className={Style.TD}><button className={Style.removeBtn} onClick={() => handleRemoveProduct(item.id)}>X</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
             <div className={Style.totalDiv}>
                 <div className={Style.subTotalDiv}>
                     <p>Subtotal: <span>$</span>{subtotal}<span>.00</span></p>

@@ -30,14 +30,27 @@ const Slider01C2 = (props) => {
         setShowInfo(!showInfo);
     };
     const addToCart = (data, quantity) => {
-        const productWithQuantity = { ...data, quantity: quantity };
         const existingData = JSON.parse(localStorage.getItem('cartData')) || [];
-        const updatedData = [...existingData, productWithQuantity];
+        let updatedData = [...existingData];
+        let found = false;
+        updatedData = updatedData.map(item => {
+            if (item.id === data.id) {
+                item.quantity += parseInt(quantity);
+                found = true;
+            }
+            return item;
+        });
+        if (!found) {
+            updatedData.push({ ...data, quantity: quantity });
+        }
         localStorage.setItem('cartData', JSON.stringify(updatedData));
-        dispatch(addProduct(data, productWithQuantity));
+        dispatch(addProduct(data, quantity));
         setSelectedQuantity();
-        navigate('/cart');
+        navigate('/cart', { state: { quantity: quantity } });
+        console.log("mydatataaa",quantity)
     };
+    
+    
     
     useEffect(() => {
         AOS.init({

@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 export const ProductsSlice = createSlice({
     name: 'product',
     initialState: [
-
     ],
     reducers: {
         addProduct: (state, action) => {
@@ -23,7 +22,7 @@ export const ProductsSlice = createSlice({
                 return state.filter((_, index) => index !== existingProductIndex);
             }
             return state;
-        }
+        },
     }
 })
 export const { addProduct, removeProduct } = ProductsSlice.actions;
