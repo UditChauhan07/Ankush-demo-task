@@ -8,14 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../features/ProductData/ProductSlice';
 import { quantity } from '../../../features/ProductData/QuantitySlice';
+
 const Slider01C2 = (props) => {
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [activeAccordion, setActiveAccordion] = useState("collapseTwo");
     const [isOpen, setIsOpen] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
     const [selectedQuantity, setSelectedQuantity] = useState(1);
-    
+
     const handleAccordionChange = (accordionId) => {
         if (activeAccordion === accordionId) {
             return;
@@ -45,13 +47,14 @@ const Slider01C2 = (props) => {
         }
         localStorage.setItem('cartData', JSON.stringify(updatedData));
         dispatch(addProduct(data, quantity));
+        console.log("add data --> ", dispatch(addProduct(data, quantity)));
         setSelectedQuantity();
         navigate('/cart', { state: { quantity: quantity } });
-        console.log("mydatataaa",quantity)
+        console.log("my Quantity--------> ", quantity)
     };
-    
-    
-    
+
+
+
     useEffect(() => {
         AOS.init({
             offset: 200,
@@ -72,6 +75,8 @@ const Slider01C2 = (props) => {
         console.log('Selected Quantity:', selectedValue);
         dispatch(quantity(selectedValue))
     };
+
+
     return (
         <>
 
@@ -100,6 +105,7 @@ const Slider01C2 = (props) => {
                                     <span className={Style.dollar}>$</span>
                                     <span className={Style.mainPrice}>{props.data.price}</span>
                                     <span className={Style.cents}>.00</span>
+
                                 </div>
                             </div>
                         </div>

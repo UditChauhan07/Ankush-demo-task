@@ -19,11 +19,6 @@ function App() {
           <Route path="/products" element={<Products />}></Route>
           <Route path="/cart" element={<CartProduct />}></Route>
           <Route path="/shorting-shop" element={<ShortingShop />}></Route>
-
-          
-
-         
-
         </Routes>
       </BrowserRouter>
     </div>

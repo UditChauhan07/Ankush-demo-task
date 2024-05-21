@@ -80,7 +80,9 @@ const ShopProducts = () => {
         // Navigate to the "/products" page and pass the product data as state
         navigate("/products", { state: { productData: product } });
     };
-
+const handleCart=()=>{
+    navigate('/cart')
+}
     // Function to clear all filters
     const handleClearFilters = () => {
         setCheckedItems({});
@@ -831,7 +833,9 @@ const ShopProducts = () => {
                         {viewMode === "grid" ? (
                             <div className="col-lg-9 col-md-9" >
                                 <div >
-                                    <h1 className={Style.heading}>SHOP PRODUCTS</h1>
+                                <button className={Style.cartShow} onClick={handleCart}>Show Cart</button>
+                                    <h1 className={Style.heading}>SHOP PRODUCTS</h1> 
+                                 
                                     <div className={Style.collection_Container} >
                                         <div className={`${Style.cardContainer}`} data-selected-line={selectedLine}>
                                             {loading ? (

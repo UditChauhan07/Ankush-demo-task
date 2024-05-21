@@ -8,16 +8,21 @@ import { removeProduct } from '../../../features/ProductData/ProductSlice';
 const CartProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const data = useSelector((state) => state.product);
     // const qty = useSelector((state) => state.quanti);
-    
+    const data = useSelector((state) => state.product);
+    console.log("vbsjdhakhkdhkshdi oaisod -------> ", data);
     const [addData, setAddData] = useState([]);
-    const [subtotal, setSubtotal] = useState(0);
+    const [subtotal, setSubtotal] = useState();
+
     const [total, setTotal] = useState(0);
     const [updatedPrice, setupdatedPrice] = useState(0)
     const [updateClicked, setUpdateClicked] = useState(false);
-    
+
     const getProduct = JSON.parse(localStorage.getItem("cartData"))
+
+    useEffect(()=>{
+        setupdatedPrice()
+    },[])
 
     const handlePromo = () => {
         toast.warning("Please Enter Promo code", {
@@ -47,13 +52,14 @@ const CartProduct = () => {
         const updatedData = addData.map(item => {
             if (item.id === id) {
                 const updatedItem = { ...item, quantity: newQuantity };
-                updatedItem.subtotal = updatedItem.quantity * updatedItem.price; // Calculate subtotal for the updated item
+                updatedItem.subtotal = updatedItem.quantity * updatedItem.price;
                 return updatedItem;
             }
             return item;
         });
         setAddData(updatedData);
     };
+
     useEffect(() => {
         if (updateClicked) {
             const subtotalAmount = addData.reduce((acc, item) => acc + item.quantity * item.price, 0);
@@ -67,6 +73,7 @@ const CartProduct = () => {
         setUpdateClicked(true);
         localStorage.setItem('cartData', JSON.stringify(addData));
     };
+
     return (
         <div className={`container-fluid ${Style.mainDiv}`}>
             <table className="table" style={{ border: " transparent" }}>
@@ -92,7 +99,15 @@ const CartProduct = () => {
                                 />
                             </td>
                             <td className={Style.TD}><span>&nbsp;$</span>{item.price}<span>.00</span></td>
+
+
                             <td className={Style.TD}><span>$</span>{(updatedPrice)}<span>.00</span></td>
+
+                            {/* <td className={Style.TD}>
+                                <span>&nbsp;$</span>
+                                {item.quantity ? `${item.quantity * item.price}.00` : `${updatedPrice}.00`}
+                            </td> */}
+
                             <td className={Style.TD}><button className={Style.updatBtn} onClick={handleUpdateClick}>Update</button></td>
                             <td className={Style.TD}><button className={Style.removeBtn} onClick={() => handleRemoveProduct(item.id)}>X</button></td>
                         </tr>

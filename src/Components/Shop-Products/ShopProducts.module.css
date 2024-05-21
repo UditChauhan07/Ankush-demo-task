@@ -111,6 +111,25 @@
     max-height: calc(88vh - 38px);
 }
 
+.cartShow {
+    border-style: none;
+    position: fixed;
+    top: 1;
+    right: 0;
+    width: 7em;
+    padding: 0.5em 1em;
+    margin-top: -30px;
+    /* margin: 0.5em; */
+    background: #7762ff;
+    color: white;
+    transition: background .5s;
+    border-radius: 4px;
+}
+
+.cartShow:hover {
+    background: #56ff6a;
+}
+
 /* //.............Print css Start.............// */
 
 @media print {
@@ -751,7 +770,6 @@
     .paginateAgain {
         margin-right: 10px;
     }
-
 }
 
 @media only screen and (max-width:1300px) and (min-width:1024px) {
@@ -766,6 +784,9 @@
         margin-top: -170px;
     }
 
+    .cartShow {
+        margin-top: -15px;
+    }
 }
 
 @media only screen and (max-width:966px) and (min-width:768px) {
@@ -811,22 +832,27 @@
         grid-template-columns: repeat(2, auto);
         margin-left: 70px;
     }
+
     .cardContainer[data-selected-line="1"] {
         grid-template-columns: repeat(2, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="2"] {
         grid-template-columns: repeat(2, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="3"] {
         grid-template-columns: repeat(2, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="4"] {
         grid-template-columns: repeat(2, auto);
         max-width: 100% !important;
     }
+
     .filterCard {
         margin-left: 10px;
         width: 100%;
@@ -908,6 +934,9 @@
         background: linear-gradient(90deg, #fff, #eee);
         max-height: 210px;
     }
+    .cartShow {
+        padding: 0.4em 1em;
+    }
 }
 
 @media only screen and (max-width:767px) and (min-width:500px) {
@@ -958,10 +987,12 @@
         text-align-last: end;
 
     }
+
     .cardContainer[data-selected-line="2"] {
         grid-template-columns: repeat(2, auto);
         max-width: 100% !important;
     }
+
     .showingProducts2 {
         margin-top: 5px;
         margin-bottom: -10px;
@@ -1264,18 +1295,22 @@
     .GridDiv {
         width: 50%;
     }
+
     .cardContainer[data-selected-line="1"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="2"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="3"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="4"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
@@ -1288,22 +1323,27 @@
         margin-left: 0px;
         width: 100%;
     }
+
     .cardContainer[data-selected-line="1"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="2"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="3"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     .cardContainer[data-selected-line="4"] {
         grid-template-columns: repeat(1, auto);
         max-width: 100% !important;
     }
+
     /* .Export {
       
         margin-left: 10%;
