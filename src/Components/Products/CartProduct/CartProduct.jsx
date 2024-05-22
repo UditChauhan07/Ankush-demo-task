@@ -1,58 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Style from '../CartProduct/CartProduct.module.css';
-import { ToastContainer, toast, Slide } from "react-toastify";
+
 import { useNavigate } from 'react-router-dom';
 import { removeProduct } from '../../../features/ProductData/ProductSlice';
-
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import CartIcon from '../../CartIcon/CartIcon';
 const CartProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const qty = useSelector((state) => state.quanti);
     const data = useSelector((state) => state.product);
-    console.log("vbsjdhakhkdhkshdi oaisod -------> ", data);
     const [addData, setAddData] = useState([]);
-    const [subtotal, setSubtotal] = useState();
+    const [subtotal, setSubtotal] = useState(0); // State to store the subtotal
 
-    const [total, setTotal] = useState(0);
-    const [updatedPrice, setupdatedPrice] = useState(0)
-    const [updateClicked, setUpdateClicked] = useState(false);
+    const getProduct = JSON.parse(localStorage.getItem("cartData"));
 
-    const getProduct = JSON.parse(localStorage.getItem("cartData"))
-
-    useEffect(()=>{
-        setupdatedPrice()
-    },[])
-
-    const handlePromo = () => {
-        toast.warning("Please Enter Promo code", {
-            position: "top-center",
-            transition: Slide,
-            autoClose: 1500,
-        });
-    }
-    const handleKeepShopping = () => {
-        navigate("/")
-    }
-    const handleRemoveProduct = (id) => {
-        const updatedData = addData.filter(item => item.id !== id);
-        localStorage.setItem('cartData', JSON.stringify(updatedData));
-        dispatch(removeProduct(id));
-        setSubtotal()
-        setTotal()
-        console.log("Product removed");
-    };
     useEffect(() => {
         setAddData(getProduct);
     }, [data]);
 
+    // Calculate subtotal whenever addData changes
+    useEffect(() => {
+        const subtotalAmount = addData.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+        setSubtotal(subtotalAmount);
+    }, [addData]);
+
+    const handleKeepShopping = () => {
+        navigate("/");
+    }
+
+    const handleRemoveProduct = (id) => {
+        const updatedData = addData.filter(item => item.id !== id);
+        localStorage.setItem('cartData', JSON.stringify(updatedData));
+        dispatch(removeProduct(id));
+    };
+
     const handleQuantityChange = (event, id) => {
-        const updatedQuantity = parseInt(event.target.value);
+        const updatedQuantity = parseFloat(event.target.value);
         const newQuantity = updatedQuantity < 1 ? 1 : updatedQuantity;
         const updatedData = addData.map(item => {
             if (item.id === id) {
                 const updatedItem = { ...item, quantity: newQuantity };
-                updatedItem.subtotal = updatedItem.quantity * updatedItem.price;
                 return updatedItem;
             }
             return item;
@@ -60,86 +48,59 @@ const CartProduct = () => {
         setAddData(updatedData);
     };
 
-    useEffect(() => {
-        if (updateClicked) {
-            const subtotalAmount = addData.reduce((acc, item) => acc + item.quantity * item.price, 0);
-            setSubtotal(subtotalAmount);
-            setTotal(subtotalAmount);
-            setupdatedPrice(subtotalAmount)
-            setUpdateClicked(false);
-        }
-    }, [addData, updateClicked]);
-    const handleUpdateClick = () => {
-        setUpdateClicked(true);
-        localStorage.setItem('cartData', JSON.stringify(addData));
-    };
-
     return (
-        <div className={`container-fluid ${Style.mainDiv}`}>
-            <table className="table" style={{ border: " transparent" }}>
-                <thead className={Style.Thead} >
-                    <th className={Style.productName}>Product Name</th>
-                    <th style={{ width: "0%" }}>Quantity</th>
-                    <th>&nbsp;Price</th>
-                    <th>Updated Price</th>
-                    <th>Update</th>
-                    <th>Remove</th>
-                </thead>
-                <tbody className={Style.Tbody} style={{ borderStyle: "none" }}>
-                    {addData.map((item, index) => (
-                        <tr key={item.id}>
-                            <td className={Style.TD}>{item.title}</td>
-                            <td className={Style.TD}>
-                                <input
-                                    value={item.quantity}
-                                    type="number"
-                                    className=""
-                                    style={{ width: "100%" }}
-                                    onChange={(event) => handleQuantityChange(event, item.id)}
-                                />
-                            </td>
-                            <td className={Style.TD}><span>&nbsp;$</span>{item.price}<span>.00</span></td>
+        <div className="container-fluid">
+            <CartIcon/>
+            <div className={`cards ${Style.cardDiv}`} >
+                <div className={Style.productDetails}>
+                    <div>
+                        <p className={Style.shopBtn} onClick={handleKeepShopping}><FaLongArrowAltLeft />Keep Shopping</p>
 
+                    </div>
 
-                            <td className={Style.TD}><span>$</span>{(updatedPrice)}<span>.00</span></td>
+                    <div  >
+                        {addData.length > 0 ? (
+                            addData.map((item, index) => (
+                                <div className={Style.itemDetails} key={item.id}>
+                                    <div>
+                                        <img className={Style.productimg} src={item.image} alt="" />
+                                    </div>
+                                    <div>
+                                        <p className={Style.itemTitle}>{item.title}</p>
+                                        <p className={Style.productPrice}> <span>$</span>{item.price}.00</p>
+                                        <p className={Style.productTotalPrice}>Total: <span>$</span>{item.quantity * item.price}.00</p> {/* Subtotal */}
+                                        <div className={Style.inptutRmove}>
+                                            <div>
+                                                <input
+                                                    value={item.quantity}
+                                                    type="number"
+                                                    className={Style.inputDiv}
+                                                    onChange={(event) => handleQuantityChange(event, item.id)}
+                                                />
+                                            </div>
+                                            <div>
+                                                <p className={Style.removeDiv}></p><span> <button className={Style.removeBtn} onClick={() => handleRemoveProduct(item.id)}>Remove</button></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <h1> Cart is empty</h1>
+                        )}
+                    </div>
+<h5>Summary</h5>
+                    <div className={Style.PriceContainer}>
+                        <p>Subtotal: </p>
+                        <strong><span>$</span>{subtotal}.00</strong>
 
-                            {/* <td className={Style.TD}>
-                                <span>&nbsp;$</span>
-                                {item.quantity ? `${item.quantity * item.price}.00` : `${updatedPrice}.00`}
-                            </td> */}
+                    </div>
+                    <div>
+                        <button className={Style.checkoutBtn}>Checkout</button>
+                    </div>
 
-                            <td className={Style.TD}><button className={Style.updatBtn} onClick={handleUpdateClick}>Update</button></td>
-                            <td className={Style.TD}><button className={Style.removeBtn} onClick={() => handleRemoveProduct(item.id)}>X</button></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <div className={Style.totalDiv}>
-                <div className={Style.subTotalDiv}>
-                    <p>Subtotal: <span>$</span>{subtotal}<span>.00</span></p>
                 </div>
             </div>
-            <div className={Style.totalDiv}>
-                <div className={Style.subTotalDiv}>
-                    <p>Total: <span>$</span>{total}<span>.00</span></p>
-                </div>
-            </div>
-            <div className={Style.promoDiv}>
-                <div>
-                    <input className={Style.promo} type="text" placeholder='Input Promo Code' />
-                </div>
-                <div>
-                    <button className={Style.allBtn} onClick={handlePromo}>Apply Promo</button>
-                </div>
-                <div>
-                    <button className={Style.allBtn}>Checkout</button>
-                </div>
-                <div>
-                    <button className={Style.allBtn} onClick={handleKeepShopping}>Keep Shopping</button>
-                </div>
-            </div>
-            <ToastContainer />
         </div>
     );
 };

@@ -16,6 +16,7 @@ import { FaSortNumericDown } from "react-icons/fa";
 import { FaSortNumericUpAlt } from "react-icons/fa";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { PiPrinterBold } from "react-icons/pi";
 
@@ -30,6 +31,8 @@ import * as XLSX from "xlsx";
 import Papa from 'papaparse';
 import { usePDF } from 'react-to-pdf';
 import { saveAs } from 'file-saver';
+import CartIcon from '../CartIcon/CartIcon';
+
 
 const ShopProducts = () => {
 
@@ -80,9 +83,7 @@ const ShopProducts = () => {
         // Navigate to the "/products" page and pass the product data as state
         navigate("/products", { state: { productData: product } });
     };
-const handleCart=()=>{
-    navigate('/cart')
-}
+   
     // Function to clear all filters
     const handleClearFilters = () => {
         setCheckedItems({});
@@ -528,7 +529,7 @@ const handleCart=()=>{
         const blob = new Blob([wordContent], { type: 'application/msword' });
         saveAs(blob, filename);
     };
-
+ 
 
     return (
         <>
@@ -833,9 +834,10 @@ const handleCart=()=>{
                         {viewMode === "grid" ? (
                             <div className="col-lg-9 col-md-9" >
                                 <div >
-                                <button className={Style.cartShow} onClick={handleCart}>Show Cart</button>
-                                    <h1 className={Style.heading}>SHOP PRODUCTS</h1> 
-                                 
+                                  <CartIcon/>
+
+                                    <h1 className={Style.heading}>SHOP PRODUCTS</h1>
+
                                     <div className={Style.collection_Container} >
                                         <div className={`${Style.cardContainer}`} data-selected-line={selectedLine}>
                                             {loading ? (
@@ -844,7 +846,7 @@ const handleCart=()=>{
                                                 ))
                                             ) : (
                                                 sortedProducts().map((product, index) => (
-                                                    <div key={index} className={`${Style.colactionCart}`} data-selected-line={selectedLine}  >
+                                                    <div onClick={() => handleClick(product)} key={index} className={`${Style.colactionCart}`} data-selected-line={selectedLine}  >
                                                         <div className={Style.imgWrapper}>
                                                             <img className={Style.img} src={product.image} alt="" />
                                                         </div>

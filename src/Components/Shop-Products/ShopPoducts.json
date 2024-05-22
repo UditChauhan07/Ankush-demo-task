@@ -22,6 +22,7 @@
         "reviews": "78 Review",
         "button": "BUY NOW",
         "price":21,
+        "subscription":10,
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -46,6 +47,7 @@
         "reviews": "24 Review",
         "button": "BUY NOW",
         "price":32, 
+        "subscription":21,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -72,6 +74,7 @@
         "reviews": "7 Review",
         "button": "BUY NOW",
         "price":42, 
+        "subscription":31,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -97,7 +100,8 @@
         "categories":["Skin","Heart","Vision"],
         "reviews": "6 Review",
         "button": "BUY NOW",
-        "price":52,     
+        "price":52,  
+        "subscription":41,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
 
@@ -120,7 +124,8 @@
         "categories":["Bones","Immunity","Vision"],
         "reviews": "33 review",
         "button": "PRE-ORDER",
-        "price":12,       
+        "price":62, 
+        "subscription":51,      
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -143,7 +148,8 @@
         "categories":["Bones","Immunity","Heart"],
         "reviews": "32 Review",
         "button": "PRE-ORDER",
-        "price":"13",
+        "price":33,
+        "subscription":22,
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -166,7 +172,8 @@
         "reviews": "52 Review",
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER",
-        "price":"16",
+        "price":36,
+        "subscription":25,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }, 
@@ -191,7 +198,8 @@
         "categories":["Skin","Bones"],
         "reviews": "98 Review",
         "button": "BUY NOW",
-        "price":"16",
+        "price":46,
+        "subscription":35,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -215,7 +223,8 @@
         "categories":["Joints","Heart","Immunity"],
         "reviews": "14 Review",
         "button": "BUY NOW",
-        "price":"90",
+        "price":90,
+        "subscription":79,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -239,7 +248,8 @@
         "categories":["Skin","Vision"],
         "reviews": "17 Review",
         "button": "BUY NOW",
-        "price":"100",
+        "price":100,
+        "subscription":89,
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -263,7 +273,8 @@
         "categories":["Skin","Bones"],
         "reviews": "28 Review",
         "button": "BUY NOW",
-        "price":"200",
+        "price":110,
+        "subscription":99,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -287,7 +298,8 @@
         "categories":["Joints","Heart","Immunity"],
         "reviews": "44 Review",
         "button": "BUY NOW",
-        "price":"210",  
+        "price":120,
+        "subscription":109,  
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -311,7 +323,8 @@
         "categories":["Skin","Vision"],
         "reviews": "37 Review",
         "button": "BUY NOW",
-        "price":"39",    
+        "price":39, 
+        "subscription":28,   
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -335,7 +348,8 @@
         "categories":["Skin","Heart","Vision"],
         "reviews": "16 Review",
         "button": "BUY NOW",
-        "price":"37",      
+        "price":37,    
+        "subscription":26,   
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
 
@@ -360,7 +374,8 @@
         "categories":["Bones","Immunity","Vision"],
         "reviews": "22 review",
         "button": "PRE-ORDER",
-        "price":"188",    
+        "price":188, 
+        "subscription":177,   
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -384,8 +399,8 @@
         "categories":["Bones","Immunity","Heart"],
         "reviews": "12 Review",
         "button": "PRE-ORDER",
-        "price":"34",
-       
+        "price":34,
+        "subscription":23,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -407,7 +422,8 @@
         "reviews": "51 Review",
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER",
-        "price":"30",      
+        "price":30,
+        "subscription":19,      
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }, 
@@ -429,7 +445,8 @@
         "categories":["Skin","Bones"],
         "reviews": "58 Review",
         "button": "BUY NOW",
-        "price":"31",
+        "price":31,
+        "subscription":20,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -451,7 +468,8 @@
         "categories":["Joints","Heart","Immunity"],
         "reviews": "34 Review",
         "button": "BUY NOW",
-        "price":"22",      
+        "price":22,   
+        "subscription":11,   
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -473,7 +491,8 @@
         "categories":["Skin","Vision"],
         "reviews": "77 Review",
         "button": "BUY NOW",
-        "price":"23",
+        "price":23,
+        "subscription":12,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -494,7 +513,8 @@
         "categories":["Skin","Bones"],
         "reviews": "66 Review",
         "button": "BUY NOW",
-        "price":"221",
+        "price":22,
+        "subscription":11,
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -515,7 +535,8 @@
         "categories":["Joints","Heart","Immunity"],
         "reviews": "29 Review",
         "button": "BUY NOW",
-        "price":"20",      
+        "price":25,  
+        "subscription":14,    
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -536,7 +557,8 @@
         "categories":["Skin","Vision"],
         "reviews": "71 Review",
         "button": "BUY NOW",
-        "price":"12",       
+        "price":121, 
+        "subscription":110,      
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -557,7 +579,8 @@
         "categories":["Skin","Heart","Vision"],
         "reviews": "100 Review",
         "button": "BUY NOW",
-        "price":"42",
+        "price":42,
+        "subscription":31,
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
 
@@ -579,7 +602,8 @@
         "categories":["Bones","Immunity","Vision"],
         "reviews": "30 review",
         "button": "PRE-ORDER",
-        "price":"62",
+        "price":62,
+        "subscription":51,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -600,7 +624,8 @@
         "categories":["Bones","Immunity","Heart"],
         "reviews": "10 Review",
         "button": "PRE-ORDER",
-        "price":"87",
+        "price":87,
+        "subscription":76,
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -621,7 +646,8 @@
         "reviews": "40 Review",
         "categories":["Skin","Immunity","Heart"],
         "button": "PRE-ORDER",
-        "price":"90",
+        "price":90,
+        "subscription":79,
         "colorVeriont":2,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }, 
@@ -641,7 +667,8 @@
         "categories":["Skin","Bones"],
         "reviews": "50 Review",
         "button": "BUY NOW",
-        "price":"39",
+        "price":39,
+        "subscription":28,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -662,7 +689,8 @@
         "categories":["Joints","Heart","Immunity"],
         "reviews": "4 Review",
         "button": "BUY NOW",
-        "price":"30",      
+        "price":30,  
+        "subscription":19,    
         "colorVeriont":1,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
@@ -683,7 +711,8 @@
         "categories":["Skin","Vision"],
         "reviews": "59 Review",
         "button": "BUY NOW",
-        "price":"17",
+        "price":87,
+        "subscription":76,
         "colorVeriont":3,
         "text":" Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }

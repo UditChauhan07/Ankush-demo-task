@@ -114,9 +114,10 @@
 .cartShow {
     border-style: none;
     position: fixed;
-    top: 1;
+    cursor: pointer;
+    /* top: 1; */
     right: 0;
-    width: 7em;
+    width: 4em;
     padding: 0.5em 1em;
     margin-top: -30px;
     /* margin: 0.5em; */
@@ -125,9 +126,13 @@
     transition: background .5s;
     border-radius: 4px;
 }
-
+.cartLength{
+    color: rgb(8, 8, 8);
+    font-size: 18px;
+    font-weight: bold;
+}
 .cartShow:hover {
-    background: #56ff6a;
+    /* background: #56ff6a; */
 }
 
 /* //.............Print css Start.............// */

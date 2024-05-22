@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../features/ProductData/ProductSlice';
 import { quantity } from '../../../features/ProductData/QuantitySlice';
+import CartIcon from '../../CartIcon/CartIcon';
 
 const Slider01C2 = (props) => {
 
@@ -37,7 +38,7 @@ const Slider01C2 = (props) => {
         let found = false;
         updatedData = updatedData.map(item => {
             if (item.id === data.id) {
-                item.quantity += parseInt(quantity);
+                item.quantity += (quantity);
                 found = true;
             }
             return item;
@@ -79,8 +80,11 @@ const Slider01C2 = (props) => {
 
     return (
         <>
+        <div className={Style.forCartIcon}>
+        <CartIcon/>
+        </div>
 
-            <div className={`accordion ${Style.AccordianDiv}`}
+            <div className={`mt-5 accordion ${Style.AccordianDiv}`}
                 id="accordionExample"
                 data-aos="zoom-in-up" >
                 <div
@@ -155,13 +159,11 @@ const Slider01C2 = (props) => {
 
                             <div className={Style.priceDiv}>
                                 <div className={Style.price2}>
-                                    <span className={Style.dollar2}>$</span>
-                                    <span className={Style.mainPrice2}>43</span>
-                                    <span className={Style.cents2}>.98</span>
-                                    <span className={Style.offer}> $54.98</span>
+                                <span className={Style.dollar}>$</span>
+                                    <span className={Style.mainPrice}>{props.data.subscription}</span>
+                                    <span className={Style.cents}>.00</span>
+                                    <span className={Style.offer}>${props.data.price.toFixed(2)}</span>
                                 </div>
-
-
                                 <div className={Style.ooferBtn}>
                                     <button className={Style.offer2}>Save $11.00</button>{' '}
                                     <span className={Style.sub}>with Subscription</span>
@@ -211,14 +213,14 @@ const Slider01C2 = (props) => {
                             <div className={Style.stocDiv2}>
                                 <h6 className={Style.stock2}>In Stock.</h6>
                                 <div className={Style.customSelect2}>
-                                    <select className={Style.selectDiv}>
-                                        <option value="1" className={Style.qty}>
-                                            QTY: 1{' '}
-                                        </option>{' '}
+                                <select className={Style.selectDiv} value={selectedQuantity} onChange={handleQuantityChange}>
+                                        <option value="1" className={Style.qty} >
+                                            QTY: 1
+                                        </option>
                                         <span style={{ color: 'black' }}> 1 Bluerex Vision 60 softgels</span>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        {props.data.quantity.map((qty, index) => (
+                                            <option key={index} value={qty.qty}>{qty.qty}</option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
@@ -237,7 +239,7 @@ const Slider01C2 = (props) => {
                                 </select>
                             </div>
                             <div className={Style.subBtnDiv}>
-                                <button className={Style.subBtn}>Subscribe</button>
+                                <button className={Style.subBtn} >Subscribe</button>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,21 @@
+.cartShow {
+    border-style: none;
+    position: fixed;
+    cursor: pointer;
+    right: 0;
+    width: 4em;
+    padding: 0.5em 1em;
+    /* margin-top: -40px; */
+    background: #7762ff;
+    color: white;
+    transition: background .5s;
+    border-radius: 4px;
+}
+.cartLength{
+    color: rgb(8, 8, 8);
+    font-size: 18px;
+    font-weight: bold;
+}
+.cartShow:hover {
+    /* background: #56ff6a; */
+}

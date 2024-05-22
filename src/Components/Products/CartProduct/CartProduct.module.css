@@ -1,229 +1,194 @@
-.updatBtn {
-  border-style: none;
-  text-transform: uppercase;
-  padding: 1% 12px;
-  width: 80%;
-  height: 30px;
-  background: #56ff6a;
-  color: white;
-  transition: background .5s;
-  border-radius: 10px;
+.cardDiv {
+  /* border: 2px solid red; */
+  width: 100%;
+  margin: 0px;
 }
 
-.updatBtn:hover {
-  background: #f0ffe6;
-  color: #56ff6a;
+.productDetails {
+  /* border: 2px solid red; */
+  margin: 0px;
+}
+
+.itemDetails {
+  display: inline-flex;
+  margin: 80px
+}
+
+.productimg {
+  width: 200px;
+  height: 200px;
+}
+
+.itemTitle {
+  font-weight: 700;
+  font-size: 16px;
+  font-family: var(--bmd-font-Secondary);
+  transition: color .2s;
+}
+
+.productPrice {
+  font-weight: 700;
+  font-size: 18px;
+  margin: .5rem 0;
+}
+
+.inptutRmove {
+  display: flex;
+  align-items: baseline;
+}
+
+.inputDiv {
+  width: 30%;
+  padding: 2px 9px 7px;
+}
+
+.shopBtn {
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 .removeBtn {
-  border-style: none;
-  font-weight: bolder;
-  padding: 2% 2.5%;
-  width: 100%;
-  height: 30px;
-  background: #ff7b67;
-  transition: background .5s;
-  color: #fff1e7;
-  border-radius: 10px;
+  color: #fff;
+  background: #000;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+}
+.removeBtn:hover{
+  background-color: #56008c;
+
 }
 
-.removeBtn:hover {
-  background: #fff1e7;
-  color: #ff7b67;
+.checkoutBtn {
+  padding: 1rem 2rem;
+  font-size: 12px;
+  line-height: 1em;
+  font-family: var(--bmd-font-Secondary);
+  text-transform: uppercase;
+  transition: background .25s, color .25s, border .25s;
+  font-weight: 700;
+  width: 40%;
+  border: none;
+  text-align: center;
+  background-color: black;
+  color: #fff;
 }
 
-.totalDiv {
-  align-items: center;
-  justify-content: center;
+.checkoutBtn:hover {
+  background-color: #56008c;
+}
+
+.PriceContainer {
+  width: 40%;
+  margin-left: 0px;
   display: flex;
+  justify-content: space-between;
+  font-family: var(--bmd-font-Secondary);
+  font-size: 16px;
+  margin-bottom: 1rem;
 }
 
-.subTotalDiv {
-  display: flex;
-}
-
-.subTotalDiv p {
-  /* margin-right: 250px; */
-}
-.TD{
-  padding: 0px !important;
-}
-.promoDiv {
-  display: flex;
-  width: 50%;
-}
-
-.promo {
-  width: 10em;
-  padding: 0.7em 0.7em;
-  border-radius: 4px;
-}
-
-.allBtn {
-  border-style: none;
-  width: 10em;
-  padding: 0.7em 0.7em;
-  background: #7762ff;
-  color: white;
-  transition: background .5s;
-  border-radius: 4px;
-}
-
-.allBtn:hover {
-  background: #56ff6a;
+.PriceContainer p {
+  font-weight: 500;
 }
 
 
-@media only screen and (max-width: 2800px)and (min-width:1500px) {
-  .promoDiv {
-    width: 50%;
-  }
 
-  .mainDiv {
-    width: 50%;
-  }
-}
+
+
+@media only screen and (max-width: 2800px)and (min-width:1500px) {}
 
 @media only screen and (max-width:1300px) and (min-width:1024px) {
-  .promoDiv {
-    width: 70%;
+  .itemDetails {
+    display: inline-flex;
+    margin: 0px 0px 20px;
   }
 }
 
 @media only screen and (max-width:966px) and (min-width:768px) {
-  .promoDiv {
-    width: 90%;
-  }
+
 }
 
 @media only screen and (max-width:766px) and (min-width:425px) {
-  .promoDiv {
+  .itemDetails {
+    display: inline-flex;
+    margin: 0px 0px 20px;
+  }
+
+  .productimg {
+    width: 150px;
+    height: 150px;
+  }
+  .itemTitle{
+    font-size: 13px;
+  }
+  .productPrice{
+    font-size: 13px;
+  }
+
+  .inputDiv {
+    width: 60%;
+    padding: 2px 12px 3px;
+  }
+  .inptutRmove {
+    margin-top: -15px;
     display: flex;
-    width: 100%;
-  }
-
-  .promo {
-    margin: 10px;
-    font-size: 7px;
-  }
-
-  .allBtn {
-    margin: 10px;
-    font-size: 7px;
-  }
-
-  .updatBtn {
-    padding: 0% 2px;
-    width: 90%;
-    height: 20px;
-  }
-
-  .removeBtn {
-    padding: 0% 2px;
-    width: 90%;
-    height: 20px;
-  }
-
-  .Thead {
-    margin-top: 10px;
-    font-size: 11px;
-  }
-
-  .Tbody {
-    margin-top: 10px;
-    font-size: 8px;
+    align-items: baseline;
   }
 }
 
 @media only screen and (max-width:423px) and (min-width:375px) {
-  .promoDiv {
+  .itemDetails {
+    display: inline-flex;
+    margin: 0px 0px 20px;
+  }
+
+  .productimg {
+    width: 150px;
+    height: 150px;
+  }
+  .itemTitle{
+    font-size: 13px;
+  }
+  .productPrice{
+    font-size: 13px;
+  }
+
+  .inputDiv {
+    width: 60%;
+    padding: 2px 12px 3px;
+  }
+  .inptutRmove {
+    margin-top: -15px;
     display: flex;
-    width: 100%;
+    align-items: baseline;
   }
-
-  .promo {
-    margin: 10px;
-    font-size: 5px;
-  }
-
-  .allBtn {
-    margin: 10px;
-    font-size: 5px;
-  }
-
-  .updatBtn {
-    padding: 0% 2px;
-    width: 90%;
-    height: 20px;
-    font-size: 5px;
-  }
-
-  .removeBtn {
-    padding: 0% 2px;
-    width: 90%;
-    height: 20px;
-  }
-
-  .Thead {
-    margin-top: 10px;
-    font-size: 10px;
-  }
-
-  .Tbody {
-    margin-top: 10px;
-    font-size: 8px;
-  }
-  .productName{
-    width: 30%;
-  }
-  .subTotalDiv{
-    font-size: 12px;
-  }
-
 }
 
 @media only screen and (max-width:373px) and (min-width:320px) {
-  .promoDiv {
+
+  .itemDetails {
+    display: inline-flex;
+    margin: 0px 0px 20px;
+  }
+
+  .productimg {
+    width: 150px;
+    height: 150px;
+  }
+  .itemTitle{
+    font-size: 13px;
+  }
+  .productPrice{
+    font-size: 13px;
+  }
+
+  .inputDiv {
+    width: 60%;
+    padding: 2px 12px 3px;
+  }
+  .inptutRmove {
+    margin-top: -15px;
     display: flex;
-    width: 100%;
-  }
-
-  .Thead {
-    margin-top: 10px;
-    font-size: 8px;
-  }
-
-  .Tbody {
-    margin-top: 10px;
-    font-size: 8px;
-  }
-
-  .productName{
-    width: 20%;
-  }
-
-  .promo {
-    margin: 10px;
-    font-size: 5px;
-  }
-
-  .updatBtn {
-    padding: 0% 2px;
-    width: 90%;
-    height: 20px;
-  }
-
-  .removeBtn {
-    padding: 0% 2px;
-    width: 90%;
-    height: 20px;
-  }
-
-  .allBtn {
-    margin: 10px;
-    font-size: 5px;
-  }
-  .subTotalDiv{
-    font-size: 12px;
+    align-items: baseline;
   }
 }
