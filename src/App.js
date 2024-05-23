@@ -7,7 +7,7 @@ import Products from "./Components/Products/Slider01A/Slider01A"
 import ShopProducts from "./Components/Shop-Products/ShopProducts";
 import ShortingShop from "./Components/Shop-Products/ShortingShop"
 import CartProduct from "./Components/Products/CartProduct/CartProduct";
-import CartIcon from "./Components/CartIcon/CartIcon";
+
 function App() {
   return (
     <div >
@@ -20,7 +20,7 @@ function App() {
           <Route path="/products" element={<Products />}></Route>
           <Route path="/cart" element={<CartProduct />}></Route>
           <Route path="/shorting-shop" element={<ShortingShop />}></Route>
-          <Route path="/carticon" element={<CartIcon />}></Route>
+          
 
         </Routes>
       </BrowserRouter>

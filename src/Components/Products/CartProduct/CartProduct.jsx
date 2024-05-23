@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { removeProduct } from '../../../features/ProductData/ProductSlice';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import CartIcon from '../../CartIcon/CartIcon';
+
 const CartProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -19,11 +20,7 @@ const CartProduct = () => {
         setAddData(getProduct);
     }, [data]);
 
-    // Calculate subtotal whenever addData changes
-    useEffect(() => {
-        const subtotalAmount = addData.reduce((acc, item) => acc + (item.quantity * item.price), 0);
-        setSubtotal(subtotalAmount);
-    }, [addData]);
+ 
 
     const handleKeepShopping = () => {
         navigate("/");
@@ -33,24 +30,33 @@ const CartProduct = () => {
         const updatedData = addData.filter(item => item.id !== id);
         localStorage.setItem('cartData', JSON.stringify(updatedData));
         dispatch(removeProduct(id));
+        window.location.reload(); 
     };
 
     const handleQuantityChange = (event, id) => {
-        const updatedQuantity = parseFloat(event.target.value);
+        const updatedQuantity =(event.target.value);
         const newQuantity = updatedQuantity < 1 ? 1 : updatedQuantity;
+        
         const updatedData = addData.map(item => {
             if (item.id === id) {
-                const updatedItem = { ...item, quantity: newQuantity };
+                const updatedItem = { ...item, quantity: (newQuantity) };
                 return updatedItem;
             }
             return item;
         });
+        localStorage.setItem('cartData', JSON.stringify(updatedData));
         setAddData(updatedData);
+        console.log("updatedData------------>",updatedData)
     };
+       // Calculate subtotal whenever addData changes
+       useEffect(() => {
+        const subtotalAmount = addData.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+        setSubtotal(subtotalAmount);
+    }, [addData]);
 
     return (
         <div className="container-fluid">
-            <CartIcon/>
+            <CartIcon />
             <div className={`cards ${Style.cardDiv}`} >
                 <div className={Style.productDetails}>
                     <div>
@@ -89,7 +95,7 @@ const CartProduct = () => {
                             <h1> Cart is empty</h1>
                         )}
                     </div>
-<h5>Summary</h5>
+                    <h5>Summary</h5>
                     <div className={Style.PriceContainer}>
                         <p>Subtotal: </p>
                         <strong><span>$</span>{subtotal}.00</strong>
