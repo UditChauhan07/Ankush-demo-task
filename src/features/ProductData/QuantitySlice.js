@@ -9,9 +9,8 @@ export const QtySlice = createSlice({
     ,
     reducers: {
         quantity: (state, action) => {
-            console.log(action.payload)
             state.qty = action.payload;
-          
+            console.log("quantity is now",action.payload)
         },
         
     }

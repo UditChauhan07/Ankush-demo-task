@@ -38,7 +38,7 @@ const Slider01C2 = (props) => {
         let found = false;
         updatedData = updatedData.map(item => {
             if (item.id === data.id) {
-                item.quantity += (quantity);
+                item.quantity += parseInt(quantity);
                 found = true;
             }
             return item;
@@ -53,8 +53,6 @@ const Slider01C2 = (props) => {
         navigate('/cart', { state: { quantity: quantity } });
         console.log("my Quantity--------> ", quantity)
     };
-
-
 
     useEffect(() => {
         AOS.init({
@@ -71,7 +69,7 @@ const Slider01C2 = (props) => {
     }
 
     const handleQuantityChange = (event) => {
-        const selectedValue = event.target.value;
+        const selectedValue = parseInt(event.target.value);
         setSelectedQuantity(selectedValue);
         console.log('Selected Quantity:', selectedValue);
         dispatch(quantity(selectedValue))
@@ -129,7 +127,7 @@ const Slider01C2 = (props) => {
                                         </option>
                                         <span style={{ color: 'black' }}> 1 Bluerex Vision 60 softgels</span>
                                         {props.data.quantity.map((qty, index) => (
-                                            <option key={index} value={qty.qty}>{qty.qty}</option>
+                                            <option key={index} value={parseInt(qty.qty)}>{qty.qty}</option>
                                         ))}
                                     </select>
                                 </div>

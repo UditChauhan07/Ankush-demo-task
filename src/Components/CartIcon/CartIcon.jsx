@@ -3,15 +3,19 @@ import Style from "../CartIcon/CartIcon.module.css";
 import { useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 
-const CartIcon = () => {
-    const navigate = useNavigate();
-    const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        const existingData = JSON.parse(localStorage.getItem('cartData')) ?? [];
-        let totalQuantity = existingData.reduce((acc, item) =>parseInt( acc) + parseInt(item.quantity), 0);
-        setTotal(totalQuantity);
-    }, [total]);
+const CartIcon = () => {
+
+    const navigate = useNavigate();
+    const totalQuantity=localStorage.getItem("cartQuantity")
+    console.log("totalQuantity",totalQuantity)
+    // const total = props.data ? props.data : 0;
+
+    // const [total, setTotal] = useState(props.data);
+
+  
+
+    
 
     const handleCart = () => {
         navigate('/cart');
@@ -21,7 +25,7 @@ const CartIcon = () => {
         <div>
             <icon className={Style.cartShow} onClick={handleCart}>
                 <FaShoppingCart />
-                <span className={Style.cartCount}>{total}</span>
+                <span className={Style.cartCount}>{totalQuantity?totalQuantity:0}</span>
             </icon>
         </div>
     );

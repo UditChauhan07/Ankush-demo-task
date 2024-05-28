@@ -11,49 +11,67 @@ const CartProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const data = useSelector((state) => state.product);
+    // console.log("data----------->>>>", data)
+
     const [addData, setAddData] = useState([]);
-    const [subtotal, setSubtotal] = useState(0); // State to store the subtotal
+    const [subtotal, setSubtotal] = useState(0);
+    const [addDataQuantity, setAddDataQuantity] = useState([]); // State to store the subtotal
 
-    const getProduct = JSON.parse(localStorage.getItem("cartData"));
-
+    // Fetch cart data from local storage on component mount
     useEffect(() => {
+        const getProduct = JSON.parse(localStorage.getItem("cartData")) || [];
         setAddData(getProduct);
-    }, [data]);
-
- 
+    }, []);
+    // console.log("old Data------------>", data)
 
     const handleKeepShopping = () => {
         navigate("/");
     }
-
-    const handleRemoveProduct = (id) => {
+     // Function to handle removing a product from the cart
+     const handleRemoveProduct = (id) => {
         const updatedData = addData.filter(item => item.id !== id);
         localStorage.setItem('cartData', JSON.stringify(updatedData));
         dispatch(removeProduct(id));
-        window.location.reload(); 
+        setAddData(updatedData); // Update local state
     };
 
+
+  
+    // Function to handle changing quantity of a product
     const handleQuantityChange = (event, id) => {
-        const updatedQuantity =(event.target.value);
+        const updatedQuantity = event.target.value;
         const newQuantity = updatedQuantity < 1 ? 1 : updatedQuantity;
-        
         const updatedData = addData.map(item => {
             if (item.id === id) {
-                const updatedItem = { ...item, quantity: (newQuantity) };
+                const updatedItem = { ...item, quantity: newQuantity };
                 return updatedItem;
             }
             return item;
         });
         localStorage.setItem('cartData', JSON.stringify(updatedData));
-        setAddData(updatedData);
-        console.log("updatedData------------>",updatedData)
+        setAddData(updatedData); // Update local state
     };
-       // Calculate subtotal whenever addData changes
-       useEffect(() => {
+    // Calculate subtotal whenever addData changes
+    useEffect(() => {
         const subtotalAmount = addData.reduce((acc, item) => acc + (item.quantity * item.price), 0);
         setSubtotal(subtotalAmount);
+
     }, [addData]);
 
+    // console.log("add subtotal---------", addData)
+    
+    localStorage.setItem("cartQuantity", JSON.stringify(addDataQuantity))
+
+    const handleAddQuantity = () => {
+        // Calculat product  total quantity------------->//
+        const totalQuantity = addData.reduce((total, product) => total + parseInt(product.quantity), 0);
+        setAddDataQuantity(totalQuantity);
+    };
+    useEffect(() => {
+        handleAddQuantity()
+    }, [addData])
+
+    console.log("addDataQuantity", addDataQuantity)
     return (
         <div className="container-fluid">
             <CartIcon />
